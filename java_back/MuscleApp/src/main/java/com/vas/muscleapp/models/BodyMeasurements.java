@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vas.muscleapp.models;
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -19,11 +16,11 @@ import javax.persistence.Temporal;
  *
  * @author Vinícius
  */
-//@Entity
+@Entity
 public class BodyMeasurements {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     @Column(nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date createdAt;
@@ -42,20 +39,18 @@ public class BodyMeasurements {
     private float rightCalf;
     private float leftCalf;
     private float glutes;
+    
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private User measuredUser;
 
-    @OneToOne(optional = true)
-    @JoinColumn(unique = true)
-    private User measuredUsuario;
-
-    @OneToOne(optional = true)
-    @JoinColumn(unique = true)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User personalTrainnerUser;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -175,8 +170,8 @@ public class BodyMeasurements {
         this.personalTrainnerUser = personalTrainnerUser;
     }
 
-    public void setMeasuredUsuario(User measuredUsuario) {
-        this.measuredUsuario = measuredUsuario;
+    public void setMeasuredUser(User measuredUser) {
+        this.measuredUser = measuredUser;
     }
 
     public User getPersonalTrainnerUser() {
@@ -184,7 +179,7 @@ public class BodyMeasurements {
     }
 
     public User getMeasuredUsuario() {
-        return measuredUsuario;
+        return measuredUser;
     }
 
     public void setGlutes(float glutes) {

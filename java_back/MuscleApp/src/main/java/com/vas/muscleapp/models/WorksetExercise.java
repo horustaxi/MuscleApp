@@ -1,25 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vas.muscleapp.models;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Vinícius
  */
+@Entity
 public class WorksetExercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String seriesNumber;
     private String repetitionsNumber;
     //in seconds
@@ -28,13 +27,14 @@ public class WorksetExercise {
     //0 = Kg, 1= Lbs
     private int chargeUnit;
     
+    @OneToMany(mappedBy = "worksetExercise", cascade = CascadeType.ALL)
     Set<Exercise> exercises = new HashSet<>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

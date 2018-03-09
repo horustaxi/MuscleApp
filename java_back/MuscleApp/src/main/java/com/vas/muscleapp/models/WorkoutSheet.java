@@ -1,30 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vas.muscleapp.models;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Vinícius
  */
+@Entity
 public class WorkoutSheet {
-    int id;
-    String description;
-    boolean active;
-    Date createdAt;
-    Set<Workset> worksets = new HashSet<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String description;
+    private boolean active;
+    private Date createdAt;
+    @OneToMany(mappedBy = "workoutSheet", cascade = CascadeType.ALL)
+    private Set<Workset> worksets = new HashSet<>();
+    
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private User user;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -58,6 +68,14 @@ public class WorkoutSheet {
 
     public Set<Workset> getWorksets() {
         return worksets;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
     
 }

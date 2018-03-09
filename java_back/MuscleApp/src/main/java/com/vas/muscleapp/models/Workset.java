@@ -1,39 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vas.muscleapp.models;
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
  *
  * @author Vinícius
  */
-//@Entity
+@Entity
 public class Workset {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     @Column(nullable = false)
     private char letter;
     @OneToMany(mappedBy = "workset", cascade = CascadeType.ALL) 
-    Set<WorksetExercise> worksetExercises = new HashSet<>();
+    private Set<WorksetExercise> worksetExercises = new HashSet<>();
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private WorkoutSheet workoutSheet;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,6 +51,14 @@ public class Workset {
 
     public void setWorksetExercises(Set<WorksetExercise> worksetExercises) {
         this.worksetExercises = worksetExercises;
+    }
+
+    public void setWorkoutSheet(WorkoutSheet workoutSheet) {
+        this.workoutSheet = workoutSheet;
+    }
+
+    public WorkoutSheet getWorkoutSheet() {
+        return workoutSheet;
     }
     
 }

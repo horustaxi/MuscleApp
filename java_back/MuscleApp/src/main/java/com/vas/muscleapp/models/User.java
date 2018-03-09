@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vas.muscleapp.models;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,7 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false, unique = true)
@@ -31,14 +28,18 @@ public class User {
     private String password;
     private short type;
     
+    @OneToMany(mappedBy = "measuredUser", cascade = CascadeType.ALL)
     private Set<BodyMeasurements> bodyMeasurementses = new HashSet<>();
+    @OneToMany(mappedBy = "personalTrainnerUser", cascade = CascadeType.ALL)
+    private Set<BodyMeasurements> bodyMeasurementsesCreateds = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<WorkoutSheet> workoutSheets = new HashSet<>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -88,6 +89,14 @@ public class User {
 
     public Set<WorkoutSheet> getWorkoutSheets() {
         return workoutSheets;
+    }
+
+    public void setBodyMeasurementsesCreateds(Set<BodyMeasurements> bodyMeasurementsesCreateds) {
+        this.bodyMeasurementsesCreateds = bodyMeasurementsesCreateds;
+    }
+
+    public Set<BodyMeasurements> getBodyMeasurementsesCreateds() {
+        return bodyMeasurementsesCreateds;
     }
 
 }
