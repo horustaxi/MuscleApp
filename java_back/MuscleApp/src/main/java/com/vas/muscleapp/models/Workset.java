@@ -5,10 +5,10 @@
  */
 package com.vas.muscleapp.models;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +25,32 @@ public class Workset {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(nullable = false)
-    char description;
+    private char letter;
     @OneToMany(mappedBy = "workset", cascade = CascadeType.ALL) 
-    Set<Exercise> exercises;
+    Set<WorksetExercise> worksetExercises = new HashSet<>();
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public char getLetter() {
+        return letter;
+    }
+
+    public void setLetter(char letter) {
+        this.letter = letter;
+    }
+
+    public Set<WorksetExercise> getWorksetExercises() {
+        return worksetExercises;
+    }
+
+    public void setWorksetExercises(Set<WorksetExercise> worksetExercises) {
+        this.worksetExercises = worksetExercises;
+    }
+    
 }

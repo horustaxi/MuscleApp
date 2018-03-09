@@ -26,7 +26,8 @@ public class BodyMeasurements {
     private int id;
     @Column(nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date date;
+    private Date createdAt;
+    private int age;
     private float height;
     private float weight;
     private float shoulders;
@@ -40,6 +41,7 @@ public class BodyMeasurements {
     private float leftThigh;
     private float rightCalf;
     private float leftCalf;
+    private float glutes;
 
     @OneToOne(optional = true)
     @JoinColumn(unique = true)
@@ -57,12 +59,12 @@ public class BodyMeasurements {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreatedAt(Date date) {
+        this.createdAt = date;
     }
 
     public float getHeight() {
@@ -183,5 +185,21 @@ public class BodyMeasurements {
 
     public User getMeasuredUsuario() {
         return measuredUsuario;
+    }
+
+    public void setGlutes(float glutes) {
+        this.glutes = glutes;
+    }
+
+    public float getGlutes() {
+        return glutes;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

@@ -5,6 +5,8 @@
  */
 package com.vas.muscleapp.models;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +30,9 @@ public class User {
     @Column(nullable = false)
     private String password;
     private short type;
+    
+    private Set<BodyMeasurements> bodyMeasurementses = new HashSet<>();
+    private Set<WorkoutSheet> workoutSheets = new HashSet<>();
 
     public int getId() {
         return id;
@@ -67,6 +72,22 @@ public class User {
 
     public void setType(short type) {
         this.type = type;
+    }
+
+    public void setBodyMeasurementses(Set<BodyMeasurements> bodyMeasurementses) {
+        this.bodyMeasurementses = bodyMeasurementses;
+    }
+
+    public Set<BodyMeasurements> getBodyMeasurementses() {
+        return bodyMeasurementses;
+    }
+
+    public void setWorkoutSheets(Set<WorkoutSheet> workoutSheets) {
+        this.workoutSheets = workoutSheets;
+    }
+
+    public Set<WorkoutSheet> getWorkoutSheets() {
+        return workoutSheets;
     }
 
 }

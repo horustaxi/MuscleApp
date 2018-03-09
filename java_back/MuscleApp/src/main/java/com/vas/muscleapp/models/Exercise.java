@@ -24,8 +24,8 @@ public class Exercise {
     private String name;
     private String description;
     @Column(nullable = false)
-    private String main_muscle;
-    private String secondary_muscles;
+    private String mainMuscle;
+    private String secondaryMuscles;
 
     public int getId() {
         return id;
@@ -51,19 +51,19 @@ public class Exercise {
         this.description = description.toLowerCase();
     }
 
-    public String getMain_muscle() {
-        return main_muscle;
+    public String getMainMuscle() {
+        return mainMuscle;
     }
 
-    public void setMain_muscle(String main_muscle) {
-        this.main_muscle = main_muscle.toLowerCase();
+    public void setMainMuscle(String mainMuscle) {
+        this.mainMuscle = mainMuscle.toLowerCase();
     }
 
-    public String getSecondary_muscles() {
-        return secondary_muscles;
+    public String getSecondaryMuscles() {
+        return secondaryMuscles;
     }
 
-    public void setSecondary_muscles(String secondary_muscles) {
-        this.secondary_muscles = secondary_muscles.toLowerCase();
+    public void setSecondaryMuscles(String secondaryMuscles) {
+        this.secondaryMuscles = secondaryMuscles.toLowerCase();
     }
 }
