@@ -1,15 +1,13 @@
 package com.vas.muscleapp.models;
 
-import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -29,8 +27,8 @@ public class WorksetExercise {
     //0 = Kg, 1= Lbs
     private int chargeUnit;
     
-    @OneToMany(mappedBy = "worksetExercise", cascade = CascadeType.ALL)
-    Set<Exercise> exercises = new HashSet<>();
+    @OneToOne
+    Exercise exercise;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Workset workset;
@@ -83,12 +81,12 @@ public class WorksetExercise {
         this.chargeUnit = chargeUnit;
     }
 
-    public void setExercises(Set<Exercise> exercises) {
-        this.exercises = exercises;
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
     }
 
-    public Set<Exercise> getExercises() {
-        return exercises;
+    public Exercise getExercise() {
+        return exercise;
     }
     
 }

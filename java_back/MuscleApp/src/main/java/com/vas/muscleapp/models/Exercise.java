@@ -24,9 +24,6 @@ public class Exercise {
     private String mainMuscle;
     private String secondaryMuscles;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private WorksetExercise worksetExercise;
-
     public Long getId() {
         return id;
     }
@@ -65,13 +62,5 @@ public class Exercise {
 
     public void setSecondaryMuscles(String secondaryMuscles) {
         this.secondaryMuscles = secondaryMuscles.toLowerCase();
-    }
-
-    public void setWorksetExercise(WorksetExercise worksetExercise) {
-        this.worksetExercise = worksetExercise;
-    }
-
-    public WorksetExercise getWorksetExercise() {
-        return worksetExercise;
     }
 }
