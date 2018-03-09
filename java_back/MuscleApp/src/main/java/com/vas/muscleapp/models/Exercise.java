@@ -40,7 +40,7 @@ public class Exercise {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public String getDescription() {
@@ -48,7 +48,7 @@ public class Exercise {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description.toLowerCase();
     }
 
     public String getMain_muscle() {
@@ -56,7 +56,7 @@ public class Exercise {
     }
 
     public void setMain_muscle(String main_muscle) {
-        this.main_muscle = main_muscle;
+        this.main_muscle = main_muscle.toLowerCase();
     }
 
     public String getSecondary_muscles() {
@@ -64,6 +64,6 @@ public class Exercise {
     }
 
     public void setSecondary_muscles(String secondary_muscles) {
-        this.secondary_muscles = secondary_muscles;
+        this.secondary_muscles = secondary_muscles.toLowerCase();
     }
 }

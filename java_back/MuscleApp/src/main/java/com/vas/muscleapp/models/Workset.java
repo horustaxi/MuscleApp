@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
  *
  * @author Vinícius
  */
-@Entity
+//@Entity
 public class Workset {
     
     @Id

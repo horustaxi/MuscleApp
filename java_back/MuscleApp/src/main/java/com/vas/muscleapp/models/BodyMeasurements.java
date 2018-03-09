@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
  *
  * @author Vinícius
  */
-@Entity
+//@Entity
 public class BodyMeasurements {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

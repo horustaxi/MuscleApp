@@ -27,7 +27,7 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-    private short profile;
+    private short type;
 
     public int getId() {
         return id;
@@ -61,12 +61,12 @@ public class User {
         this.password = password;
     }
 
-    public short getProfile() {
-        return profile;
+    public short getType() {
+        return type;
     }
 
-    public void setProfile(short profile) {
-        this.profile = profile;
+    public void setType(short type) {
+        this.type = type;
     }
 
 }
