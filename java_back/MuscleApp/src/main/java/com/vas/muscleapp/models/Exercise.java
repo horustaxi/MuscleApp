@@ -18,10 +18,21 @@ public class Exercise {
     private Long id;
     @Column(nullable = false)
     private String name;
-    private String description;
     @Column(nullable = false)
     private String mainMuscle;
     private String secondaryMuscles;
+    @Column(length = 500)
+    private String description;
+
+    public Exercise() {
+    }
+
+    public Exercise(String name, String mainMuscle, String secondaryMuscles, String description) {
+        this.name = name;
+        this.mainMuscle = mainMuscle;
+        this.secondaryMuscles = secondaryMuscles;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
