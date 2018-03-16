@@ -1,6 +1,7 @@
 package com.vas.muscleapp.models;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,6 +35,16 @@ public class User {
     private Set<BodyMeasurements> bodyMeasurementsesCreateds = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<WorkoutSheet> workoutSheets = new HashSet<>();
+
+    public User() {
+    }    
+
+    public User(String name, String email, String password, short type) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.type = type;
+    }    
 
     public Long getId() {
         return id;
@@ -97,6 +108,28 @@ public class User {
 
     public Set<BodyMeasurements> getBodyMeasurementsesCreateds() {
         return bodyMeasurementsesCreateds;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.email);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        return Objects.equals(this.email, other.email);
     }
 
 }
