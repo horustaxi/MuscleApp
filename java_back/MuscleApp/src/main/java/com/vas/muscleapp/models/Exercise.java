@@ -1,5 +1,6 @@
 package com.vas.muscleapp.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +13,11 @@ import javax.persistence.Id;
  * @author Vinícius
  */
 @Entity
-public class Exercise {
+public class Exercise implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @Column(nullable = false)
     private String mainMuscle;
@@ -28,9 +29,9 @@ public class Exercise {
     }
 
     public Exercise(String name, String mainMuscle, String secondaryMuscles, String description) {
-        this.name = name;
-        this.mainMuscle = mainMuscle;
-        this.secondaryMuscles = secondaryMuscles;
+        setName(name);
+        setMainMuscle(mainMuscle);
+        setSecondaryMuscles(secondaryMuscles);
         this.description = description;
     }
 
@@ -55,7 +56,7 @@ public class Exercise {
     }
 
     public void setDescription(String description) {
-        this.description = description.toLowerCase();
+        this.description = description;
     }
 
     public String getMainMuscle() {

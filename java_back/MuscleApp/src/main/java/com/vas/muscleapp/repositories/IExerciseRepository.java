@@ -6,7 +6,7 @@
 package com.vas.muscleapp.repositories;
 
 import com.vas.muscleapp.models.Exercise;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
@@ -14,6 +14,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  * @author Vinicius
  */
 @RepositoryRestResource(collectionResourceRel = "exercise", path = "exercise")
-public interface IExerciseRepository extends PagingAndSortingRepository<Exercise, Integer> {
+public interface IExerciseRepository extends JpaRepository<Exercise, Integer> {
 
 }
