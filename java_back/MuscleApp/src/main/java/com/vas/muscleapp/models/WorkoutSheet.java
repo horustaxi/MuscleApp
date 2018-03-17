@@ -1,5 +1,6 @@
 package com.vas.muscleapp.models;
 
+import com.vas.muscleapp.user.User;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;

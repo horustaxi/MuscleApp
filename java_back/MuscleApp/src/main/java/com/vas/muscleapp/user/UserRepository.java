@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vas.muscleapp.repositories;
+package com.vas.muscleapp.user;
 
-import com.vas.muscleapp.models.User;
+import com.vas.muscleapp.user.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -14,7 +14,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  * @author Vinicius
  */
 @RepositoryRestResource(collectionResourceRel = "user", path = "user")
-public interface IUserRepository extends PagingAndSortingRepository<User, Integer> {
+public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
 
     public User findUserByEmail(String email);
 

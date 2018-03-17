@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vas.muscleapp.controllers;
+package com.vas.muscleapp.exercise;
 
-import com.vas.muscleapp.models.Exercise;
-import com.vas.muscleapp.repositories.IExerciseRepository;
+import com.vas.muscleapp.exercise.Exercise;
 import java.net.URI;
 import java.util.List;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,10 +25,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController(value = "exercises")
 public class ExerciseController {
 
-    private final IExerciseRepository exerciseRepository;
+    private final ExerciseRepository exerciseRepository;
 
     @Autowired
-    public ExerciseController(IExerciseRepository exerciseRepository) {
+    public ExerciseController(ExerciseRepository exerciseRepository) {
         this.exerciseRepository = exerciseRepository;
     }
 
@@ -39,6 +40,11 @@ public class ExerciseController {
                 .buildAndExpand(exercise.getId()).toUri();
         return ResponseEntity.created(location).build();
     }
+    
+//    @GetMapping(value = "/{exerciseId}")
+//    public Exercise get(@PathVariable Long exerciseId) {
+//        return exerciseRepository.findById(exerciseId).orElse(null);
+//    }
 
     @GetMapping
     public Iterable<Exercise> getAll() {

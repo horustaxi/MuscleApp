@@ -5,13 +5,13 @@
  */
 package com.vas.muscleapp.bootstrap;
 
-import com.vas.muscleapp.models.Exercise;
-import com.vas.muscleapp.models.User;
-import com.vas.muscleapp.repositories.IExerciseRepository;
-import com.vas.muscleapp.repositories.IUserRepository;
+import com.vas.muscleapp.exercise.Exercise;
+import com.vas.muscleapp.user.User;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import com.vas.muscleapp.exercise.ExerciseRepository;
+import com.vas.muscleapp.user.UserRepository;
 
 /**
  *
@@ -20,10 +20,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     
-    private IUserRepository userRepository;
-    private IExerciseRepository exerciseRepository;
+    private UserRepository userRepository;
+    private ExerciseRepository exerciseRepository;
 
-    public DevBootstrap(IUserRepository userRepository, IExerciseRepository exerciseRepository) {
+    public DevBootstrap(UserRepository userRepository, ExerciseRepository exerciseRepository) {
         this.userRepository = userRepository;
         this.exerciseRepository = exerciseRepository;
     }

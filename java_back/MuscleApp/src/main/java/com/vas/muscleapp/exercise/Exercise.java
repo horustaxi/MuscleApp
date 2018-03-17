@@ -1,4 +1,4 @@
-package com.vas.muscleapp.models;
+package com.vas.muscleapp.exercise;
 
 import java.io.Serializable;
 import java.util.Objects;

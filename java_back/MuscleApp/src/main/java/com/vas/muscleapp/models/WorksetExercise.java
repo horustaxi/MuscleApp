@@ -1,5 +1,6 @@
 package com.vas.muscleapp.models;
 
+import com.vas.muscleapp.exercise.Exercise;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

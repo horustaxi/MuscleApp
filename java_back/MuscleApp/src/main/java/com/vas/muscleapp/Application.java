@@ -1,20 +1,20 @@
 package com.vas.muscleapp;
 
-import com.vas.muscleapp.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.vas.muscleapp.user.UserRepository;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public Application(IUserRepository userRepository) {
+    public Application(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

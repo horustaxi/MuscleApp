@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vas.muscleapp.controllers;
+package com.vas.muscleapp.exercise;
 
 import com.vas.muscleapp.Application;
-import com.vas.muscleapp.models.Exercise;
-import com.vas.muscleapp.repositories.IExerciseRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +41,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 @WebAppConfiguration
 public class ExerciseControllerTest {
 
-    private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
+    private final MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(),
             Charset.forName("utf8"));
     private MockMvc mockMvc;
@@ -51,12 +49,12 @@ public class ExerciseControllerTest {
     
     private Exercise exercise1;
     private Exercise exercise2;
-    private List<Exercise> exerciseList = new ArrayList<>();
+    private final List<Exercise> exerciseList = new ArrayList<>();
 
     @Autowired
     private WebApplicationContext webApplicationContext;
     @Autowired
-    private IExerciseRepository exerciseRepository;
+    private ExerciseRepository exerciseRepository;
 
     @Autowired
     public void setConverters(HttpMessageConverter<?>[] converters) {
@@ -75,13 +73,16 @@ public class ExerciseControllerTest {
         this.exercise1 = this.exerciseRepository.save(new Exercise("Squat", "Quadriceps", "Hamstrings, Gluteus, Hips",
                 "Squat is a compound, full body exercise that trains primarily the muscles of the thighs, hips and buttocks, quadriceps femoris muscle (vastus lateralis, vastus medialis, vastus intermedius and rectus femoris), hamstrings, as well as strengthening the bones, ligaments and insertion of the tendons throughout the lower body"));
         this.exerciseList.add(exercise1);
-        this.exercise2 = this.exerciseRepository.save(new Exercise("Leg press", "Quadriceps", "Gluteus",
+        this.exercise2 = this.exerciseRepository.save(new Exercise("Leg press", "Quadriceps2", "Gluteus",
                 "leg press is a weight training exercise in which the individual pushes a weight or resistance away from them using their legs"));
         this.exerciseList.add(exercise2);
     }
 
     @Test
-    public void testSave() {
+    public void testSave() throws Exception {
+        Exercise exercise = new Exercise("Bench press", "Pectorals", "Deltoids, Triceps", "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps");
+        mockMvc.perform(post("/exercises").contentType(contentType).content(json(exercise)))
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -94,5 +95,11 @@ public class ExerciseControllerTest {
                 .andExpect(jsonPath("$[0].name", is("squat")))
                 .andExpect(jsonPath("$[1].id", is(this.exerciseList.get(1).getId().intValue())))
                 .andExpect(jsonPath("$[1].name", is("leg press")));
+    }
+
+    protected String json(Object obj) throws IOException {
+        MockHttpOutputMessage httpOutputMessage = new MockHttpOutputMessage();
+        this.httpMessageConverter.write(obj, MediaType.APPLICATION_JSON, httpOutputMessage);
+        return httpOutputMessage.getBodyAsString();
     }
 }
