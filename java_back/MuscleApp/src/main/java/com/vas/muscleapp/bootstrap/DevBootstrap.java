@@ -5,6 +5,9 @@
  */
 package com.vas.muscleapp.bootstrap;
 
+import com.vas.muscleapp.bodyMeasurements.BodyMeasurements;
+import com.vas.muscleapp.bodyMeasurements.BodyMeasurements.BodyMeasurementsBuilder;
+import com.vas.muscleapp.enums.ProfileEnum;
 import com.vas.muscleapp.exercise.Exercise;
 import com.vas.muscleapp.user.User;
 import org.springframework.context.ApplicationListener;
@@ -20,8 +23,8 @@ import com.vas.muscleapp.user.UserRepository;
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     
-    private UserRepository userRepository;
-    private ExerciseRepository exerciseRepository;
+    private final UserRepository userRepository;
+    private final ExerciseRepository exerciseRepository;
 
     public DevBootstrap(UserRepository userRepository, ExerciseRepository exerciseRepository) {
         this.userRepository = userRepository;
@@ -35,8 +38,36 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     private void initData() {
         //User
-        User user = new User("Vinicius", "vinicius.vas.ti@gmail.com", "$2a$10$wRX4a2YRolkkLaMlHngCEuFrq19FajntkkXPdpp9a9N4ubH8Ki5yy", (short) 0);
-        userRepository.save(user);
+        User userVinicius = new User("Vinicius A. dos Santos", "vinicius.vas.ti@gmail.com",
+                "$2a$10$wRX4a2YRolkkLaMlHngCEuFrq19FajntkkXPdpp9a9N4ubH8Ki5yy",
+                (short) ProfileEnum.Administrator.profileValue);
+        User userEdson = new User("Edson Pereira", "edson.pereira@gmail.com",
+                "$2a$10$wRX4a2YRolkkLaMlHngCEuFrq19FajntkkXPdpp9a9N4ubH8Ki5yy",
+                (short) ProfileEnum.PersonalTrainner.profileValue);
+        User userTiago = new User("Tiago Oliveira", "tiago.oliveira@gmail.com",
+                "$2a$10$wRX4a2YRolkkLaMlHngCEuFrq19FajntkkXPdpp9a9N4ubH8Ki5yy",
+                (short) ProfileEnum.SimpleUser.profileValue);
+        BodyMeasurements bodyMeasurements = new BodyMeasurementsBuilder(userTiago, userEdson)
+                .setAge(0)
+                .setChest(0)
+                .setGlutes(0)
+                .setHeight(0)
+                .setLeftArm(0)
+                .setRightArm(0)
+                .setLeftCalf(0)
+                .setRightCalf(0)
+                .setLeftForearm(0)
+                .setRightForearm(0)
+                .setLeftThigh(0)
+                .setRightThigh(0)
+                .setShoulders(0)
+                .setWaist(0)
+                .setWeight(0)
+                .buildPerson();
+        userTiago.getBodyMeasurementses().add(bodyMeasurements);
+        userRepository.save(userVinicius);
+        userRepository.save(userEdson);
+        userRepository.save(userTiago);
 
         //Exercises
         Exercise squat = new Exercise("Squat", "Quadriceps", "Hamstrings, Gluteus, Hips", "Squat is a compound, full body exercise that trains primarily the muscles of the thighs, hips and buttocks, quadriceps femoris muscle (vastus lateralis, vastus medialis, vastus intermedius and rectus femoris), hamstrings, as well as strengthening the bones, ligaments and insertion of the tendons throughout the lower body");

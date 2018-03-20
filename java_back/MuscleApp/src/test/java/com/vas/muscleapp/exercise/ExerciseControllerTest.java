@@ -97,6 +97,15 @@ public class ExerciseControllerTest {
                 .andExpect(jsonPath("$[1].name", is("leg press")));
     }
 
+    @Test
+    public void testGet() throws Exception {
+        mockMvc.perform(get("/exercises/"+this.exerciseList.get(1).getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(contentType))
+                .andExpect(jsonPath("$.id", is(this.exercise2.getId().intValue())))
+                .andExpect(jsonPath("$.name", is("leg press")));
+    }
+
     protected String json(Object obj) throws IOException {
         MockHttpOutputMessage httpOutputMessage = new MockHttpOutputMessage();
         this.httpMessageConverter.write(obj, MediaType.APPLICATION_JSON, httpOutputMessage);

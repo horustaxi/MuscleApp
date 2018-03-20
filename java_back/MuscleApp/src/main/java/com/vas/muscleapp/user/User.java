@@ -1,6 +1,7 @@
 package com.vas.muscleapp.user;
 
-import com.vas.muscleapp.models.BodyMeasurements;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vas.muscleapp.bodyMeasurements.BodyMeasurements;
 import com.vas.muscleapp.models.WorkoutSheet;
 import java.util.HashSet;
 import java.util.Objects;
@@ -31,8 +32,10 @@ public class User {
     private String password;
     private short type;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "measuredUser", cascade = CascadeType.ALL)
     private Set<BodyMeasurements> bodyMeasurementses = new HashSet<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "personalTrainnerUser", cascade = CascadeType.ALL)
     private Set<BodyMeasurements> bodyMeasurementsesCreateds = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

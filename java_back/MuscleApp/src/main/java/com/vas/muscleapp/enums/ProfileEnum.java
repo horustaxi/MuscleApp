@@ -10,7 +10,7 @@ package com.vas.muscleapp.enums;
  * @author Vinicius
  */
 public enum ProfileEnum {
-    Administrator(0), Simple(1), PersonalTrainner(2);
+    Administrator(0), SimpleUser(1), PersonalTrainner(2);
     public int profileValue;
     ProfileEnum(int valor) {
         profileValue = valor;

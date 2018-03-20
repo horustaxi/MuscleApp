@@ -5,6 +5,8 @@
  */
 package com.vas.muscleapp.user;
 
+import com.vas.muscleapp.bodyMeasurements.BodyMeasurements;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,9 +40,15 @@ public class UserController {
         this.userRepository.save(user);
     }
     
-    @GetMapping(value = "/logado/{email:.+}")
+    @GetMapping(value = "/user/{email:.+}")
     public ResponseEntity<User> userLogado(@PathVariable String email) {
         return new ResponseEntity<>(this.userRepository.findUserByEmail(email), HttpStatus.OK);
+    }
+    
+    @GetMapping(value = "/user/{userId}/bodymeasurements")
+    public ResponseEntity<Set<BodyMeasurements>> getBodyMeasurements(@PathVariable Long userId) {
+        User user = this.userRepository.findById(userId).orElse(null);
+        return new ResponseEntity<>(user.getBodyMeasurementses(), HttpStatus.OK);
     }
     
 }
