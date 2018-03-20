@@ -73,7 +73,7 @@ public class User {
         return email;
     }
 
-    // TODO verify email pattern
+    // TODO verify email pattern (IllegalFormatException)
     public void setEmail(String email) {
         this.email = email;
     }
@@ -83,7 +83,7 @@ public class User {
     }
 
     public void setPassword(String password) throws Exception {
-        if (password.length() < 6) throw new Exception("Password must have at least 6 characters");
+        if (password.length() < 6) throw new IllegalArgumentException("Password must have at least 6 characters");
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         this.password = bCryptPasswordEncoder.encode(password);
     }

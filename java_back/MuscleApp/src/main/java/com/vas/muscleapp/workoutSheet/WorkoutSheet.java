@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,8 +24,10 @@ public class WorkoutSheet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private String description;
     private boolean active;
+    @Column(nullable = false, updatable = false)
     private Date createdAt;
     @OneToMany(mappedBy = "workoutSheet", cascade = CascadeType.ALL)
     private Set<Workset> worksets = new HashSet<>();

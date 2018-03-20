@@ -23,7 +23,7 @@ public class BodyMeasurements implements Comparable<BodyMeasurements> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdAt;
     private int age;
