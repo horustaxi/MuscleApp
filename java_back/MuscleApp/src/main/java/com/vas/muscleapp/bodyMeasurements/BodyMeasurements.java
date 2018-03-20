@@ -12,20 +12,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
-import org.aspectj.lang.annotation.Before;
 
 /**
  *
  * @author Vinícius
  */
 @Entity
-public class BodyMeasurements {
+public class BodyMeasurements implements Comparable<BodyMeasurements> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdAt;
     private int age;
     private float height;
@@ -224,6 +223,14 @@ public class BodyMeasurements {
 
     public int getAge() {
         return age;
+    }
+
+    @Override
+    public int compareTo(BodyMeasurements o) {
+        if (o == null && this == null) return 1;
+        if (o == null) return 1;
+        if (this == null) return -1;
+        return this.createdAt.compareTo(o.getCreatedAt());
     }
 
     public static class BodyMeasurementsBuilder {

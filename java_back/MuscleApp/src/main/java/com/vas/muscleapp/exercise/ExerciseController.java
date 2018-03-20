@@ -34,6 +34,7 @@ public class ExerciseController {
 
     @PostMapping(value = "/exercises")
     public ResponseEntity<?> save(@RequestBody Exercise exercise) {
+        // TODO verify if an exercise with the same name already exists
         exercise = exerciseRepository.save(exercise);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
@@ -49,6 +50,7 @@ public class ExerciseController {
     
     @GetMapping(value = "exercises/{id}")
     public @ResponseBody ResponseEntity<Exercise> get(@PathVariable Long id) {
+        // TODO throw an exception if it can't find exercise
         Exercise exercise = exerciseRepository.findById(id).orElse(null);
         return new ResponseEntity<>(exercise, HttpStatus.OK);
     }

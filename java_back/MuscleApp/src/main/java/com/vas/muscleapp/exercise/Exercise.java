@@ -14,6 +14,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class Exercise implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -32,7 +33,7 @@ public class Exercise implements Serializable {
         setName(name);
         setMainMuscle(mainMuscle);
         setSecondaryMuscles(secondaryMuscles);
-        this.description = description;
+        setDescription(description);
     }
 
     public Long getId() {
@@ -47,6 +48,7 @@ public class Exercise implements Serializable {
         return name;
     }
 
+    // TODO not empty string
     public void setName(String name) {
         this.name = name.toLowerCase();
     }
@@ -55,6 +57,7 @@ public class Exercise implements Serializable {
         return description;
     }
 
+    // TODO maximum of 500 characters
     public void setDescription(String description) {
         this.description = description;
     }
@@ -63,6 +66,7 @@ public class Exercise implements Serializable {
         return mainMuscle;
     }
 
+    // TODO not empty string
     public void setMainMuscle(String mainMuscle) {
         this.mainMuscle = mainMuscle.toLowerCase();
     }

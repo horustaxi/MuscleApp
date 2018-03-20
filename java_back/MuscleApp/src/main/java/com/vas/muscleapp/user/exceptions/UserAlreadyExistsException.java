@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author vinicius
  */
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class UserNotFoundException extends RuntimeException {
+@ResponseStatus(HttpStatus.CONFLICT)
+public class UserAlreadyExistsException extends RuntimeException {
 
-    public UserNotFoundException(String attribute, String attributeValue) {
-        super("could not find user with "+attribute+"= '" + attributeValue + "'.");
+    public UserAlreadyExistsException(String userEmail) {
+        super("User with email '" + userEmail + "' already exists.");
     }
 
 }

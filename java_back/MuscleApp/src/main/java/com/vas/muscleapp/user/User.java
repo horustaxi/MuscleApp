@@ -2,7 +2,7 @@ package com.vas.muscleapp.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vas.muscleapp.bodyMeasurements.BodyMeasurements;
-import com.vas.muscleapp.models.WorkoutSheet;
+import com.vas.muscleapp.workoutSheet.WorkoutSheet;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -44,10 +46,10 @@ public class User {
     public User() {
     }    
 
-    public User(String name, String email, String password, short type) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public User(String name, String email, String password, short type) throws Exception {
+        setName(name);
+        setEmail(email);
+        setPassword(password);
         this.type = type;
     }    
 
@@ -71,6 +73,7 @@ public class User {
         return email;
     }
 
+    // TODO verify email pattern
     public void setEmail(String email) {
         this.email = email;
     }
@@ -79,8 +82,10 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) throws Exception {
+        if (password.length() < 6) throw new Exception("Password must have at least 6 characters");
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        this.password = bCryptPasswordEncoder.encode(password);
     }
 
     public short getType() {

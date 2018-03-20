@@ -5,7 +5,7 @@
  */
 package com.vas.muscleapp.user;
 
-import com.vas.muscleapp.user.User;
+import java.util.Optional;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -16,6 +16,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "user", path = "user")
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
-    public User findUserByEmail(String email);
+    public Optional<User> findUserByEmail(String email);
 
 }

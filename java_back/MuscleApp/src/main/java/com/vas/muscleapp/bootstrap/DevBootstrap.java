@@ -15,6 +15,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import com.vas.muscleapp.exercise.ExerciseRepository;
 import com.vas.muscleapp.user.UserRepository;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,19 +35,24 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent e) {
-        initData();
+        try {
+            initData();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            Logger.getLogger(DevBootstrap.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void initData() {
+    private void initData() throws Exception {
         //User
         User userVinicius = new User("Vinicius A. dos Santos", "vinicius.vas.ti@gmail.com",
-                "$2a$10$wRX4a2YRolkkLaMlHngCEuFrq19FajntkkXPdpp9a9N4ubH8Ki5yy",
+                "123456",
                 (short) ProfileEnum.Administrator.profileValue);
         User userEdson = new User("Edson Pereira", "edson.pereira@gmail.com",
-                "$2a$10$wRX4a2YRolkkLaMlHngCEuFrq19FajntkkXPdpp9a9N4ubH8Ki5yy",
+                "123456",
                 (short) ProfileEnum.PersonalTrainner.profileValue);
         User userTiago = new User("Tiago Oliveira", "tiago.oliveira@gmail.com",
-                "$2a$10$wRX4a2YRolkkLaMlHngCEuFrq19FajntkkXPdpp9a9N4ubH8Ki5yy",
+                "123456",
                 (short) ProfileEnum.SimpleUser.profileValue);
         BodyMeasurements bodyMeasurements = new BodyMeasurementsBuilder(userTiago, userEdson)
                 .setAge(0)
