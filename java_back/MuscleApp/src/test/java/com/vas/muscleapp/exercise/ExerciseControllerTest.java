@@ -5,69 +5,32 @@
  */
 package com.vas.muscleapp.exercise;
 
-import com.vas.muscleapp.Application;
+import com.vas.muscleapp.abstracts.AbstractControllerTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.mock.http.MockHttpOutputMessage;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.context.WebApplicationContext;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 /**
  *
  * @author vinicius
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
-@WebAppConfiguration
-public class ExerciseControllerTest {
-
-    private final MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-            MediaType.APPLICATION_JSON.getSubtype(),
-            Charset.forName("utf8"));
-    private MockMvc mockMvc;
-    private HttpMessageConverter httpMessageConverter;
+public class ExerciseControllerTest extends AbstractControllerTest {
     
     private Exercise exercise1;
     private Exercise exercise2;
     private final List<Exercise> exerciseList = new ArrayList<>();
 
     @Autowired
-    private WebApplicationContext webApplicationContext;
-    @Autowired
     private ExerciseRepository exerciseRepository;
 
-    @Autowired
-    public void setConverters(HttpMessageConverter<?>[] converters) {
-        this.httpMessageConverter = Arrays.asList(converters).stream()
-                .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter)
-                .findAny()
-                .orElse(null);
-        assertNotNull("JSON message converter must not be null", this.httpMessageConverter);
-    }
-
     @Before
-    public void setup() {
-        this.mockMvc = webAppContextSetup(webApplicationContext).build();
+    public void setUp() {
         this.exerciseRepository.deleteAllInBatch();
 
         this.exercise1 = this.exerciseRepository.save(new Exercise("Squat", "Quadriceps", "Hamstrings, Gluteus, Hips",
@@ -104,11 +67,5 @@ public class ExerciseControllerTest {
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.id", is(this.exercise2.getId().intValue())))
                 .andExpect(jsonPath("$.name", is("leg press")));
-    }
-
-    protected String json(Object obj) throws IOException {
-        MockHttpOutputMessage httpOutputMessage = new MockHttpOutputMessage();
-        this.httpMessageConverter.write(obj, MediaType.APPLICATION_JSON, httpOutputMessage);
-        return httpOutputMessage.getBodyAsString();
     }
 }
