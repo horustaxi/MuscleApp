@@ -7,7 +7,6 @@ package com.vas.muscleapp.bootstrap;
 
 import com.vas.muscleapp.bodyMeasurements.BodyMeasurements;
 import com.vas.muscleapp.bodyMeasurements.BodyMeasurements.BodyMeasurementsBuilder;
-import com.vas.muscleapp.enums.ProfileEnum;
 import com.vas.muscleapp.exercise.Exercise;
 import com.vas.muscleapp.user.User;
 import org.springframework.context.ApplicationListener;
@@ -44,16 +43,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     private void initData() throws Exception {
-        //User
-        User userVinicius = new User("Vinicius A. dos Santos", "vinicius.vas.ti@gmail.com",
-                "123456",
-                (short) ProfileEnum.Administrator.profileValue);
-        User userEdson = new User("Edson Pereira", "edson.pereira@gmail.com",
-                "123456",
-                (short) ProfileEnum.PersonalTrainner.profileValue);
-        User userTiago = new User("Tiago Oliveira", "tiago.oliveira@gmail.com",
-                "123456",
-                (short) ProfileEnum.SimpleUser.profileValue);
+        // User
+        User userVinicius = new User("Vinicius A. dos Santos", "vinicius.vas.ti@gmail.com", "123456");
+        User userEdson = new User("Edson Pereira", "edson.pereira@gmail.com", "123456");
+        User userTiago = new User("Tiago Oliveira", "tiago.oliveira@gmail.com", "123456");
+        
+        // TODO use real values
         BodyMeasurements bodyMeasurements = new BodyMeasurementsBuilder(userTiago, userEdson)
                 .setAge(0)
                 .setChest(0)

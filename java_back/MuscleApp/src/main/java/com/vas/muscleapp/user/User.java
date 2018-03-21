@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -32,7 +31,6 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-    private short type;
     
     @JsonIgnore
     @OneToMany(mappedBy = "measuredUser", cascade = CascadeType.ALL)
@@ -46,11 +44,10 @@ public class User {
     public User() {
     }    
 
-    public User(String name, String email, String password, short type) throws Exception {
+    public User(String name, String email, String password) throws Exception {
         setName(name);
         setEmail(email);
         setPassword(password);
-        this.type = type;
     }    
 
     public Long getId() {
@@ -86,14 +83,6 @@ public class User {
         if (password.length() < 6) throw new IllegalArgumentException("Password must have at least 6 characters");
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         this.password = bCryptPasswordEncoder.encode(password);
-    }
-
-    public short getType() {
-        return type;
-    }
-
-    public void setType(short type) {
-        this.type = type;
     }
 
     public void setBodyMeasurementses(Set<BodyMeasurements> bodyMeasurementses) {

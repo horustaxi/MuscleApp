@@ -37,19 +37,20 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public void register(@RequestBody User user) {
-        if (this.userRepository.findUserByEmail(user.getEmail()) != null) {
+    public ResponseEntity<?> register(@RequestBody User user) {
+        if (this.userRepository.findUserByEmail(user.getEmail()).orElse(null) != null) {
             throw new UserAlreadyExistsException(user.getEmail());
         }
         this.userRepository.save(user);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping(value = "/user/{email:.+}")
-    public ResponseEntity<User> userLogado(@PathVariable String email) {
-        User user = this.userRepository.findUserByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("email", email));
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
+//    @GetMapping(value = "/user/{email:.+}")
+//    public ResponseEntity<User> userLogado(@PathVariable String email) {
+//        User user = this.userRepository.findUserByEmail(email)
+//                .orElseThrow(() -> new UserNotFoundException("email", email));
+//        return new ResponseEntity<>(user, HttpStatus.OK);
+//    }
 
     @GetMapping(value = "/user/{userId}/bodymeasurements")
     public ResponseEntity<Set<BodyMeasurements>> getBodyMeasurements(@PathVariable Long userId) {
