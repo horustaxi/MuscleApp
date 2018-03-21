@@ -48,8 +48,10 @@ public class Exercise implements Serializable {
         return name;
     }
 
-    // TODO not empty string
     public void setName(String name) {
+        if (name.isEmpty()) {
+            throw new IllegalArgumentException("Name can't be empty");
+        }
         this.name = name.toLowerCase();
     }
 
@@ -57,8 +59,10 @@ public class Exercise implements Serializable {
         return description;
     }
 
-    // TODO maximum of 500 characters
     public void setDescription(String description) {
+        if (description.length() > 500) {
+            throw new IllegalArgumentException("Description must hava a maximum of 500 characters");
+        }
         this.description = description;
     }
 
@@ -66,8 +70,10 @@ public class Exercise implements Serializable {
         return mainMuscle;
     }
 
-    // TODO not empty string
     public void setMainMuscle(String mainMuscle) {
+        if (mainMuscle.isEmpty()) {
+            throw new IllegalArgumentException("Name can't be empty");
+        }
         this.mainMuscle = mainMuscle.toLowerCase();
     }
 
