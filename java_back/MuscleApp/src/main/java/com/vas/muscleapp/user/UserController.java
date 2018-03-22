@@ -27,11 +27,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserController(UserRepository userRepository,
             BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @PostMapping(value = "/register")
@@ -39,6 +41,7 @@ public class UserController {
         if (this.userRepository.findUserByEmail(user.getEmail()).orElse(null) != null) {
             throw new UserAlreadyExistsException(user.getEmail());
         }
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         this.userRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

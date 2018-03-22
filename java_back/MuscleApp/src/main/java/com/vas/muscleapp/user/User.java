@@ -15,8 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
@@ -85,8 +83,6 @@ public class User {
 
     public void setPassword(String password) throws Exception {
         if (password.length() < 6) throw new IllegalArgumentException("Password must have at least 6 characters");
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.password = encoder.encode(password);
         this.password = password;
     }
 

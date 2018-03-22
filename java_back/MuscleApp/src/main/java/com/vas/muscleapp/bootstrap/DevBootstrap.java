@@ -16,6 +16,7 @@ import com.vas.muscleapp.exercise.ExerciseRepository;
 import com.vas.muscleapp.user.UserRepository;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -43,10 +44,11 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     private void initData() throws Exception {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         // User
-        User userVinicius = new User("Vinicius A. dos Santos", "vinicius.vas.ti@gmail.com", "123456");
-        User userEdson = new User("Edson Pereira", "edson.pereira@gmail.com", "123456");
-        User userTiago = new User("Tiago Oliveira", "tiago.oliveira@gmail.com", "123456");
+        User userVinicius = new User("Vinicius A. dos Santos", "vinicius.vas.ti@gmail.com", bCryptPasswordEncoder.encode("123456"));
+        User userEdson = new User("Edson Pereira", "edson.pereira@gmail.com", bCryptPasswordEncoder.encode("123456"));
+        User userTiago = new User("Tiago Oliveira", "tiago.oliveira@gmail.com", bCryptPasswordEncoder.encode("123456"));
         
         BodyMeasurements bodyMeasurements = new BodyMeasurementsBuilder(userTiago, userEdson)
                 .setAge(27)
