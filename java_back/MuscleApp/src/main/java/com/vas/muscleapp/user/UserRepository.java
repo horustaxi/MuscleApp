@@ -13,7 +13,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  *
  * @author Vinicius
  */
-@RepositoryRestResource(collectionResourceRel = "user", path = "user")
+@RepositoryRestResource(collectionResourceRel = "user", path = "user", exported = false)
 public interface UserRepository extends JpaRepository<User, Long> {
 
     public Optional<User> findUserByEmail(String email);
