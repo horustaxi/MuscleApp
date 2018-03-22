@@ -3,8 +3,9 @@ package com.vas.muscleapp.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vas.muscleapp.bodyMeasurements.BodyMeasurements;
 import com.vas.muscleapp.workoutSheet.WorkoutSheet;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.IllegalFormatException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
@@ -35,7 +37,7 @@ public class User {
     
     @JsonIgnore
     @OneToMany(mappedBy = "measuredUser", cascade = CascadeType.ALL)
-    private Set<BodyMeasurements> bodyMeasurementses = new HashSet<>();
+    private List<BodyMeasurements> bodyMeasurementses = new ArrayList<>();
     @JsonIgnore
     @OneToMany(mappedBy = "personalTrainnerUser", cascade = CascadeType.ALL)
     private Set<BodyMeasurements> bodyMeasurementsesCreateds = new HashSet<>();
@@ -83,15 +85,16 @@ public class User {
 
     public void setPassword(String password) throws Exception {
         if (password.length() < 6) throw new IllegalArgumentException("Password must have at least 6 characters");
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        this.password = bCryptPasswordEncoder.encode(password);
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
+        this.password = password;
     }
 
-    public void setBodyMeasurementses(Set<BodyMeasurements> bodyMeasurementses) {
+    public void setBodyMeasurementses(List<BodyMeasurements> bodyMeasurementses) {
         this.bodyMeasurementses = bodyMeasurementses;
     }
 
-    public Set<BodyMeasurements> getBodyMeasurementses() {
+    public List<BodyMeasurements> getBodyMeasurementses() {
         return bodyMeasurementses;
     }
 

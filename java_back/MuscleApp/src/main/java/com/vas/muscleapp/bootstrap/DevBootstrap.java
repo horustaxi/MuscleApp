@@ -48,23 +48,22 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         User userEdson = new User("Edson Pereira", "edson.pereira@gmail.com", "123456");
         User userTiago = new User("Tiago Oliveira", "tiago.oliveira@gmail.com", "123456");
         
-        // TODO use real values
         BodyMeasurements bodyMeasurements = new BodyMeasurementsBuilder(userTiago, userEdson)
-                .setAge(0)
-                .setChest(0)
-                .setGlutes(0)
-                .setHeight(0)
-                .setLeftArm(0)
-                .setRightArm(0)
-                .setLeftCalf(0)
-                .setRightCalf(0)
-                .setLeftForearm(0)
-                .setRightForearm(0)
-                .setLeftThigh(0)
-                .setRightThigh(0)
-                .setShoulders(0)
-                .setWaist(0)
-                .setWeight(0)
+                .setAge(27)
+                .setChest(76)
+                .setGlutes(80)
+                .setHeight(179)
+                .setLeftArm(34)
+                .setRightArm(34.5f)
+                .setLeftCalf(32.3f)
+                .setRightCalf(32.7f)
+                .setLeftForearm(25.2f)
+                .setRightForearm(25)
+                .setLeftThigh(47)
+                .setRightThigh(47.8f)
+                .setShoulders(94.6f)
+                .setWaist(80)
+                .setWeight(70)
                 .buildPerson();
         userTiago.getBodyMeasurementses().add(bodyMeasurements);
         userRepository.save(userVinicius);

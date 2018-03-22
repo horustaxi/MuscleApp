@@ -8,7 +8,7 @@ package com.vas.muscleapp.user;
 import com.vas.muscleapp.bodyMeasurements.BodyMeasurements;
 import com.vas.muscleapp.user.exceptions.UserAlreadyExistsException;
 import com.vas.muscleapp.user.exceptions.UserNotFoundException;
-import java.util.Set;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,17 +27,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserController(UserRepository userRepository,
             BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody User user) throws Exception {
         if (this.userRepository.findUserByEmail(user.getEmail()).orElse(null) != null) {
             throw new UserAlreadyExistsException(user.getEmail());
         }
@@ -51,11 +49,10 @@ public class UserController {
 //                .orElseThrow(() -> new UserNotFoundException("email", email));
 //        return new ResponseEntity<>(user, HttpStatus.OK);
 //    }
-
     @GetMapping(value = "/user/{userId}/bodymeasurements")
-    public ResponseEntity<Set<BodyMeasurements>> getBodyMeasurements(@PathVariable Long userId) {
+    public ResponseEntity<List<BodyMeasurements>> getBodyMeasurements(@PathVariable Long userId) {
         User user = this.userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("id",userId.toString()));
+                .orElseThrow(() -> new UserNotFoundException("id", userId.toString()));
         return new ResponseEntity<>(user.getBodyMeasurementses(), HttpStatus.OK);
     }
 
