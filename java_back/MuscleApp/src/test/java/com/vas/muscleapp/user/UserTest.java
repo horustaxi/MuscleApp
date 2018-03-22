@@ -31,4 +31,34 @@ public class UserTest {
         user.setPassword("1234567");
     }
     
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetEmailWithException1() {
+        user.setEmail("a");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetEmailWithException12() {
+        user.setEmail("a@");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetEmailWithException13() {
+        user.setEmail("a@a");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetEmailWithException14() {
+        user.setEmail("email@email,com");
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetEmailWithException15() {
+        user.setEmail("ema,il@email.com");
+    }
+    
+    @Test
+    public void testSetEmail() {
+        user.setEmail("email@email.com");
+    }
+    
 }
