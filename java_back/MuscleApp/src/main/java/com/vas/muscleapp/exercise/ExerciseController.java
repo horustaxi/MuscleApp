@@ -25,17 +25,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 public class ExerciseController {
 
-    private final ExerciseRepository exerciseRepository;
+    private final ExerciseService exerciseService;
 
     @Autowired
-    public ExerciseController(ExerciseRepository exerciseRepository) {
-        this.exerciseRepository = exerciseRepository;
+    public ExerciseController(ExerciseService exerciseService) {
+        this.exerciseService = exerciseService;
     }
 
     @PostMapping(value = "/exercises")
     public ResponseEntity<?> save(@RequestBody Exercise exercise) {
         // TODO verify if an exercise with the same name already exists
-        exercise = exerciseRepository.save(exercise);
+        exercise = exerciseService.save(exercise);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
                 .buildAndExpand(exercise.getId()).toUri();
@@ -44,14 +44,14 @@ public class ExerciseController {
 
     @GetMapping(value = "/exercises")
     public @ResponseBody ResponseEntity<List<Exercise>> getAll() {
-        List<Exercise> exercises = exerciseRepository.findAll();
+        List<Exercise> exercises = exerciseService.findAll();
         return new ResponseEntity<>(exercises, HttpStatus.OK);
     }
     
     @GetMapping(value = "exercises/{id}")
     public @ResponseBody ResponseEntity<Exercise> get(@PathVariable Long id) {
         // TODO throw an exception if it can't find exercise
-        Exercise exercise = exerciseRepository.findById(id).orElse(null);
+        Exercise exercise = exerciseService.findById(id);
         return new ResponseEntity<>(exercise, HttpStatus.OK);
     }
 

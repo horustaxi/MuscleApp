@@ -5,7 +5,7 @@
  */
 package com.vas.muscleapp.exercise;
 
-import com.vas.muscleapp.abstracts.AbstractControllerTest;
+import com.vas.muscleapp.abstracts.BaseControllerTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +20,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @author vinicius
  */
-public class ExerciseControllerTest extends AbstractControllerTest {
+public class ExerciseControllerTest extends BaseControllerTest {
     
     private Exercise exercise1;
     private Exercise exercise2;
     private final List<Exercise> exerciseList = new ArrayList<>();
 
     @Autowired
-    private ExerciseRepository exerciseRepository;
+    private ExerciseService exerciseService;
 
     @Before
     public void setUp() {
-        this.exerciseRepository.deleteAllInBatch();
+        this.exerciseService.deleteAllInBatch();
 
-        this.exercise1 = this.exerciseRepository.save(new Exercise("Squat", "Quadriceps", "Hamstrings, Gluteus, Hips",
+        this.exercise1 = this.exerciseService.save(new Exercise("Squat", "Quadriceps", "Hamstrings, Gluteus, Hips",
                 "Squat is a compound, full body exercise that trains primarily the muscles of the thighs, hips and buttocks, quadriceps femoris muscle (vastus lateralis, vastus medialis, vastus intermedius and rectus femoris), hamstrings, as well as strengthening the bones, ligaments and insertion of the tendons throughout the lower body"));
         this.exerciseList.add(exercise1);
-        this.exercise2 = this.exerciseRepository.save(new Exercise("Leg press", "Quadriceps2", "Gluteus",
+        this.exercise2 = this.exerciseService.save(new Exercise("Leg press", "Quadriceps2", "Gluteus",
                 "leg press is a weight training exercise in which the individual pushes a weight or resistance away from them using their legs"));
         this.exerciseList.add(exercise2);
     }

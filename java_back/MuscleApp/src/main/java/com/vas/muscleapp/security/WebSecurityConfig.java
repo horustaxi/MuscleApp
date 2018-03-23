@@ -5,8 +5,6 @@
  */
 package com.vas.muscleapp.security;
 
-import com.vas.muscleapp.security.JWTAuthenticationFilter;
-import com.vas.muscleapp.security.JWTAuthorizationFilter;
 import static com.vas.muscleapp.security.SecurityConstants.SIGN_UP_URL;
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;

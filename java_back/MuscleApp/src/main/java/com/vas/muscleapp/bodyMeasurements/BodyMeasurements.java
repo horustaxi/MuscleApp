@@ -333,7 +333,7 @@ public class BodyMeasurements implements Comparable<BodyMeasurements> {
             return this;
         }
         
-        public BodyMeasurements buildPerson() {
+        public BodyMeasurements buildBodyMeasurements() {
             return new BodyMeasurements(age, height, weight, shoulders, chest, waist, rightArm, leftArm, rightForearm, leftForearm, rightThigh, leftThigh, rightCalf, leftCalf, glutes, measuredUser, personalTrainnerUser);
         }
 

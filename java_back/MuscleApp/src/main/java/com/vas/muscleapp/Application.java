@@ -6,16 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import com.vas.muscleapp.user.UserRepository;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    private final UserRepository userRepository;
-
     @Autowired
-    public Application(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public Application() {
+        
     }
 
     @Bean
