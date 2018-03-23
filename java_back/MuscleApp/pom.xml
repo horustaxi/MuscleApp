@@ -132,7 +132,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <appName>MuscleApp</appName>
+                    <appName>{project.name}</appName>
                     <excludes>
                         <exclude>javax.servlet:javax.servlet-api</exclude>
                         <exclude>com.google.guava:guava</exclude> <!-- avoid android version -->
