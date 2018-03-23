@@ -23,7 +23,10 @@ public class ExerciseService {
         this.exerciseRepository = exerciseRepository;
     }
 
-    Exercise save(Exercise exercise) {
+    Exercise save(Exercise exercise) {        
+//        if (exerciseRepository) {
+//            
+//        }
         return exerciseRepository.save(exercise);
     }
 
