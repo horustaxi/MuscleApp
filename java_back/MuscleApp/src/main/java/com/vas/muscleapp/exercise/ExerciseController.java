@@ -34,7 +34,6 @@ public class ExerciseController {
 
     @PostMapping(value = "/exercises")
     public ResponseEntity<?> save(@RequestBody Exercise exercise) {
-        // TODO verify if an exercise with the same name already exists
         exercise = exerciseService.save(exercise);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
