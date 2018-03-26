@@ -1,7 +1,6 @@
 package com.vas.muscleapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.vas.muscleapp.models.BodyMeasurements;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
