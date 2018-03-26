@@ -8,6 +8,7 @@ package com.vas.muscleapp.controllers;
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.models.Exercise;
 import com.vas.muscleapp.services.ExerciseService;
+import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,17 @@ public class ExerciseControllerTest extends BaseControllerTest {
     }
 
     @Test
-    public void testSave() throws Exception {
+    public void testSave() throws IOException, Exception {
         Exercise exercise = new Exercise("Bench press", "Pectorals", "Deltoids, Triceps", "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps");
         mockMvc.perform(post("/exercises").contentType(contentType).content(json(exercise)))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void testSaveWithConflict() throws Exception {
+        Exercise exercise = new Exercise("Leg press", "Pectorals", "Deltoids, Triceps", "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps");
+        mockMvc.perform(post("/exercises").contentType(contentType).content(json(exercise)))
+                .andExpect(status().isConflict());
     }
 
     @Test

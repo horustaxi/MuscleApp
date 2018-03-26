@@ -5,6 +5,7 @@
  */
 package com.vas.muscleapp.services;
 
+import com.vas.muscleapp.exceptions.exercise.ExerciseAlreadyExistsException;
 import com.vas.muscleapp.repositories.ExerciseRepository;
 import com.vas.muscleapp.models.Exercise;
 import java.util.List;
@@ -26,10 +27,9 @@ public class ExerciseService {
     }
 
     public Exercise save(Exercise exercise) {  
-        // TODO verifiy if exercise with same name exists
-//        if (exerciseRepository) {
-//            
-//        }
+        if (exerciseRepository.findExerciseByName(exercise.getName()).orElse(null) != null) {
+            throw new ExerciseAlreadyExistsException(exercise.getName());
+        }
         return exerciseRepository.save(exercise);
     }
 

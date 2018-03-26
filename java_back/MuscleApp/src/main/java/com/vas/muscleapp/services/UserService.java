@@ -38,8 +38,8 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("id", userId.toString()));
     }
 
-    public void deleteAllInBatch() {
-        userReporitory.deleteAllInBatch();
+    public void deleteAll() {
+        userReporitory.deleteAll();
     }
     
 }
