@@ -1,7 +1,9 @@
 ## MuscleApp Rest Endpoints
 *Always use Header Authorization Bearer 'token', excepting for "/register" and "/login"*
 
-### Sign Up
+### User
+
+#### Sign Up
   - Post: https://muscle-app.herokuapp.com/register
   - Request body:
     ```json
@@ -12,7 +14,7 @@
     }
     ```
     
-### Login
+#### Login
   - Post: https://muscle-app.herokuapp.com/login
   - Request body:
     ```json
@@ -24,13 +26,31 @@
   - Response Header token:
     `Authorization →Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjdXMuamFja3NvbkBnbWFpbC5jb20iLCJleHAiOjE1MjI5NDY0NTl9.V4vDd7TECki74THSVt2BIiKGHuquVr0X8BR6zh9RbaKExe5wvL5mTZRv-iWMDvVieWe1kVgEIQ5GH14nLQrZgg`
 
+#### User (retrive user info from token)
+  - Get: https://muscle-app.herokuapp.com/user
+  - Response body:
+    ```
+    {
+      "id": 8,
+      "name": "Marcus Jackson",
+      "email": "marcus.jackson@gmail.com",
+      "password": "fakepassword",
+      "createdAt": "2018-03-26T19:17:43.265+0000",
+      "workoutSheets": null
+    }
+    ```
+
 ### User Body Measurements
 
 #### Saving
   - Post: 
 
 #### Listing
-  - Get: 
+  - Get: https://muscle-app.herokuapp.com/user/8/bodymeasurements
+  - Response body:
+  ```json
+  
+  ```
 
 ### Exercises
 #### Listing
