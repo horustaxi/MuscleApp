@@ -26,8 +26,7 @@ public class UserService {
     }
 
     public User findUserByEmail(String email) {
-        return userReporitory.findUserByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("email", email));
+        return userReporitory.findUserByEmail(email).orElse(null);
     }
 
     public User save(User user) {
