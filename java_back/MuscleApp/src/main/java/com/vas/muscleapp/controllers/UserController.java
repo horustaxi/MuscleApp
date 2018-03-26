@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vas.muscleapp.user;
+package com.vas.muscleapp.controllers;
 
-import com.vas.muscleapp.user.exceptions.UserAlreadyExistsException;
+import com.vas.muscleapp.models.User;
+import com.vas.muscleapp.services.UserService;
+import com.vas.muscleapp.exceptions.user.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

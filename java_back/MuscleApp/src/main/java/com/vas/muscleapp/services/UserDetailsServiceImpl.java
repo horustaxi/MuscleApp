@@ -1,5 +1,7 @@
-package com.vas.muscleapp.user;
+package com.vas.muscleapp.services;
 
+import com.vas.muscleapp.models.User;
+import com.vas.muscleapp.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

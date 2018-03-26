@@ -5,15 +5,15 @@
  */
 package com.vas.muscleapp.bootstrap;
 
-import com.vas.muscleapp.bodyMeasurements.BodyMeasurements;
-import com.vas.muscleapp.bodyMeasurements.BodyMeasurements.BodyMeasurementsBuilder;
-import com.vas.muscleapp.exercise.Exercise;
-import com.vas.muscleapp.user.User;
+import com.vas.muscleapp.models.BodyMeasurements;
+import com.vas.muscleapp.models.BodyMeasurements.BodyMeasurementsBuilder;
+import com.vas.muscleapp.models.Exercise;
+import com.vas.muscleapp.models.User;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import com.vas.muscleapp.exercise.ExerciseRepository;
-import com.vas.muscleapp.user.UserRepository;
+import com.vas.muscleapp.repositories.ExerciseRepository;
+import com.vas.muscleapp.repositories.UserRepository;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

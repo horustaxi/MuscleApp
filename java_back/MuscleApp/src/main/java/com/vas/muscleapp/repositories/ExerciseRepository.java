@@ -1,5 +1,6 @@
-package com.vas.muscleapp.exercise;
+package com.vas.muscleapp.repositories;
 
+import com.vas.muscleapp.models.Exercise;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

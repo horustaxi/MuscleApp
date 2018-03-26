@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vas.muscleapp.user;
+package com.vas.muscleapp.services;
 
-import com.vas.muscleapp.user.exceptions.UserNotFoundException;
+import com.vas.muscleapp.models.User;
+import com.vas.muscleapp.exceptions.user.UserNotFoundException;
+import com.vas.muscleapp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

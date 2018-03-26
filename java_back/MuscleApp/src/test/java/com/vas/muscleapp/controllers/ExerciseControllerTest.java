@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vas.muscleapp.exercise;
+package com.vas.muscleapp.controllers;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
+import com.vas.muscleapp.models.Exercise;
+import com.vas.muscleapp.services.ExerciseService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

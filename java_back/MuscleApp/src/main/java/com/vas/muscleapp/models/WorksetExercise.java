@@ -1,7 +1,7 @@
-package com.vas.muscleapp.worksetExercise;
+package com.vas.muscleapp.models;
 
-import com.vas.muscleapp.workset.Workset;
-import com.vas.muscleapp.exercise.Exercise;
+import com.vas.muscleapp.models.Workset;
+import com.vas.muscleapp.models.Exercise;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

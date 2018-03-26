@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vas.muscleapp.exercise;
+package com.vas.muscleapp.services;
 
+import com.vas.muscleapp.repositories.ExerciseRepository;
+import com.vas.muscleapp.models.Exercise;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,18 +25,19 @@ public class ExerciseService {
         this.exerciseRepository = exerciseRepository;
     }
 
-    Exercise save(Exercise exercise) {        
+    public Exercise save(Exercise exercise) {  
+        // TODO verifiy if exercise with same name exists
 //        if (exerciseRepository) {
 //            
 //        }
         return exerciseRepository.save(exercise);
     }
 
-    List<Exercise> findAll() {
+    public List<Exercise> findAll() {
         return exerciseRepository.findAll();
     }
 
-    Exercise findById(Long id) {
+    public Exercise findById(Long id) {
         return exerciseRepository.findById(id).orElse(null);
     }
 

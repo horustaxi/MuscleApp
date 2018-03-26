@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vas.muscleapp.bodyMeasurements;
+package com.vas.muscleapp.controllers;
 
-import com.vas.muscleapp.user.*;
+import com.vas.muscleapp.services.UserService;
+import com.vas.muscleapp.models.User;
+import com.vas.muscleapp.models.BodyMeasurements;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

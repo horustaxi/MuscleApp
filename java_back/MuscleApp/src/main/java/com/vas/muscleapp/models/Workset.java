@@ -1,7 +1,6 @@
-package com.vas.muscleapp.workset;
+package com.vas.muscleapp.models;
 
-import com.vas.muscleapp.worksetExercise.WorksetExercise;
-import com.vas.muscleapp.workoutSheet.WorkoutSheet;
+import com.vas.muscleapp.models.WorkoutSheet;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;

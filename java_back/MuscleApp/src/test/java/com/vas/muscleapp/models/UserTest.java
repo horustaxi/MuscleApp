@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vas.muscleapp.user;
+package com.vas.muscleapp.models;
 
 import org.junit.Test;
 import org.junit.Before;

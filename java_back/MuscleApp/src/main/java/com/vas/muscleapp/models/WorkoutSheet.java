@@ -1,7 +1,6 @@
-package com.vas.muscleapp.workoutSheet;
+package com.vas.muscleapp.models;
 
-import com.vas.muscleapp.workset.Workset;
-import com.vas.muscleapp.user.User;
+import com.vas.muscleapp.models.User;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
