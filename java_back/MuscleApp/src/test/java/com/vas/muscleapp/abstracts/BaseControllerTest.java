@@ -6,6 +6,7 @@
 package com.vas.muscleapp.abstracts;
 
 import com.vas.muscleapp.Application;
+import com.vas.muscleapp.JpaConfigTest;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import static org.junit.Assert.*;
+import org.springframework.test.context.ActiveProfiles;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
@@ -30,8 +31,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * @author vinicius
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
-@WebAppConfiguration
+@SpringBootTest(classes = {Application.class, JpaConfigTest.class})
+//@WebAppConfiguration
+@ActiveProfiles("test")
 public abstract class BaseControllerTest {
 
     protected final MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
