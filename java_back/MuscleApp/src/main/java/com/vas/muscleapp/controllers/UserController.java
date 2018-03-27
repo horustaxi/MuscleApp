@@ -5,6 +5,7 @@
  */
 package com.vas.muscleapp.controllers;
 
+import com.vas.muscleapp.dtos.UserDTO;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.services.UserService;
 import com.vas.muscleapp.exceptions.user.UserAlreadyExistsException;
@@ -48,20 +49,16 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    // TODO missing test
     @GetMapping(value = "/user")
-    public ResponseEntity<User> userByToken(@RequestHeader String authorization) throws Exception {
+    public ResponseEntity<UserDTO> userByToken(@RequestHeader String authorization) throws Exception {
         String email = Jwts.parser()
                     .setSigningKey(SECRET.getBytes())
                     .parseClaimsJws(authorization.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
-        User user = userService.findUserByEmail(email);
-        // TODO create viewmodel to avoid the following sets
-        user.setPassword("fakepassword");
-        user.setBodyMeasurementses(null);
-        user.setWorkoutSheets(null);
-        user.setBodyMeasurementsesCreateds(null);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        UserDTO userDto = userService.findUserByEmail(email);
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
 //    @GetMapping(value = "/user/{email:.+}")

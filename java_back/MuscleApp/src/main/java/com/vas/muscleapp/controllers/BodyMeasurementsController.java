@@ -5,12 +5,15 @@
  */
 package com.vas.muscleapp.controllers;
 
+import com.vas.muscleapp.dtos.BodyMeasurementsDTO;
 import com.vas.muscleapp.services.UserService;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.models.BodyMeasurements;
 import com.vas.muscleapp.services.BodyMeasurementsService;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,16 +28,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  *
  * @author Vinícius
  */
+
+// TODO missing tests
 @RestController
 public class BodyMeasurementsController {
 
-    private final UserService userService;
     private final BodyMeasurementsService bodyMeasurementsService;
 
     @Autowired
-    public BodyMeasurementsController(UserService userService,
-            BodyMeasurementsService bodyMeasurementsService) {
-        this.userService = userService;
+    public BodyMeasurementsController(BodyMeasurementsService bodyMeasurementsService) {
         this.bodyMeasurementsService = bodyMeasurementsService;
     }
 
@@ -52,10 +54,9 @@ public class BodyMeasurementsController {
     }
 
     @GetMapping(value = "/user/{userId}/bodymeasurements")
-    public ResponseEntity<List<BodyMeasurements>> getBodyMeasurements(@PathVariable Long userId) {
-        // TODO create viewmodel to hide some user attributes
-        User user = userService.findById(userId);
-        return new ResponseEntity<>(user.getBodyMeasurementses(), HttpStatus.OK);
+    public ResponseEntity<List<BodyMeasurementsDTO>> getBodyMeasurements(@PathVariable Long userId) {
+        List<BodyMeasurementsDTO> bodyMeasurementsDTOs = bodyMeasurementsService.getBodyMeasurementsByUserId(userId);
+        return new ResponseEntity<>(bodyMeasurementsDTOs, HttpStatus.OK);
     }
 
 }

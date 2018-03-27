@@ -5,8 +5,16 @@
  */
 package com.vas.muscleapp.services;
 
+import com.vas.muscleapp.dtos.BodyMeasurementsDTO;
 import com.vas.muscleapp.models.BodyMeasurements;
+import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.repositories.BodyMeasurementsRepository;
+import java.util.ArrayList;
+import java.util.List;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.modelmapper.config.Configuration.AccessLevel;
+import org.modelmapper.convention.NamingConventions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +24,33 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BodyMeasurementsService {
-    
+
     @Autowired
     private final BodyMeasurementsRepository bodyMeasurementsRepository;
 
-    public BodyMeasurementsService(BodyMeasurementsRepository bodyMeasurementsRepository) {
+    @Autowired
+    private final UserService userService;
+
+    public BodyMeasurementsService(BodyMeasurementsRepository bodyMeasurementsRepository,
+            UserService userService) {
         this.bodyMeasurementsRepository = bodyMeasurementsRepository;
+        this.userService = userService;
     }
-    
+
     public void save(BodyMeasurements bodyMeasurements) {
         bodyMeasurementsRepository.save(bodyMeasurements);
     }
-    
+
+    public List<BodyMeasurementsDTO> getBodyMeasurementsByUserId(Long userId) {
+        ModelMapper modelMapper = new ModelMapper();
+        User user = userService.findById(userId);
+        List<BodyMeasurementsDTO> bodyMeasurementsDTOs = new ArrayList<>();
+        
+        user.getBodyMeasurementses().forEach(
+                (bm) -> bodyMeasurementsDTOs.add(modelMapper.map(bm, BodyMeasurementsDTO.class))
+        );
+        
+        return bodyMeasurementsDTOs;
+    }
+
 }
