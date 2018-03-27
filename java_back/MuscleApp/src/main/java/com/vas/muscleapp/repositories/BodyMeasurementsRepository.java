@@ -18,8 +18,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "bodymeasurements", exported = false)
 public interface BodyMeasurementsRepository extends JpaRepository<BodyMeasurements, Long> {
     
-    // TODO find exercise by user measured id
-    @Query()
-    public Optional<BodyMeasurements> findExerciseByIdMeasuredUser(Long idUser);
+//    @Query("SELECT bm from BODY_MEASUREMENTS bm where MEASURED_USER_ID = :idUser")
+//    public Optional<BodyMeasurements> findBodyMeasurementsByIdMeasuredUser(Long idUser);
     
 }

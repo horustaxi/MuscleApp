@@ -94,6 +94,12 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
+        <!-- api to map models to dto's -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>1.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -154,30 +160,6 @@
                     <warSourceDirectory>webapp</warSourceDirectory>
                 </configuration>
             </plugin>
-            <!--Maybe necessary for heroku deploy, need test-->
-<!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.3</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.github.jsimone</groupId>
-                                    <artifactId>webapp-runner</artifactId>
-                                    <version>8.5.11.3</version>
-                                    <destFileName>webapp-runner.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
     </build>
 </project>
