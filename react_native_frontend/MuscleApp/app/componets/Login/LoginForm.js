@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { TextInput, View } from 'react-native'
-import styles from './styles'
+import React from 'react';
+import { TextInput, View } from 'react-native';
+import styles from './styles';
 
 export class LoginForm extends React.PureComponent {
   render() {
@@ -10,14 +10,14 @@ export class LoginForm extends React.PureComponent {
           placeholder="email"
           placeholderTextColor="grey"
           style={styles.input}
-          />
+        />
         <TextInput
           placeholder="password"
           placeholderTextColor="grey"
           style={styles.input}
-          />
+        />
       </View>
-    )
+    );
   }
 }
 
