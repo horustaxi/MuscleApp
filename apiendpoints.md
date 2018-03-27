@@ -42,14 +42,91 @@
 
 ### User Body Measurements
 
-#### Saving
-  - Post: 
-
 #### Listing
   - Get: https://muscle-app.herokuapp.com/user/8/bodymeasurements
   - Response body:
   ```json
-  
+  [
+    {
+        "id": 9,
+        "createdAt": "2018-03-26T23:02:06.343+0000",
+        "age": 27,
+        "height": 180,
+        "weight": 83,
+        "shoulders": 112.6,
+        "chest": 93,
+        "waist": 85,
+        "rightArm": 37.5,
+        "leftArm": 37,
+        "rightForearm": 30,
+        "leftForearm": 30.2,
+        "rightThigh": 55.8,
+        "leftThigh": 55,
+        "rightCalf": 36.7,
+        "leftCalf": 36.3,
+        "glutes": 90,
+        "personalTrainnerUser": {
+            "id": 2,
+            "name": "Edson Pereira",
+            "email": "edson.pereira@gmail.com",
+            "password": "$2a$10$A4NBW1cJhva8nETQFNBj7u4MW4WK3U.CMQUqi2pHPKL69i0X1IuIC",
+            "createdAt": "2018-03-26T23:00:02.119+0000",
+            "workoutSheets": []
+        }
+    },
+    {
+        "id": 10,
+        "createdAt": "2018-03-26T23:06:00.198+0000",
+        "age": 27,
+        "height": 180,
+        "weight": 88,
+        "shoulders": 117.6,
+        "chest": 97,
+        "waist": 85,
+        "rightArm": 39.5,
+        "leftArm": 39,
+        "rightForearm": 32,
+        "leftForearm": 32.2,
+        "rightThigh": 58.8,
+        "leftThigh": 58,
+        "rightCalf": 38.7,
+        "leftCalf": 38.3,
+        "glutes": 92,
+        "personalTrainnerUser": {
+            "id": 2,
+            "name": "Edson Pereira",
+            "email": "edson.pereira@gmail.com",
+            "password": "$2a$10$A4NBW1cJhva8nETQFNBj7u4MW4WK3U.CMQUqi2pHPKL69i0X1IuIC",
+            "createdAt": "2018-03-26T23:00:02.119+0000",
+            "workoutSheets": []
+        }
+    }
+  ]
+  ```
+
+#### Saving new
+  - Post: https://muscle-app.herokuapp.com/user/8/bodymeasurements
+  ```JSON
+  {
+    "age": 27,
+    "height": 180,
+    "weight": 83,
+    "shoulders": 112.6,
+    "chest": 93,
+    "waist": 85,
+    "rightArm": 37.5,
+    "leftArm": 37,
+    "rightForearm": 30,
+    "leftForearm": 30.2,
+    "rightThigh": 55.8,
+    "leftThigh": 55,
+    "rightCalf": 36.7,
+    "leftCalf": 36.3,
+    "glutes": 90,
+    "personalTrainnerUser": {
+        "id": 2
+    }
+  }
   ```
 
 ### Exercises
