@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, View, Button } from 'react-native';
+import { TextInput, View, Button, AsyncStorage, Alert } from 'react-native';
 import axios from 'axios';
 import styles from './styles';
 import { Constants } from '../../config/constants';
@@ -16,8 +16,28 @@ export class LoginForm extends React.PureComponent {
         email: this.state.email.trim(),
         password: this.state.password
       })
-      .then(response => console.log(response.headers.authorization))
-      .catch(response => console.error(response));
+      .then(async (response) => {
+        console.log(response.headers.authorization);
+        if (response.headers.authorization) {
+          try {
+            console.log('storing token');
+            AsyncStorage.setItem('@MuscleApp:token', response.headers.authorization)
+            .then(() =>
+              console.log('token stored')
+            );
+            Alert.alert('You are Logged In');
+          } catch (error) {
+            console.error(error);
+            Alert.alert('Error', 'Oops! Something happened. Please try again');
+          }
+        } else {
+          Alert.alert('Error', 'Oops! Something happened. Please try again');
+        }
+      })
+      .catch(response => {
+        console.error(response);
+        Alert.alert('Error', 'Oops! Something happened. Please try again');
+      });
   }
 
   render() {
