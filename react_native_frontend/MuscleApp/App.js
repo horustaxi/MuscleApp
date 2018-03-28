@@ -12,12 +12,15 @@ EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use glo
   $pdark: '#1b1b1b'
 });
 
-const App = StackNavigator({
-  Login: { screen: Login },
-  Exercises: { screen: ExerciseList },
-},
-{
-  initialRouteName: 'Login',
-});
+// https://reactnavigation.org/docs/getting-started.html
+const App = StackNavigator(
+  {
+    Login: { screen: Login },
+    Exercises: { screen: ExerciseList },
+  },
+  {
+    initialRouteName: 'Exercises',
+  }
+);
 
 export default App;
