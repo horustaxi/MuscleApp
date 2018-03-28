@@ -13,7 +13,11 @@ EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use glo
 });
 
 const App = StackNavigator({
-  Home: { screen: ExerciseList },
+  Login: { screen: Login },
+  Exercises: { screen: ExerciseList },
+},
+{
+  initialRouteName: 'Login',
 });
 
 export default App;
