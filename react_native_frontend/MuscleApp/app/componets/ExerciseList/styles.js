@@ -8,11 +8,6 @@ export default EStyleSheet.create({
         alignItems: 'center'
     },
     textStyle: {
-        height: 40,
-        backgroundColor: '$plight',
-        marginBottom: 20,
-        marginTop: 20,
-        paddingHorizontal: 10,
         color: '$ptextColor'
-    },
+    }
 });
