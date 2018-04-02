@@ -17,5 +17,14 @@ export default EStyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
         marginTop: 10,
+    },
+    cardSectionStyle: {
+        borderBottomWidth: 1,
+        padding: 5,
+        backgroundColor: '$plight',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        borderColor: '$pdark',
+        position: 'relative',
     }
 });
