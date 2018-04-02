@@ -7,7 +7,7 @@ export default EStyleSheet.create({
     cardStyle: {
         borderWidth: 1,
         borderRadius: 2,
-        borderColor: '$pdark',
+        borderColor: '#ddd',
         borderBottomWidth: 0,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -21,7 +21,7 @@ export default EStyleSheet.create({
     cardSectionStyle: {
         borderBottomWidth: 1,
         padding: 5,
-        backgroundColor: '$plight',
+        backgroundColor: '#fff',
         justifyContent: 'flex-start',
         flexDirection: 'row',
         borderColor: '$pdark',

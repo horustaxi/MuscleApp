@@ -6,9 +6,9 @@ import ExerciseList from './app/componets/ExerciseList/index';
 import Login from './app/componets/Login/index';
 
 EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use global variables!
-  $ptextColor: '#ffffff',
-  $primary: '#424242',
-  $plight: '#6d6d6d',
+  $ptextColor: '#424242',
+  $primary: '#6d6d6d',
+  $plight: '#ffffff',
   $pdark: '#1b1b1b'
 });
 

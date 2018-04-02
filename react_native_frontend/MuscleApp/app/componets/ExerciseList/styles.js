@@ -5,9 +5,12 @@ export default EStyleSheet.create({
         flex: 1,
         backgroundColor: '$plight',
         justifyContent: 'flex-start',
-        alignItems: 'center'
     },
     textStyle: {
         color: '$ptextColor'
+    },
+    headerContentStyle: {
+        flexDirection: 'column',
+        justifyContent: 'space-around',
     }
 });
