@@ -6,6 +6,7 @@
 package com.vas.muscleapp.controllers;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
+import com.vas.muscleapp.enums.Language;
 import com.vas.muscleapp.models.Exercise;
 import com.vas.muscleapp.services.ExerciseService;
 import java.io.IOException;
@@ -36,24 +37,26 @@ public class ExerciseControllerTest extends BaseControllerTest {
     public void setUp() {
         this.exerciseService.deleteAllInBatch();
 
-        this.exercise1 = this.exerciseService.save(new Exercise("Squat", "Quadriceps", "Hamstrings, Gluteus, Hips",
-                "Squat is a compound, full body exercise that trains primarily the muscles of the thighs, hips and buttocks, quadriceps femoris muscle (vastus lateralis, vastus medialis, vastus intermedius and rectus femoris), hamstrings, as well as strengthening the bones, ligaments and insertion of the tendons throughout the lower body"));
+        this.exercise1 = this.exerciseService.save(new Exercise("Crunch", "The crunch is performed while lying face up on the floor with knees bent, by curling the shoulders up towards the pelvis. This is an isolation exercise for the abdominals", Language.ENGLISH));
         this.exerciseList.add(exercise1);
-        this.exercise2 = this.exerciseService.save(new Exercise("Leg press", "Quadriceps2", "Gluteus",
-                "leg press is a weight training exercise in which the individual pushes a weight or resistance away from them using their legs"));
+        this.exercise2 = this.exerciseService.save(new Exercise("leg raise", "The leg raise is performed while sitting on a bench or flat on the floor by raising the knees towards the shoulders, or legs to a vertical upright position. This is a compound exercise that also involves the hip flexors", Language.ENGLISH));
         this.exerciseList.add(exercise2);
     }
 
     @Test
     public void testSave() throws IOException, Exception {
-        Exercise exercise = new Exercise("Bench press", "Pectorals", "Deltoids, Triceps", "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps");
+        Exercise exercise = new Exercise("Bench press",
+                "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps",
+                Language.ENGLISH);
         mockMvc.perform(post("/exercises").contentType(contentType).content(json(exercise)))
                 .andExpect(status().isCreated());
     }
 
     @Test
     public void testSaveWithConflict() throws Exception {
-        Exercise exercise = new Exercise("Leg press", "Pectorals", "Deltoids, Triceps", "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps");
+        Exercise exercise = new Exercise("Leg raise",
+                "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position. The exercise works the pectoralis major as well as supporting chest, arm, and shoulder muscles such as the anterior deltoids, serratus anterior, coracobrachialis, scapulae fixers, trapezii, and the triceps",
+                Language.ENGLISH);
         mockMvc.perform(post("/exercises").contentType(contentType).content(json(exercise)))
                 .andExpect(status().isConflict());
     }
@@ -65,9 +68,9 @@ public class ExerciseControllerTest extends BaseControllerTest {
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(this.exerciseList.get(0).getId().intValue())))
-                .andExpect(jsonPath("$[0].name", is("squat")))
+                .andExpect(jsonPath("$[0].name", is("crunch")))
                 .andExpect(jsonPath("$[1].id", is(this.exerciseList.get(1).getId().intValue())))
-                .andExpect(jsonPath("$[1].name", is("leg press")));
+                .andExpect(jsonPath("$[1].name", is("leg raise")));
     }
 
     @Test
@@ -76,6 +79,6 @@ public class ExerciseControllerTest extends BaseControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$.id", is(this.exercise2.getId().intValue())))
-                .andExpect(jsonPath("$.name", is("leg press")));
+                .andExpect(jsonPath("$.name", is("leg raise")));
     }
 }
