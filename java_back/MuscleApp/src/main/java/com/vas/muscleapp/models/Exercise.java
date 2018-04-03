@@ -1,12 +1,18 @@
 package com.vas.muscleapp.models;
 
+import com.vas.muscleapp.enums.Language;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -20,20 +26,25 @@ public class Exercise implements Serializable {
     private Long id;
     @Column(nullable = false, unique = true)
     private String name;
-    @Column(nullable = false)
-    private String mainMuscle;
-    private String secondaryMuscles;
+    @ManyToMany
+    private List<Muscle> mainMuscles;
+    @ManyToMany
+    private List<Muscle> secondaryMuscles;
     @Column(length = 500)
     private String description;
+    @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    private Language language;
 
     public Exercise() {
     }
 
-    public Exercise(String name, String mainMuscle, String secondaryMuscles, String description) {
+    public Exercise(String name, String description, Language language) {
         setName(name);
-        setMainMuscle(mainMuscle);
-        setSecondaryMuscles(secondaryMuscles);
         setDescription(description);
+        this.language = language;
+        this.mainMuscles = new ArrayList<>();
+        this.secondaryMuscles = new ArrayList<>();
     }
 
     public Long getId() {
@@ -66,23 +77,28 @@ public class Exercise implements Serializable {
         this.description = description;
     }
 
-    public String getMainMuscle() {
-        return mainMuscle;
+    public void setMainMuscles(List<Muscle> mainMuscles) {
+        this.mainMuscles = mainMuscles;
     }
 
-    public void setMainMuscle(String mainMuscle) {
-        if (mainMuscle.isEmpty()) {
-            throw new IllegalArgumentException("Name can't be empty");
-        }
-        this.mainMuscle = mainMuscle.toLowerCase();
+    public List<Muscle> getMainMuscles() {
+        return mainMuscles;
     }
 
-    public String getSecondaryMuscles() {
+    public void setSecondaryMuscles(List<Muscle> secondaryMuscles) {
+        this.secondaryMuscles = secondaryMuscles;
+    }
+
+    public List<Muscle> getSecondaryMuscles() {
         return secondaryMuscles;
     }
 
-    public void setSecondaryMuscles(String secondaryMuscles) {
-        this.secondaryMuscles = secondaryMuscles.toLowerCase();
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     @Override

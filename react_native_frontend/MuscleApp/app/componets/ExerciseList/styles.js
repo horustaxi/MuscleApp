@@ -7,10 +7,21 @@ export default EStyleSheet.create({
         justifyContent: 'flex-start',
     },
     textStyle: {
-        color: '$ptextColor'
+        color: '$ptextColor',
+        fontSize: 18,
     },
     headerContentStyle: {
         flexDirection: 'column',
         justifyContent: 'space-around',
+    },
+    imageStyle: {
+        width: 50,
+        height: 50,
+    },
+    imageContainerStyle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 10,
+        marginRight: 10,
     }
 });
