@@ -1,13 +1,18 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableHighlight } from 'react-native';
 import styles from './styles';
 import Card from '../Card/index';
 import CardSection from '../Card/CardSection';
 import { capitalizeFirst, capitalizeAll } from '../../config/Util';
+import ViewMoreButton from '../ViewMoreButton/index';
 
 class ExerciseDetail extends React.PureComponent {
+  getMuscles(mainMuscles) {
+    return mainMuscles.map(muscle => muscle.name).join(', ');
+  }
+
   render() {
-    const { name, mainMuscle } = this.props.exercise;
+    const { name, mainMuscles } = this.props.exercise;
     const {
       imageContainerStyle,
       imageStyle,
@@ -15,6 +20,8 @@ class ExerciseDetail extends React.PureComponent {
       textStyle,
     } = styles;
     return (
+
+      <TouchableHighlight onPress={() => alert('touched')}>
       <Card>
         <CardSection>
           <View style={imageContainerStyle}>
@@ -24,11 +31,15 @@ class ExerciseDetail extends React.PureComponent {
             />
           </View>
           <View style={headerContentStyle}>
-            <Text style={textStyle}> {capitalizeFirst(name)} </Text>
-            <Text style={textStyle}> {capitalizeAll(mainMuscle)} </Text>
+            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={[textStyle, { fontWeight: 'bold' }]}> {capitalizeFirst(name)} </Text>
+              <ViewMoreButton />
+            </View>
+            <Text style={textStyle}> {capitalizeAll(this.getMuscles(mainMuscles))} </Text>
           </View>
         </CardSection>
       </Card>
+      </TouchableHighlight>
     );
   }
 }

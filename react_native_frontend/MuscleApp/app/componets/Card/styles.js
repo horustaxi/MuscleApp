@@ -26,5 +26,6 @@ export default EStyleSheet.create({
         flexDirection: 'row',
         borderColor: '$pdark',
         position: 'relative',
+        height: 80,
     }
 });

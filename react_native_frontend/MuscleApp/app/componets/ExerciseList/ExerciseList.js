@@ -1,9 +1,9 @@
 'use strict';
 
 import React from 'react';
-import { Image, View, TouchableHighlight, FlatList } from 'react-native';
+import { ScrollView } from 'react-native';
 import axios from 'axios';
-import styles from './styles';
+// import styles from './styles';
 import { Constants } from '../../config/constants';
 import ExerciseDetail from './ExerciseDetail';
 
@@ -42,9 +42,9 @@ class ExerciseList extends React.PureComponent {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={{ flex: 1, marginBottom: 10 }}>
                 {this.renderExercises()}
-            </View>
+            </ScrollView>
         ); 
     }
 }

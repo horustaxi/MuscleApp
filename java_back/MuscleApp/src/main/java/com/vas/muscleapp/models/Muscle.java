@@ -22,7 +22,7 @@ public class Muscle implements Serializable {
     private Long id;
     @Column(nullable = false, unique = true)
     private String name;
-    
+
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MuscleGroup muscleGroup;
 
@@ -58,11 +58,7 @@ public class Muscle implements Serializable {
         if (name.isEmpty()) {
             throw new IllegalArgumentException("Name can't be empty");
         }
-<<<<<<< HEAD
         this.name = name.toLowerCase().trim();
-=======
-        this.name = name.toLowerCase();
->>>>>>> a42f0a67fa7d8049dfd206237da7ad70b52b53d8
     }
 
     @Override
