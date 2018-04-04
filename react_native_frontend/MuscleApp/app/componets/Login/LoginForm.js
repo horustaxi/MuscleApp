@@ -1,8 +1,9 @@
 import React from 'react';
-import { TextInput, View, Button, AsyncStorage, Alert } from 'react-native';
+import { TextInput, View, AsyncStorage, Alert } from 'react-native';
 import axios from 'axios';
 import styles from './styles';
 import { Constants } from '../../config/constants';
+import VButton from '../VButton/index';
 
 export class LoginForm extends React.PureComponent {
 
@@ -57,12 +58,7 @@ export class LoginForm extends React.PureComponent {
           value={this.state.password}
           onChangeText={(password) => this.setState({ password })}
         />
-        <Button
-          onPress={this.login}
-          title="Login"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
+        <VButton onPress={this.login}>Login</VButton>
       </View>
     );
   }

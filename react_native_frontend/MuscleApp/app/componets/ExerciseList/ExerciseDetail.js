@@ -22,23 +22,23 @@ class ExerciseDetail extends React.PureComponent {
     return (
 
       <TouchableHighlight onPress={() => alert('touched')}>
-      <Card>
-        <CardSection>
-          <View style={imageContainerStyle}>
-            <Image
-              source={{ uri: 'https://wger.de/media/exercise-images/60/Hyperextensions-2.png' }}
-              style={imageStyle}
-            />
-          </View>
-          <View style={headerContentStyle}>
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={[textStyle, { fontWeight: 'bold' }]}> {capitalizeFirst(name)} </Text>
-              <ViewMoreButton />
+        <Card>
+          <CardSection>
+            <View style={imageContainerStyle}>
+              <Image
+                source={{ uri: 'https://wger.de/media/exercise-images/60/Hyperextensions-2.png' }}
+                style={imageStyle}
+              />
             </View>
-            <Text style={textStyle}> {capitalizeAll(this.getMuscles(mainMuscles))} </Text>
-          </View>
-        </CardSection>
-      </Card>
+            <View style={headerContentStyle}>
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={[textStyle, { fontWeight: 'bold' }]}> {capitalizeFirst(name)} </Text>
+                <ViewMoreButton />
+              </View>
+              <Text style={textStyle}> {capitalizeAll(this.getMuscles(mainMuscles))} </Text>
+            </View>
+          </CardSection>
+        </Card>
       </TouchableHighlight>
     );
   }
