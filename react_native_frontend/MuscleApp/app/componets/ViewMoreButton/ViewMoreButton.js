@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-const ViewMoreButton = () => (
-    <TouchableOpacity onPress={() => alert('test')}>
+const ViewMoreButton = ({ onPress }) => (
+    <TouchableOpacity onPress={onPress}>
       <Text>View more...</Text>
     </TouchableOpacity>
   );

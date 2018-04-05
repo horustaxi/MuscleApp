@@ -24,5 +24,13 @@ export default EStyleSheet.create({
         alignItems: 'center',
         marginLeft: 10,
         marginRight: 10,
+    },
+    modalStyle: {
+        backgroundColor: '#FFF',
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderRadius: 5,
     }
 });
