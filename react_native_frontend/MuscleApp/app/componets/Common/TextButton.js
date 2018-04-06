@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-const ViewMoreButton = ({ onPress }) => (
+const TextButton = ({ onPress, text, textStyle }) => (
     <TouchableOpacity onPress={onPress}>
-      <Text>View more...</Text>
+      <Text style={textStyle}>{text}</Text>
     </TouchableOpacity>
   );
 
-export default ViewMoreButton;
+export { TextButton };

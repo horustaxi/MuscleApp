@@ -1,36 +1,19 @@
 import React from 'react';
 import { Image, View, Text, AsyncStorage, Alert } from 'react-native';
 import axios from 'axios';
-import { VButton, Card, CardSection, Input, TextButton, Spinner } from '../Common';
+import { VButton, Card, CardSection, Input, TextButton } from '../Common';
 import styles from './styles';
 import { Constants } from '../../config/constants';
 
 class LoginForm extends React.PureComponent {
+
+  state = { email: '', password: '' };
   
   static navigationOptions = {
       title: 'Login',
   };
 
-  state = { email: '', password: '', error: '', loading: false };
-
-  onLoginSuccess(token) {
-    try {
-      console.log('storing token');
-      AsyncStorage.setItem('@MuscleApp:token', token)
-        .then(() =>
-          console.log('token stored')
-        );
-      Alert.alert('You are Logged In');
-      this.setState({ loading: false });
-    } catch (error) {
-      console.error(`${error}`);
-      Alert.alert('Error', 'Oops! Something gone wrong.');
-    }
-  }
-
   login = () => {
-    this.setState({ error: '', loading: true });
-
     axios.post(`${Constants.apiUrl}login`, {
         email: this.state.email.trim(),
         password: this.state.password
@@ -38,38 +21,38 @@ class LoginForm extends React.PureComponent {
       .then(async (response) => {
         console.log(response.status);
         if (response.headers.authorization) {
-          this.onLoginSuccess(response.headers.authorization);
+          try {
+            console.log('storing token');
+            AsyncStorage.setItem('@MuscleApp:token', response.headers.authorization)
+            .then(() =>
+              console.log('token stored')
+            );
+            Alert.alert('You are Logged In');
+          } catch (error) {
+            console.error(`0 ${response}`);
+            Alert.alert('Error', 'Oops! Something happened. Please try again');
+          }
         } else {
-          console.log(`${response}`);
-          Alert.alert('Error', 'Oops! Something gone wrong.');
+          console.log(`1 ${response}`);
+          Alert.alert('Error', 'Oops! Something happened. Please try again');
         }
       })
       .catch(response => {
         try {
           if (response.response.status == '403') {
-            this.setState({ error: 'Wrong Password or Email.', loading: false });
+            Alert.alert('Error', 'Password or Email may be wrong. Please try again.');
           } else {
-            Alert.alert('Error', `${response.response.status} - Oops! Something gone wrong.`);
+            Alert.alert('Error', `${response.response.status} - Oops! Something happened. Please try again.`);
           }
         } catch (error) {
-          this.setState({ error: 'Unavailable Server. Please try again.', loading: false });
+          Alert.alert('Error', 'Unavailable Server. Please try again.');
         }
       });
   }
 
-  renderButton() {
-    if (this.state.loading) {
-      return <Spinner size="large" />;
-    }
-
-    return (
-      <VButton onPress={this.login}>Login</VButton>
-    );
-  }
-
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View>
         <Card>
           <CardSection>
             <View style={styles.logoContainer}>
@@ -99,12 +82,8 @@ class LoginForm extends React.PureComponent {
             />
           </CardSection>
 
-          <Text style={styles.erroTextStyle}>
-            {this.state.error}
-          </Text>
-
           <CardSection>
-            {this.renderButton()}
+          <VButton onPress={this.login}>Login</VButton>
           </CardSection>
         </Card>
 

@@ -2,8 +2,8 @@
 
 import { StackNavigator } from 'react-navigation';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import ExerciseList from './app/componets/ExerciseList/index';
-import Login from './app/componets/Login/index';
+import ExerciseList from './app/componets/ExerciseList';
+import LoginForm from './app/componets/Login';
 
 EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use global variables!
   $ptextColor: '#424242',
@@ -15,11 +15,11 @@ EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use glo
 // https://reactnavigation.org/docs/getting-started.html
 const App = StackNavigator(
   {
-    Login: { screen: Login },
+    Login: { screen: LoginForm },
     Exercises: { screen: ExerciseList },
   },
   {
-    initialRouteName: 'Exercises',
+    initialRouteName: 'Login',
   }
 );
 

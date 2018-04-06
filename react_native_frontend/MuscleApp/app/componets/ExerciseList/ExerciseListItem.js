@@ -2,10 +2,8 @@ import React from 'react';
 import { Text, View, Image, TouchableHighlight, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './styles';
-import Card from '../Card/index';
-import CardSection from '../Card/CardSection';
+import { Card, CardSection, TextButton } from '../Common';
 import { capitalizeFirst, capitalizeAll, arrayToString } from '../../config/Util';
-import ViewMoreButton from '../ViewMoreButton/index';
 import ExerciseDetails from './ExerciseDetails';
 
 class ExerciseListItem extends React.PureComponent {
@@ -58,7 +56,7 @@ class ExerciseListItem extends React.PureComponent {
               <View style={headerContentStyle}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                   <Text style={[textStyle, { fontWeight: 'bold' }]}> {capitalizeFirst(name)} </Text>
-                  <ViewMoreButton onPress={() => this.setModalVisible(true)} />
+                  <TextButton text="View more..." onPress={() => this.setModalVisible(true)} />
                 </View>
                 <Text style={textStyle}> {capitalizeAll(arrayToString(mainMuscles))} </Text>
               </View>

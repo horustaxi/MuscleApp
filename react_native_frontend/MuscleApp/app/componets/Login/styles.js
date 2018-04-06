@@ -1,10 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '$plight'
-    },
     logoContainer: {
         alignItems: 'center',
         flexGrow: 1,
@@ -12,16 +8,13 @@ export default EStyleSheet.create({
     },
     logo: {
         width: 100,
-        height: 100
+        height: 100,
+        borderRadius: 10,
     },
     title: {
         color: '$ptextColor',
         marginTop: 10,
         textAlign: 'center'
-    },
-    formContainer: {
-        flex: 1,
-        padding: 20
     },
     input: {
         height: 40,
@@ -29,5 +22,16 @@ export default EStyleSheet.create({
         marginBottom: 20,
         paddingHorizontal: 10,
         color: '$ptextColor'
+    },
+    newAccountContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        paddingTop: 10,
+        marginRight: 5,
+    },
+    erroTextStyle: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red',
     }
 });

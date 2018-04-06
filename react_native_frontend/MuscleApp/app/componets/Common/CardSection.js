@@ -8,4 +8,4 @@ const CardSection = (props) => (
       </View>
     );
 
-export default CardSection;
+export { CardSection };
