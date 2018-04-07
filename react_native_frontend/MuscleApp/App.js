@@ -9,6 +9,7 @@ import ExerciseList from './app/componets/ExerciseList';
 import LoginForm from './app/componets/Login';
 import AppLoading from './app/componets/Login/AppLoading';
 import SignUpForm from './app/componets/Login/SignUpForm';
+import reducers from './app/reducers';
 
 EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use global variables!
   $ptextColor: '#424242',
@@ -48,7 +49,7 @@ const SwitchNavigator = StackNavigator(
 class App extends React.PureComponent {
   render() {
     return (
-      <Provider store={createStore}>
+      <Provider store={createStore(reducers)}>
         <SwitchNavigator />
       </Provider>
     );
