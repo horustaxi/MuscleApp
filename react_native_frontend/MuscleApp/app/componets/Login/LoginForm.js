@@ -11,6 +11,14 @@ class LoginForm extends React.PureComponent {
       title: 'Login',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.onLoginSuccess = this.onLoginSuccess.bind(this);
+    this.onLoginFail = this.onLoginFail.bind(this);
+  }
+
+
   state = { email: '', password: '', error: '', loading: false };
 
   onLoginSuccess(token) {
@@ -21,10 +29,23 @@ class LoginForm extends React.PureComponent {
           console.log('token stored')
         );
       Alert.alert('You are Logged In');
-      this.setState({ loading: false });
+      this.setState({ email: '', password: '', loading: false });
+      this.props.navigation.navigate('Exercises');
     } catch (error) {
       console.error(`${error}`);
       Alert.alert('Error', 'Oops! Something gone wrong.');
+    }
+  }
+
+  onLoginFail(response) {
+    try {
+      if (response.response.status == '403') {
+        this.setState({ error: 'Wrong Password or Email.', email: '', password: '', loading: false });
+      } else {
+        Alert.alert('Error', `${response.response.status} - Oops! Something gone wrong.`);
+      }
+    } catch (error) {
+      this.setState({ error: 'Unavailable Server. Please try again.', loading: false });
     }
   }
 
@@ -45,15 +66,7 @@ class LoginForm extends React.PureComponent {
         }
       })
       .catch(response => {
-        try {
-          if (response.response.status == '403') {
-            this.setState({ error: 'Wrong Password or Email.', loading: false });
-          } else {
-            Alert.alert('Error', `${response.response.status} - Oops! Something gone wrong.`);
-          }
-        } catch (error) {
-          this.setState({ error: 'Unavailable Server. Please try again.', loading: false });
-        }
+        this.onLoginFail(response);
       });
   }
 
