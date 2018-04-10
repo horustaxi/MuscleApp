@@ -1,9 +1,11 @@
 'use strict';
 
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import axios from 'axios';
-// import styles from './styles';
+import { fetchExercises } from '../../actions';
 import { Constants } from '../../config/constants';
 import ExerciseListItem from './ExerciseListItem';
 
@@ -18,23 +20,27 @@ class ExerciseList extends React.PureComponent {
     this.state = {
       exercises: [],
       modalVisible: false,
+      // TODO: use a loading spinner while exercises arent fetched yet
+      loading: true
     };
   }
 
-  componentWillMount() {
-    axios.get(`${Constants.apiUrl}exercises`,
-    {
-      headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ2aW5pY2l1cy52YXMudGlAZ21haWwuY29tIiwiZXhwIjoxNTIzMTM4OTg3fQ.wWB5s95OiWOeajFYOV5h1qcAil5FiATcQyPJpKPwq2ZwoqGRo8n86kcQjk09grwiz0Jof1PK8LZBr7t4C6-zVw'
-      }
-    })
-    .then(response => {
-      //console.log(response.data);
-      this.setState({ exercises: response.data });
-    })
-    .catch(response => {
-      console.error(`erro: ${response}`);
-    });
+  componentDidMount() {
+    // axios.get(`${Constants.apiUrl}exercises`,
+    // {
+    //   headers: {
+    //     Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ2aW5pY2l1cy52YXMudGlAZ21haWwuY29tIiwiZXhwIjoxNTIzMTM4OTg3fQ.wWB5s95OiWOeajFYOV5h1qcAil5FiATcQyPJpKPwq2ZwoqGRo8n86kcQjk09grwiz0Jof1PK8LZBr7t4C6-zVw'
+    //   }
+    // })
+    // .then(response => {
+    //   //console.log(response.data);
+    //   this.setState({ exercises: response.data, loading: false });
+    // })
+    // .catch(response => {
+    //   console.error(`erro: ${response}`);
+    // });
+
+    this.props.fetchExercises();
   }
 
   setModalVisible(visible) {
@@ -42,6 +48,12 @@ class ExerciseList extends React.PureComponent {
   }
 
   renderExercises() {
+    if (!this.props.exercises) {
+      return (
+        <Text>Loading...</Text>
+      );
+    }
+
     return this.state.exercises.map(exercise => 
       <ExerciseListItem key={exercise.id} exercise={exercise} />
     );
@@ -56,4 +68,11 @@ class ExerciseList extends React.PureComponent {
   }
 }
 
-export default ExerciseList;
+const mapStateToProps = state => {
+  //console.log(`state: ${JSON.stringify(state)}`);
+  return { exercises: state.exercises };
+};
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchExercises }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseList);

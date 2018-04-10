@@ -3,9 +3,11 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import ExerciseList from './app/componets/ExerciseList';
+import WorkSheetList from './app/componets/WorkSheetList';
 import LoginForm from './app/componets/Login';
 import AppLoading from './app/componets/Login/AppLoading';
 import SignUpForm from './app/componets/Login/SignUpForm';
@@ -29,6 +31,7 @@ const AuthStack = StackNavigator(
 const AppStack = StackNavigator(
   {
     Exercises: ExerciseList,
+    WorkSheets: WorkSheetList,
   },
   {
     headerMode: 'none'
@@ -46,10 +49,13 @@ const SwitchNavigator = StackNavigator(
   }
 );
 
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const store = createStoreWithMiddleware(reducers);
+
 class App extends React.PureComponent {
   render() {
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={store}>
         <SwitchNavigator />
       </Provider>
     );

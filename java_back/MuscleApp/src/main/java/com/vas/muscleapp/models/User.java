@@ -43,8 +43,10 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "personalTrainnerUser", cascade = CascadeType.ALL)
     private Set<BodyMeasurements> bodyMeasurementsesCreateds = new HashSet<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<WorkoutSheet> workoutSheets = new HashSet<>();
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
+    private Set<WorkoutPlan> workoutPlansCreated = new HashSet<>();
+    @OneToMany(mappedBy = "createdTo", cascade = CascadeType.ALL)
+    private Set<WorkoutPlan> workoutPlans = new HashSet<>();
 
     public User() {
     }
@@ -111,12 +113,20 @@ public class User {
         return bodyMeasurementses;
     }
 
-    public void setWorkoutSheets(Set<WorkoutSheet> workoutSheets) {
-        this.workoutSheets = workoutSheets;
+    public void setWorkoutPlans(Set<WorkoutPlan> workoutPlans) {
+        this.workoutPlans = workoutPlans;
     }
 
-    public Set<WorkoutSheet> getWorkoutSheets() {
-        return workoutSheets;
+    public Set<WorkoutPlan> getWorkoutPlansCreated() {
+        return workoutPlansCreated;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Set<WorkoutPlan> getWorkoutPlans() {
+        return workoutPlans;
     }
 
     public void setBodyMeasurementsesCreateds(Set<BodyMeasurements> bodyMeasurementsesCreateds) {

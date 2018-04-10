@@ -28,6 +28,8 @@
     "react-native-modal": "^5.4.0",
     "react-navigation": "^1.4.0",
     "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-promise": "^0.5.3",
+    "watchman": "^1.0.0"
   }
 }

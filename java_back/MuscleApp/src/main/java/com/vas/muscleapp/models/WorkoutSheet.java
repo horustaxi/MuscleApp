@@ -1,6 +1,5 @@
 package com.vas.muscleapp.models;
 
-import com.vas.muscleapp.models.User;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -27,12 +28,17 @@ public class WorkoutSheet {
     private String description;
     private boolean active;
     @Column(nullable = false, updatable = false)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdAt;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private WorkoutPlan workoutPlan;
     @OneToMany(mappedBy = "workoutSheet", cascade = CascadeType.ALL)
     private Set<Workset> worksets = new HashSet<>();
-    
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private User user;
+
+    @PrePersist
+    public void setCreatedAt() {
+        this.createdAt = new Date();
+    }
 
     public Long getId() {
         return id;
@@ -62,10 +68,6 @@ public class WorkoutSheet {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public void setWorksets(Set<Workset> worksets) {
         this.worksets = worksets;
     }
@@ -74,12 +76,12 @@ public class WorkoutSheet {
         return worksets;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public User getUser() {
-        return user;
+    public WorkoutPlan getWorkoutPlan() {
+        return workoutPlan;
     }
     
 }
