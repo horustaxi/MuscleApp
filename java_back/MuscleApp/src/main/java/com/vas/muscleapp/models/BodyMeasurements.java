@@ -1,6 +1,7 @@
 package com.vas.muscleapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import javax.persistence.Temporal;
  * @author Vinícius
  */
 @Entity
-public class BodyMeasurements implements Comparable<BodyMeasurements> {
+public class BodyMeasurements implements Comparable<BodyMeasurements>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,24 +49,24 @@ public class BodyMeasurements implements Comparable<BodyMeasurements> {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User personalTrainnerUser;
 
-    public BodyMeasurements(int age, float height, float weight, float shoulders, float chest, float waist, float rightArm, float leftArm, float rightForearm, float leftForearm, float rightThigh, float leftThigh, float rightCalf, float leftCalf, float glutes, User measuredUser, User personalTrainnerUser) {
-        this.age = age;
-        this.height = height;
-        this.weight = weight;
-        this.shoulders = shoulders;
-        this.chest = chest;
-        this.waist = waist;
-        this.rightArm = rightArm;
-        this.leftArm = leftArm;
-        this.rightForearm = rightForearm;
-        this.leftForearm = leftForearm;
-        this.rightThigh = rightThigh;
-        this.leftThigh = leftThigh;
-        this.rightCalf = rightCalf;
-        this.leftCalf = leftCalf;
-        this.glutes = glutes;
-        this.measuredUser = measuredUser;
-        this.personalTrainnerUser = personalTrainnerUser;
+    public BodyMeasurements(Builder builder) {
+        this.age = builder.age;
+        this.height = builder.height;
+        this.weight = builder.weight;
+        this.shoulders = builder.shoulders;
+        this.chest = builder.chest;
+        this.waist = builder.waist;
+        this.rightArm = builder.rightArm;
+        this.leftArm = builder.leftArm;
+        this.rightForearm = builder.rightForearm;
+        this.leftForearm = builder.leftForearm;
+        this.rightThigh = builder.rightThigh;
+        this.leftThigh = builder.leftThigh;
+        this.rightCalf = builder.rightCalf;
+        this.leftCalf = builder.leftCalf;
+        this.glutes = builder.glutes;
+        this.measuredUser = builder.measuredUser;
+        this.personalTrainnerUser = builder.personalTrainnerUser;
     }
 
     public BodyMeasurements() {
@@ -232,7 +233,7 @@ public class BodyMeasurements implements Comparable<BodyMeasurements> {
         return this.createdAt.compareTo(o.getCreatedAt());
     }
 
-    public static class BodyMeasurementsBuilder {
+    public static class Builder {
 
         private int age;
         private float height;
@@ -252,88 +253,88 @@ public class BodyMeasurements implements Comparable<BodyMeasurements> {
         private final User measuredUser;
         private final User personalTrainnerUser;
 
-        public BodyMeasurementsBuilder(User measuredUser, User personalTrainnerUser) {
+        public Builder(User measuredUser, User personalTrainnerUser) {
             this.measuredUser = measuredUser;
             this.personalTrainnerUser = personalTrainnerUser;
         }
 
-        public BodyMeasurementsBuilder setAge(int age) {
+        public Builder setAge(int age) {
             this.age = age;
             return this;
         }
 
-        public BodyMeasurementsBuilder setHeight(float height) {
+        public Builder setHeight(float height) {
             this.height = height;
             return this;
         }
 
-        public BodyMeasurementsBuilder setWeight(float weight) {
+        public Builder setWeight(float weight) {
             this.weight = weight;
             return this;
         }
 
-        public BodyMeasurementsBuilder setShoulders(float shoulders) {
+        public Builder setShoulders(float shoulders) {
             this.shoulders = shoulders;
             return this;
         }
 
-        public BodyMeasurementsBuilder setChest(float chest) {
+        public Builder setChest(float chest) {
             this.chest = chest;
             return this;
         }
 
-        public BodyMeasurementsBuilder setWaist(float waist) {
+        public Builder setWaist(float waist) {
             this.waist = waist;
             return this;
         }
 
-        public BodyMeasurementsBuilder setRightArm(float rightArm) {
+        public Builder setRightArm(float rightArm) {
             this.rightArm = rightArm;
             return this;
         }
 
-        public BodyMeasurementsBuilder setLeftArm(float leftArm) {
+        public Builder setLeftArm(float leftArm) {
             this.leftArm = leftArm;
             return this;
         }
 
-        public BodyMeasurementsBuilder setRightForearm(float rightForearm) {
+        public Builder setRightForearm(float rightForearm) {
             this.rightForearm = rightForearm;
             return this;
         }
 
-        public BodyMeasurementsBuilder setLeftForearm(float leftForearm) {
+        public Builder setLeftForearm(float leftForearm) {
             this.leftForearm = leftForearm;
             return this;
         }
 
-        public BodyMeasurementsBuilder setRightThigh(float rightThigh) {
+        public Builder setRightThigh(float rightThigh) {
             this.rightThigh = rightThigh;
             return this;
         }
 
-        public BodyMeasurementsBuilder setLeftThigh(float leftThigh) {
+        public Builder setLeftThigh(float leftThigh) {
             this.leftThigh = leftThigh;
             return this;
         }
 
-        public BodyMeasurementsBuilder setRightCalf(float rightCalf) {
+        public Builder setRightCalf(float rightCalf) {
             this.rightCalf = rightCalf;
             return this;
         }
 
-        public BodyMeasurementsBuilder setLeftCalf(float leftCalf) {
+        public Builder setLeftCalf(float leftCalf) {
             this.leftCalf = leftCalf;
             return this;
         }
 
-        public BodyMeasurementsBuilder setGlutes(float glutes) {
+        public Builder setGlutes(float glutes) {
             this.glutes = glutes;
             return this;
         }
         
-        public BodyMeasurements buildBodyMeasurements() {
-            return new BodyMeasurements(age, height, weight, shoulders, chest, waist, rightArm, leftArm, rightForearm, leftForearm, rightThigh, leftThigh, rightCalf, leftCalf, glutes, measuredUser, personalTrainnerUser);
+        public BodyMeasurements build() {
+            return new BodyMeasurements(this);
         }
 
     }

@@ -7,7 +7,7 @@ package com.vas.muscleapp.bootstrap;
 
 import com.vas.muscleapp.enums.Language;
 import com.vas.muscleapp.models.BodyMeasurements;
-import com.vas.muscleapp.models.BodyMeasurements.BodyMeasurementsBuilder;
+import com.vas.muscleapp.models.BodyMeasurements.Builder;
 import com.vas.muscleapp.models.Exercise;
 import com.vas.muscleapp.models.Muscle;
 import com.vas.muscleapp.models.MuscleGroup;
@@ -284,7 +284,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
             User userEdson = new User("Edson Pereira", "edson.pereira@gmail.com", bCryptPasswordEncoder.encode("123456"));
             User userTiago = new User("Tiago Oliveira", "tiago.oliveira@gmail.com", bCryptPasswordEncoder.encode("123456"));
 
-            BodyMeasurements bodyMeasurements = new BodyMeasurementsBuilder(userTiago, userEdson)
+            BodyMeasurements bodyMeasurements = new Builder(userTiago, userEdson)
                     .setAge(27)
                     .setChest(76)
                     .setGlutes(80)
@@ -300,7 +300,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                     .setShoulders(94.6f)
                     .setWaist(80)
                     .setWeight(70)
-                    .buildBodyMeasurements();
+                    .build();
             userTiago.getBodyMeasurementses().add(bodyMeasurements);
             userRepository.save(userVinicius);
             userRepository.save(userEdson);
