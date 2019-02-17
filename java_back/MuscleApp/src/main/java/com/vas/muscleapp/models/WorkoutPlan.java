@@ -24,7 +24,7 @@ import javax.persistence.Temporal;
 public class WorkoutPlan implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = false)
     private String description;

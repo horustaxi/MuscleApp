@@ -20,7 +20,7 @@ import javax.persistence.Temporal;
 public class BodyMeasurements implements Comparable<BodyMeasurements> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, updatable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)

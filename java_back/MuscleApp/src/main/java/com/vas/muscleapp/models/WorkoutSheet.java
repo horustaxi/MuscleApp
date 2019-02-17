@@ -22,7 +22,7 @@ import javax.persistence.Temporal;
 @Entity
 public class WorkoutSheet {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String description;
