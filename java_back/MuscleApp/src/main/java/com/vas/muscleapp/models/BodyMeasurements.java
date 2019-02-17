@@ -3,6 +3,7 @@ package com.vas.muscleapp.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -76,7 +77,7 @@ public class BodyMeasurements implements Comparable<BodyMeasurements>, Serializa
     public void setCreatedAt() {
         this.createdAt = new Date();
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -227,10 +228,38 @@ public class BodyMeasurements implements Comparable<BodyMeasurements>, Serializa
 
     @Override
     public int compareTo(BodyMeasurements o) {
-        if (o == null && this == null) return 1;
-        if (o == null) return 1;
-        if (this == null) return -1;
+        if (o == null && this == null) {
+            return 1;
+        }
+        if (o == null) {
+            return 1;
+        }
+        if (this == null) {
+            return -1;
+        }
         return this.createdAt.compareTo(o.getCreatedAt());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof BodyMeasurements)) {
+            return false;
+        }
+        final BodyMeasurements other = (BodyMeasurements) obj;
+        return Objects.equals(this.id, other.id);
     }
 
     public static class Builder {
@@ -332,7 +361,7 @@ public class BodyMeasurements implements Comparable<BodyMeasurements>, Serializa
             this.glutes = glutes;
             return this;
         }
-        
+
         public BodyMeasurements build() {
             return new BodyMeasurements(this);
         }

@@ -1,7 +1,8 @@
 package com.vas.muscleapp.models;
 
-import com.vas.muscleapp.models.WorkoutSheet;
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import javax.persistence.OneToMany;
  * @author Vinícius
  */
 @Entity
-public class Workset {
+public class Workset implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +62,28 @@ public class Workset {
 
     public WorkoutSheet getWorkoutSheet() {
         return workoutSheet;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Workset)) {
+            return false;
+        }
+        final Workset other = (Workset) obj;
+        return Objects.equals(this.id, other.id);
     }
     
 }

@@ -78,7 +78,7 @@ public class MuscleGroup implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof MuscleGroup)) {
             return false;
         }
         final MuscleGroup other = (MuscleGroup) obj;

@@ -34,7 +34,7 @@ public class Exercise implements Serializable {
     private String description;
     @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    private Language language;
+    private Language languageForLocalization;
 
     public Exercise() {
     }
@@ -42,7 +42,7 @@ public class Exercise implements Serializable {
     public Exercise(String name, String description, Language language) {
         setName(name);
         setDescription(description);
-        this.language = language;
+        this.languageForLocalization = language;
         this.mainMuscles = new ArrayList<>();
         this.secondaryMuscles = new ArrayList<>();
     }
@@ -93,12 +93,12 @@ public class Exercise implements Serializable {
         return secondaryMuscles;
     }
 
-    public Language getLanguage() {
-        return language;
+    public void setLanguageForLocalization(Language languageForLocalization) {
+        this.languageForLocalization = languageForLocalization;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
+    public Language getLanguageForLocalization() {
+        return languageForLocalization;
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Exercise implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Exception)) {
             return false;
         }
         final Exercise other = (Exercise) obj;

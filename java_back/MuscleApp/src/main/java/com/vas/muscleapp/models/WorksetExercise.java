@@ -1,8 +1,6 @@
 package com.vas.muscleapp.models;
 
-import com.vas.muscleapp.models.Workset;
-import com.vas.muscleapp.models.Exercise;
-import java.util.Set;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,7 +26,7 @@ public class WorksetExercise {
     private float charge;
     //0 = Kg, 1= Lbs
     private int chargeUnit;
-    
+
     @OneToOne
     Exercise exercise;
 
@@ -90,5 +88,27 @@ public class WorksetExercise {
     public Exercise getExercise() {
         return exercise;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof WorksetExercise)) {
+            return false;
+        }
+        final WorksetExercise other = (WorksetExercise) obj;
+        return Objects.equals(this.id, other.id);
+    }
+
 }

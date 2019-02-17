@@ -76,7 +76,7 @@ public class Muscle implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Muscle)) {
             return false;
         }
         final Muscle other = (Muscle) obj;

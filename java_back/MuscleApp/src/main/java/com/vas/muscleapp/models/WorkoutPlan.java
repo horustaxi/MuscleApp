@@ -3,6 +3,7 @@ package com.vas.muscleapp.models;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,7 +40,7 @@ public class WorkoutPlan implements Serializable {
     private User createdTo;
 
     @OneToMany(mappedBy = "workoutPlan", cascade = CascadeType.ALL)
-    private Set<WorkoutSheet> workoutSheets = new HashSet<>();
+    private final Set<WorkoutSheet> workoutSheets = new HashSet<>();
 
     public WorkoutPlan() {
     }
@@ -98,5 +99,27 @@ public class WorkoutPlan implements Serializable {
 
     public Set<WorkoutSheet> getWorkoutSheets() {
         return workoutSheets;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof WorkoutPlan)) {
+            return false;
+        }
+        final WorkoutPlan other = (WorkoutPlan) obj;
+        return Objects.equals(this.id, other.id);
     }
 }

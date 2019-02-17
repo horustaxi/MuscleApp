@@ -1,6 +1,7 @@
 package com.vas.muscleapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -22,7 +23,7 @@ import javax.persistence.Temporal;
  * @author Vinicius
  */
 @Entity
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +45,7 @@ public class User {
     @OneToMany(mappedBy = "personalTrainnerUser", cascade = CascadeType.ALL)
     private Set<BodyMeasurements> bodyMeasurementsesCreateds = new HashSet<>();
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
-    private Set<WorkoutPlan> workoutPlansCreated = new HashSet<>();
+    private final Set<WorkoutPlan> workoutPlansCreated = new HashSet<>();
     @OneToMany(mappedBy = "createdTo", cascade = CascadeType.ALL)
     private Set<WorkoutPlan> workoutPlans = new HashSet<>();
 
@@ -152,7 +153,7 @@ public class User {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof User)) {
             return false;
         }
         final User other = (User) obj;
