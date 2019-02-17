@@ -1,14 +1,11 @@
 'use strict';
-import { Constants } from '../config/constants';
+import { actionTypes } from '../config/constants';
 
-const INITIAL_STATE = {
-  all: []
-};
-
-export default (state = INITIAL_STATE, action) => {
+export default (state = {}, action) => {
+  console.log(action);
   switch (action.type) {
-    case Constants.actionTypes.FETCH_EXERCISES:
-      return { ...state, all: action.payload.data };
+    case actionTypes.FETCH_EXERCISES:
+      return { ...state, exercises: action.payload.data };
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Constants } from '../config/constants';
+import { apiUrl, actionTypes } from '../config/constants';
 
 export const fetchExercises = () => {
   // axios.get(`${apiUrl}exercises`,
@@ -14,7 +14,7 @@ export const fetchExercises = () => {
   //     console.error(`erro: ${response}`);
   //   });
 
-  const request = axios.get(`${Constants.apiUrl}exercises`,
+  const request = axios.get(`${apiUrl}exercises`,
   {
     headers: {
       // TODO get token from storage
@@ -23,7 +23,7 @@ export const fetchExercises = () => {
   });
 
   return {
-    type: Constants.actionTypes.FETCH_EXERCISES,
+    type: actionTypes.FETCH_EXERCISES,
     payload: request
   };
 };
