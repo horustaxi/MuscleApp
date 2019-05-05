@@ -1,0 +1,17 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "clone": "^2.1.2",
+    "react-placeholder": "^3.0.2",
+    "react-throttle": "^0.3.0",
+    "react-window-size-listener": "^1.2.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+}
