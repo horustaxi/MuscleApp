@@ -51,7 +51,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent e) {
         try {
-            initData();
+            //initData();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             Logger.getLogger(DevBootstrap.class.getName()).log(Level.SEVERE, null, ex);
