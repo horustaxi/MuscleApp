@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import App from './containers/App/App';
+import App from './views/containers/App/App';
 import asyncComponent from './helpers/AsyncFunc';
 
 const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
@@ -26,11 +26,15 @@ const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
 const PublicRoutes = ({ history, isLoggedIn }) => (
   <BrowserRouter history={history}>
     <Switch>
-      <Route exact path="/" component={asyncComponent(() => import('./containers/Page/signin'))} />
+      <Route
+        exact
+        path="/"
+        component={asyncComponent(() => import('./views/containers/Page/signin'))}
+      />
       <Route
         exact
         path="/signin"
-        component={asyncComponent(() => import('./containers/Page/signin'))}
+        component={asyncComponent(() => import('./views/containers/Page/signin'))}
       />
       <RestrictedRoute path="/dashboard" component={App} isLoggedIn={isLoggedIn} />
     </Switch>

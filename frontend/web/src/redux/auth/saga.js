@@ -1,4 +1,6 @@
-import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
+import {
+  all, takeEvery, put, fork, call,
+} from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import axios from 'axios';
 import { getToken, clearToken } from '../../helpers/utility';
@@ -13,25 +15,25 @@ export function* loginAsync({ payload: { login, password } }) {
     yield put({
       type: actions.LOGIN_SUCCESS,
       token: 'secret token',
-      profile: 'Profile'
+      profile: 'Profile',
     });
   } else {
     try {
-      const response = yield call(axios.post, `${apiUrl}login`,  {
-        username: login,
-        password: password
-      });
+      // const response = yield call(axios.post, `${apiUrl}login`,  {
+      //   username: login,
+      //   password: password
+      // });
       yield put({
         type: actions.LOGIN_SUCCESS,
-        token: response.headers.authorization,
-        profile: 'Profile'
+        token: 'response.headers.authorization',
+        profile: 'Profile',
       });
     } catch (error) {
-      console.error('login error response',error);
+      console.error('login error response', error);
       if (error.response.status === 403) {
         yield put({ type: actions.LOGIN_ERROR, payload: 'Usuário ou Senha Inválidos' });
       } else {
-        console.error('login error response',error.response);
+        console.error('login error response', error.response);
       }
     }
   }
@@ -42,36 +44,31 @@ export function* loginRequest() {
 }
 
 export function* loginSuccess() {
-  yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
+  yield takeEvery(actions.LOGIN_SUCCESS, function* (payload) {
     yield localStorage.setItem('id_token', payload.token);
   });
 }
 
 export function* logout() {
-  yield takeEvery(actions.LOGOUT, function*() {
+  yield takeEvery(actions.LOGOUT, function* () {
     clearToken();
     yield put(push('/'));
   });
 }
 
 export function* checkAuthorization() {
-  yield takeEvery(actions.CHECK_AUTHORIZATION, function*() {
+  yield takeEvery(actions.CHECK_AUTHORIZATION, function* () {
     const token = getToken().get('idToken');
     if (token) {
       yield put({
         type: actions.LOGIN_SUCCESS,
         token,
-        profile: 'Profile'
+        profile: 'Profile',
       });
     }
   });
 }
 
 export default function* rootSaga() {
-  yield all([
-    fork(checkAuthorization),
-    fork(loginRequest),
-    fork(loginSuccess),
-    fork(logout)
-  ]);
+  yield all([fork(checkAuthorization), fork(loginRequest), fork(loginSuccess), fork(logout)]);
 }
