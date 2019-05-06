@@ -1,7 +1,6 @@
 import React from 'react';
-import {
-  BrowserRouter, Route, Redirect, Switch,
-} from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import { connect } from 'react-redux';
 
 import App from './views/containers/App/App';
@@ -24,7 +23,7 @@ const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   />
 );
 const PublicRoutes = ({ history, isLoggedIn }) => (
-  <BrowserRouter history={history}>
+  <ConnectedRouter history={history}>
     <Switch>
       <Route
         exact
@@ -38,7 +37,7 @@ const PublicRoutes = ({ history, isLoggedIn }) => (
       />
       <RestrictedRoute path="/dashboard" component={App} isLoggedIn={isLoggedIn} />
     </Switch>
-  </BrowserRouter>
+  </ConnectedRouter>
 );
 
 const mapStateToProps = state => ({
