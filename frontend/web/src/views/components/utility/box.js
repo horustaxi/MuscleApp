@@ -2,9 +2,9 @@ import React from 'react';
 import BoxTitleWrapper from './boxTitle';
 import { BoxWrapper } from './box.style';
 
-export default props => (
+export default ({ title, subtitle, children }) => (
   <BoxWrapper className="isoBoxWrapper">
-    <BoxTitleWrapper title={props.title} subtitle={props.subtitle} />
-    {props.children}
+    <BoxTitleWrapper title={title} subtitle={subtitle} />
+    {children}
   </BoxWrapper>
 );

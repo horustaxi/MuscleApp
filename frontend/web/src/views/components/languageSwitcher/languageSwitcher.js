@@ -4,11 +4,9 @@ export default ({ config, changeTheme, selectedId }) => {
   const { id, label, options } = config;
   return (
     <div className="themeSwitchBlock">
-      <h4>
-        {label}
-      </h4>
+      <h4>{label}</h4>
       <div className="themeSwitchBtnWrapper">
-        {options.map(option => {
+        {options.map((option) => {
           const { themeName, buttonColor, text } = option;
           const onClick = () => {
             changeTheme(id, themeName);

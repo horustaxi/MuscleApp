@@ -1,35 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from 'antd';
 
-export default class GroupButtonForm extends Component {
-  render() {
-    return (
-      <div>
-        <Button
-          type="primary"
-          htmlType="submit"
-          disabled={this.props.disableSubmitButton}
-          loading={this.props.loading}
-        >
-          {this.props.submitButtonText}
-        </Button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button
-          type="danger"
-          disabled={this.props.disableCancelButton}
-          onClick={this.props.onClickCancel}
-        >
-          {this.props.cancelButtonText}
-        </Button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button
-          type="secondary"
-          disabled={this.props.disableClearButton}
-          onClick={this.props.onClickClear}
-        >
-          {this.props.clearButtonText}
-        </Button>
-      </div>
-    );
-  }
-}
+const GroupButtonForm = ({
+  disableSubmitButton,
+  loading,
+  submitButtonText,
+  disableCancelButton,
+  onClickCancel,
+  cancelButtonText,
+  disableClearButton,
+  onClickClear,
+  clearButtonText,
+}) => (
+  <div>
+    <Button type="primary" htmlType="submit" disabled={disableSubmitButton} loading={loading}>
+      {submitButtonText}
+    </Button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <Button type="danger" disabled={disableCancelButton} onClick={onClickCancel}>
+      {cancelButtonText}
+    </Button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <Button type="secondary" disabled={disableClearButton} onClick={onClickClear}>
+      {clearButtonText}
+    </Button>
+  </div>
+);
+
+export default GroupButtonForm;

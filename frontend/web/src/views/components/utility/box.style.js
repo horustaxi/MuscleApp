@@ -15,7 +15,7 @@ const BoxWrapper = styled.div`
 
   @media only screen and (max-width: 767px) {
     padding: 20px;
-    ${'' /* margin: 0 10px 30px; */};
+    ${''};
   }
 
   &.half {

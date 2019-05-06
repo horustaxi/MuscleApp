@@ -2,31 +2,20 @@ import qs from 'qs';
 
 export function getInitData() {
   const initData = qs.parse(window.location.search.slice(1));
-  if (initData.toggle)
-    initData.toggle.free_shipping =
-      initData.toggle.free_shipping === 'true' ? true : undefined;
+  if (initData.toggle) initData.toggle.free_shipping = initData.toggle.free_shipping === 'true' ? true : undefined;
   return initData;
 }
 export function setUrl(searchState) {
-  const search = searchState
-    ? `${window.location.pathname}?${qs.stringify(searchState)}`
-    : '';
+  const search = searchState ? `${window.location.pathname}?${qs.stringify(searchState)}` : '';
   window.history.pushState(searchState, null, search);
 }
 
 export function getDefaultPath() {
-  const getParent = lastRoute => {
+  const getParent = (lastRoute) => {
     const parents = {
       ecommerce: ['shop', 'cart', 'checkout', 'card'],
       map: ['googlemap', 'leafletmap'],
-      charts: [
-        'googleChart',
-        'reecharts',
-        'reactVis',
-        'reactChart2',
-        'reactTrend',
-        'echart'
-      ],
+      charts: ['googleChart', 'reecharts', 'reactVis', 'reactChart2', 'reactTrend', 'echart'],
       Forms: [
         'InputField',
         'editor',
@@ -37,7 +26,7 @@ export function getDefaultPath() {
         'checkbox',
         'radiobox',
         'transfer',
-        'autocomplete'
+        'autocomplete',
       ],
       uielements: [
         'op_badge',
@@ -51,17 +40,10 @@ export function getDefaultPath() {
         'dropdown',
         'pagination',
         'rating',
-        'tree'
+        'tree',
       ],
       advancedUielements: ['reactDates', 'codeMirror', 'uppy', 'dropzone'],
-      feedback: [
-        'alert',
-        'modal',
-        'message',
-        'notification',
-        'popconfirm',
-        'spin'
-      ],
+      feedback: ['alert', 'modal', 'message', 'notification', 'popconfirm', 'spin'],
       table: ['table_ant'],
       pages: [
         '404',
@@ -71,12 +53,12 @@ export function getDefaultPath() {
         'forgotpassword',
         'resetpassword',
         'invoice',
-        'comingSoon'
-      ]
+        'comingSoon',
+      ],
     };
     let parent;
-    Object.keys(parents).forEach(key => {
-      parents[key].forEach(p => {
+    Object.keys(parents).forEach((key) => {
+      parents[key].forEach((p) => {
         if (p === lastRoute) {
           parent = key;
         }

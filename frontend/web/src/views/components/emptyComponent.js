@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { EmptyComponent } from './emptyComponent.style';
 
-export default class extends Component {
-  render() {
-    const value = this.props.value || 'Please include Config';
-    return (
-      <EmptyComponent className="isoEmptyComponent">
-        <span>
-          {value}
-        </span>
-      </EmptyComponent>
-    );
-  }
-}
+export default ({ value }) => (
+  <EmptyComponent className="isoEmptyComponent">
+    <span>{value || 'Please include Config'}</span>
+  </EmptyComponent>
+);
