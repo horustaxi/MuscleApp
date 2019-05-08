@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
  *
  * @author Vinícius
  */
-@Entity
+@Entity(name = "exercise")
 public class Exercise extends BaseEntity implements Serializable {
 
     @Column(nullable = false, unique = true)
@@ -28,7 +28,7 @@ public class Exercise extends BaseEntity implements Serializable {
     private List<Muscle> secondaryMuscles;
     @Column(length = 500)
     private String description;
-    @Column(nullable = false)
+    @Column(name = "language_for_localization", nullable = false)
     @Enumerated(EnumType.STRING)
     private Language languageForLocalization;
 

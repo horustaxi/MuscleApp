@@ -2,6 +2,7 @@ package com.vas.muscleapp.models;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -11,16 +12,18 @@ import javax.persistence.OneToOne;
  *
  * @author Vinícius
  */
-@Entity
+@Entity(name = "workset_exercise")
 public class WorksetExercise extends BaseEntity implements Serializable {
 
+    @Column(name = "series_number", nullable = false)
     private String seriesNumber;
+    @Column(name = "repetitions_number", nullable = false)
     private String repetitionsNumber;
     //in seconds
+    @Column(name = "resting_time")
     private int restingTime;
-    private float charge;
-    //0 = Kg, 1= Lbs
-    private int chargeUnit;
+    @Column(name = "details")
+    private String details;
 
     @OneToOne
     Exercise exercise;
@@ -50,22 +53,6 @@ public class WorksetExercise extends BaseEntity implements Serializable {
 
     public void setRestingTime(int restingTime) {
         this.restingTime = restingTime;
-    }
-
-    public float getCharge() {
-        return charge;
-    }
-
-    public void setCharge(float charge) {
-        this.charge = charge;
-    }
-
-    public int getChargeUnit() {
-        return chargeUnit;
-    }
-
-    public void setChargeUnit(int chargeUnit) {
-        this.chargeUnit = chargeUnit;
     }
 
     public void setExercise(Exercise exercise) {
@@ -104,6 +91,14 @@ public class WorksetExercise extends BaseEntity implements Serializable {
         }
         final WorksetExercise other = (WorksetExercise) obj;
         return Objects.equals(getId(), other.getId());
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
 }

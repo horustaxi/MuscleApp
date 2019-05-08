@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
  *
  * @author Vinícius
  */
-@Entity
+@Entity(name = "workset")
 public class Workset extends BaseEntity implements Serializable {
 
     private char letter;

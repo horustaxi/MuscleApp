@@ -15,13 +15,13 @@ import javax.validation.constraints.NotEmpty;
  *
  * @author Vinícius
  */
-@Entity
+@Entity(name = "muscle")
 public class Muscle extends BaseEntity implements Serializable {
 
     @Column(nullable = false, unique = true)
     @NotEmpty
     private String name;
-    @Column(nullable = false)
+    @Column(name = "language_for_localization", nullable = false)
     @Enumerated(EnumType.STRING)
     private Language languageForLocalization;
 

@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
  *
  * @author Vinícius
  */
-@Entity
+@Entity(name = "workout_plan")
 public class WorkoutPlan extends BaseEntity implements Serializable {
 
     @Column(nullable = false, unique = false)

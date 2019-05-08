@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
  *
  * @author Vinícius
  */
-@Entity
+@Entity(name = "workout_sheet")
 public class WorkoutSheet extends BaseEntity implements Serializable {
 
     @Column(nullable = false)

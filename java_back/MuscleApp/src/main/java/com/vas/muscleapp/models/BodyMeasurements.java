@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
  *
  * @author Vinícius
  */
-@Entity
+@Entity(name = "body_measurements")
 public class BodyMeasurements extends BaseEntity implements Comparable<BodyMeasurements>, Serializable {
     
     private int age;
