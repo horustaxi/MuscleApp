@@ -31,7 +31,12 @@ public class Muscle extends BaseEntity implements Serializable {
     public Muscle() {
     }
 
-    public Muscle(String name, Language languageForLocalization, MuscleGroup muscleGroup) {
+    public Muscle(String name, MuscleGroup muscleGroup) {
+        this.name = name;
+        this.muscleGroup = muscleGroup;
+    }
+
+    public Muscle(String name, MuscleGroup muscleGroup, Language languageForLocalization) {
         this.name = name;
         this.languageForLocalization = languageForLocalization;
         this.muscleGroup = muscleGroup;

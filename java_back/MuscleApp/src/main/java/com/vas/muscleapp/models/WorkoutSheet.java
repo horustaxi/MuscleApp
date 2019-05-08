@@ -25,6 +25,14 @@ public class WorkoutSheet extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "workoutSheet", cascade = CascadeType.ALL)
     private Set<Workset> worksets = new HashSet<>();
 
+    public WorkoutSheet() {
+    }
+
+    public WorkoutSheet(String description, WorkoutPlan workoutPlan) {
+        this.description = description;
+        this.workoutPlan = workoutPlan;
+    }
+
     public String getDescription() {
         return description;
     }

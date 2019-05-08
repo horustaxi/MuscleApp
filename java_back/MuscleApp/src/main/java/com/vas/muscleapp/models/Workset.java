@@ -24,6 +24,14 @@ public class Workset extends BaseEntity implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private WorkoutSheet workoutSheet;
 
+    public Workset() {
+    }
+
+    public Workset(char letter, WorkoutSheet workoutSheet) {
+        this.letter = letter;
+        this.workoutSheet = workoutSheet;
+    }
+
     public char getLetter() {
         return letter;
     }

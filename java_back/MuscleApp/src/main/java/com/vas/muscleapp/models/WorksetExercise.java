@@ -31,6 +31,18 @@ public class WorksetExercise extends BaseEntity implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Workset workset;
 
+    public WorksetExercise() {
+    }
+
+    public WorksetExercise(String seriesNumber, String repetitionsNumber, int restingTime, String details, Exercise exercise, Workset workset) {
+        this.seriesNumber = seriesNumber;
+        this.repetitionsNumber = repetitionsNumber;
+        this.restingTime = restingTime;
+        this.details = details;
+        this.exercise = exercise;
+        this.workset = workset;
+    }
+
     public String getSeriesNumber() {
         return seriesNumber;
     }
