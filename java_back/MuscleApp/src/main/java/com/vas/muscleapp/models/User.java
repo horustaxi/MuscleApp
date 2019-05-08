@@ -3,7 +3,6 @@ package com.vas.muscleapp.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -11,32 +10,25 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.Temporal;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
  * @author Vinicius
  */
 @Entity
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(nullable = false)
+    @NotEmpty
     private String name;
     @Column(nullable = false, unique = true)
+    @NotEmpty
     private String email;
     @Column(nullable = false)
+    @NotEmpty
     private String password;
-    @Column(nullable = false, updatable = false)
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date createdAt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "measuredUser", cascade = CascadeType.ALL)
@@ -52,27 +44,10 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String name, String email, String password) throws Exception {
-        setName(name);
-        setEmail(email);
-        setPassword(password);
-    }
-
-    @PrePersist
-    public void setCreatedAt() {
-        this.createdAt = new Date();
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     public String getName() {
@@ -120,10 +95,6 @@ public class User implements Serializable {
 
     public Set<WorkoutPlan> getWorkoutPlansCreated() {
         return workoutPlansCreated;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 
     public Set<WorkoutPlan> getWorkoutPlans() {

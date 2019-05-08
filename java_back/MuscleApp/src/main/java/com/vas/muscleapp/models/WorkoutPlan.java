@@ -1,7 +1,6 @@
 package com.vas.muscleapp.models;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -9,29 +8,20 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.Temporal;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
  * @author Vinícius
  */
 @Entity
-public class WorkoutPlan implements Serializable {
+public class WorkoutPlan extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(nullable = false, unique = false)
+    @NotEmpty
     private String description;
-    @Column(nullable = false, updatable = false)
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date createdAt;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User createdBy;
@@ -45,21 +35,10 @@ public class WorkoutPlan implements Serializable {
     public WorkoutPlan() {
     }
 
-    public WorkoutPlan(String description) {
-        setDescription(description);
-    }
-
-    @PrePersist
-    public void setCreatedAt() {
-        this.createdAt = new Date();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public WorkoutPlan(String description, User createdBy, User createdTo) {
+        this.description = description;
+        this.createdBy = createdBy;
+        this.createdTo = createdTo;
     }
 
     public String getDescription() {
@@ -71,10 +50,6 @@ public class WorkoutPlan implements Serializable {
             throw new IllegalArgumentException("Name can't be empty");
         }
         this.description = description.toLowerCase().trim();
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
     }
 
     public void setCreatedBy(User createdBy) {
@@ -93,10 +68,6 @@ public class WorkoutPlan implements Serializable {
         return createdTo;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public Set<WorkoutSheet> getWorkoutSheets() {
         return workoutSheets;
     }
@@ -104,7 +75,7 @@ public class WorkoutPlan implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(getId());
         return hash;
     }
 
@@ -120,6 +91,6 @@ public class WorkoutPlan implements Serializable {
             return false;
         }
         final WorkoutPlan other = (WorkoutPlan) obj;
-        return Objects.equals(this.id, other.id);
+        return Objects.equals(getId(), other.getId());
     }
 }

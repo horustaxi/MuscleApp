@@ -1,27 +1,29 @@
 package com.vas.muscleapp.models;
 
+import com.vas.muscleapp.enums.Language;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
  * @author Vinícius
  */
 @Entity
-public class Muscle implements Serializable {
+public class Muscle extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(nullable = false, unique = true)
+    @NotEmpty
     private String name;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Language languageForLocalization;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private MuscleGroup muscleGroup;
@@ -29,17 +31,10 @@ public class Muscle implements Serializable {
     public Muscle() {
     }
 
-    public Muscle(String name, MuscleGroup muscleGroup) {
-        setName(name);
+    public Muscle(String name, Language languageForLocalization, MuscleGroup muscleGroup) {
+        this.name = name;
+        this.languageForLocalization = languageForLocalization;
         this.muscleGroup = muscleGroup;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -59,6 +54,14 @@ public class Muscle implements Serializable {
             throw new IllegalArgumentException("Name can't be empty");
         }
         this.name = name.toLowerCase().trim();
+    }
+
+    public Language getLanguageForLocalization() {
+        return languageForLocalization;
+    }
+
+    public void setLanguageForLocalization(Language languageForLocalization) {
+        this.languageForLocalization = languageForLocalization;
     }
 
     @Override

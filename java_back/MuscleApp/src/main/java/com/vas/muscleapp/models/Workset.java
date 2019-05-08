@@ -5,12 +5,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -19,26 +15,14 @@ import javax.persistence.OneToMany;
  * @author Vinícius
  */
 @Entity
-public class Workset implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
+public class Workset extends BaseEntity implements Serializable {
+
     private char letter;
-    
-    @OneToMany(mappedBy = "workset", cascade = CascadeType.ALL) 
+
+    @OneToMany(mappedBy = "workset", cascade = CascadeType.ALL)
     private Set<WorksetExercise> worksetExercises = new HashSet<>();
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private WorkoutSheet workoutSheet;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public char getLetter() {
         return letter;
@@ -67,7 +51,7 @@ public class Workset implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(getId());
         return hash;
     }
 
@@ -83,7 +67,7 @@ public class Workset implements Serializable {
             return false;
         }
         final Workset other = (Workset) obj;
-        return Objects.equals(this.id, other.id);
+        return Objects.equals(getId(), other.getId());
     }
-    
+
 }

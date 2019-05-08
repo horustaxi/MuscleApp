@@ -1,47 +1,39 @@
 package com.vas.muscleapp.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vas.muscleapp.enums.Language;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
  * @author Vinícius
  */
 @Entity
-public class MuscleGroup implements Serializable {
+public class MuscleGroup extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(nullable = false, unique = true)
+    @NotEmpty
     private String name;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Language languageForLocalization;
 
-    // criar DTO e remover a anotação ignore
-    @JsonIgnore
     @OneToMany(mappedBy = "muscleGroup")
     private List<Muscle> muscles;
 
     public MuscleGroup() {
     }
 
-    public MuscleGroup(String name) {
-        setName(name);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public MuscleGroup(String name, Language languageForLocalization) {
+        this.name = name;
+        this.languageForLocalization = languageForLocalization;
     }
 
     public String getName() {
@@ -49,9 +41,6 @@ public class MuscleGroup implements Serializable {
     }
 
     public void setName(String name) {
-        if (name.isEmpty()) {
-            throw new IllegalArgumentException("Name can't be empty");
-        }
         this.name = name.toLowerCase().trim();
     }
 
@@ -61,6 +50,14 @@ public class MuscleGroup implements Serializable {
 
     public List<Muscle> getMuscles() {
         return muscles;
+    }
+
+    public Language getLanguageForLocalization() {
+        return languageForLocalization;
+    }
+
+    public void setLanguageForLocalization(Language languageForLocalization) {
+        this.languageForLocalization = languageForLocalization;
     }
 
     @Override

@@ -2,31 +2,18 @@ package com.vas.muscleapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Temporal;
 
 /**
  *
  * @author Vinícius
  */
 @Entity
-public class BodyMeasurements implements Comparable<BodyMeasurements>, Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false, updatable = false)
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date createdAt;
+public class BodyMeasurements extends BaseEntity implements Comparable<BodyMeasurements>, Serializable {
+    
     private int age;
     private float height;
     private float weight;
@@ -71,23 +58,6 @@ public class BodyMeasurements implements Comparable<BodyMeasurements>, Serializa
     }
 
     public BodyMeasurements() {
-    }
-
-    @PrePersist
-    public void setCreatedAt() {
-        this.createdAt = new Date();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
     }
 
     public float getHeight() {
@@ -237,13 +207,13 @@ public class BodyMeasurements implements Comparable<BodyMeasurements>, Serializa
         if (this == null) {
             return -1;
         }
-        return this.createdAt.compareTo(o.getCreatedAt());
+        return getCreatedAt().compareTo(o.getCreatedAt());
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(getId());
         return hash;
     }
 
@@ -259,7 +229,7 @@ public class BodyMeasurements implements Comparable<BodyMeasurements>, Serializa
             return false;
         }
         final BodyMeasurements other = (BodyMeasurements) obj;
-        return Objects.equals(this.id, other.id);
+        return Objects.equals(getId(), other.getId());
     }
 
     public static class Builder {

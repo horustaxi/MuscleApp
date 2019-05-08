@@ -9,22 +9,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
  * @author Vinícius
  */
 @Entity
-public class Exercise implements Serializable {
+public class Exercise extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(nullable = false, unique = true)
+    @NotEmpty
     private String name;
     @ManyToMany
     private List<Muscle> mainMuscles;
@@ -33,26 +29,18 @@ public class Exercise implements Serializable {
     @Column(length = 500)
     private String description;
     @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Language languageForLocalization;
 
     public Exercise() {
     }
 
     public Exercise(String name, String description, Language language) {
-        setName(name);
-        setDescription(description);
+        this.name = name;
+        this.description = description;
         this.languageForLocalization = language;
         this.mainMuscles = new ArrayList<>();
         this.secondaryMuscles = new ArrayList<>();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -60,9 +48,6 @@ public class Exercise implements Serializable {
     }
 
     public void setName(String name) {
-        if (name.isEmpty()) {
-            throw new IllegalArgumentException("Name can't be empty");
-        }
         this.name = name.toLowerCase().trim();
     }
 
@@ -71,9 +56,6 @@ public class Exercise implements Serializable {
     }
 
     public void setDescription(String description) {
-        if (description.length() > 500) {
-            throw new IllegalArgumentException("Description must hava a maximum of 500 characters");
-        }
         this.description = description;
     }
 

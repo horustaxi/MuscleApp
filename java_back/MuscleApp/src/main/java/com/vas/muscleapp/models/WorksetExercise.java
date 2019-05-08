@@ -1,11 +1,9 @@
 package com.vas.muscleapp.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -14,11 +12,8 @@ import javax.persistence.OneToOne;
  * @author Vinícius
  */
 @Entity
-public class WorksetExercise {
+public class WorksetExercise extends BaseEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String seriesNumber;
     private String repetitionsNumber;
     //in seconds
@@ -32,14 +27,6 @@ public class WorksetExercise {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Workset workset;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getSeriesNumber() {
         return seriesNumber;
@@ -89,10 +76,18 @@ public class WorksetExercise {
         return exercise;
     }
 
+    public Workset getWorkset() {
+        return workset;
+    }
+
+    public void setWorkset(Workset workset) {
+        this.workset = workset;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(getId());
         return hash;
     }
 
@@ -108,7 +103,7 @@ public class WorksetExercise {
             return false;
         }
         final WorksetExercise other = (WorksetExercise) obj;
-        return Objects.equals(this.id, other.id);
+        return Objects.equals(getId(), other.getId());
     }
 
 }
