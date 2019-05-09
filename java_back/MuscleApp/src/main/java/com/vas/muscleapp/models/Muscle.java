@@ -31,13 +31,8 @@ public class Muscle extends BaseEntity implements Serializable {
     public Muscle() {
     }
 
-    public Muscle(String name, MuscleGroup muscleGroup) {
-        this.name = name;
-        this.muscleGroup = muscleGroup;
-    }
-
     public Muscle(String name, MuscleGroup muscleGroup, Language languageForLocalization) {
-        this.name = name;
+        this.name = name.toLowerCase().trim();
         this.languageForLocalization = languageForLocalization;
         this.muscleGroup = muscleGroup;
     }
@@ -55,9 +50,6 @@ public class Muscle extends BaseEntity implements Serializable {
     }
 
     public void setName(String name) {
-        if (name.isEmpty()) {
-            throw new IllegalArgumentException("Name can't be empty");
-        }
         this.name = name.toLowerCase().trim();
     }
 

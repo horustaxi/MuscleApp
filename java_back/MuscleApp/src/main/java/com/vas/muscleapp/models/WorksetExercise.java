@@ -21,7 +21,7 @@ public class WorksetExercise extends BaseEntity implements Serializable {
     private String repetitionsNumber;
     //in seconds
     @Column(name = "resting_time")
-    private int restingTime;
+    private Short restingTime;
     @Column(name = "details")
     private String details;
 
@@ -34,7 +34,7 @@ public class WorksetExercise extends BaseEntity implements Serializable {
     public WorksetExercise() {
     }
 
-    public WorksetExercise(String seriesNumber, String repetitionsNumber, int restingTime, String details, Exercise exercise, Workset workset) {
+    public WorksetExercise(String seriesNumber, String repetitionsNumber, Short restingTime, String details, Exercise exercise, Workset workset) {
         this.seriesNumber = seriesNumber;
         this.repetitionsNumber = repetitionsNumber;
         this.restingTime = restingTime;
@@ -63,7 +63,7 @@ public class WorksetExercise extends BaseEntity implements Serializable {
         return restingTime;
     }
 
-    public void setRestingTime(int restingTime) {
+    public void setRestingTime(Short restingTime) {
         this.restingTime = restingTime;
     }
 

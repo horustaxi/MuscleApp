@@ -2,8 +2,8 @@ package com.vas.muscleapp.models;
 
 import com.vas.muscleapp.enums.Language;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,17 +26,13 @@ public class MuscleGroup extends BaseEntity implements Serializable {
     private Language languageForLocalization;
 
     @OneToMany(mappedBy = "muscleGroup")
-    private List<Muscle> muscles;
+    private Set<Muscle> muscles;
 
     public MuscleGroup() {
     }
 
-    public MuscleGroup(String name) {
-        this.name = name;
-    }
-
     public MuscleGroup(String name, Language languageForLocalization) {
-        this.name = name;
+        this.name = name.toLowerCase().trim();
         this.languageForLocalization = languageForLocalization;
     }
 
@@ -48,11 +44,11 @@ public class MuscleGroup extends BaseEntity implements Serializable {
         this.name = name.toLowerCase().trim();
     }
 
-    public void setMuscles(List<Muscle> muscles) {
+    public void setMuscles(Set<Muscle> muscles) {
         this.muscles = muscles;
     }
 
-    public List<Muscle> getMuscles() {
+    public Set<Muscle> getMuscles() {
         return muscles;
     }
 

@@ -2,9 +2,9 @@ package com.vas.muscleapp.models;
 
 import com.vas.muscleapp.enums.Language;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,9 +23,9 @@ public class Exercise extends BaseEntity implements Serializable {
     @NotEmpty
     private String name;
     @ManyToMany
-    private List<Muscle> mainMuscles;
+    private Set<Muscle> mainMuscles;
     @ManyToMany
-    private List<Muscle> secondaryMuscles;
+    private Set<Muscle> secondaryMuscles;
     @Column(length = 500)
     private String description;
     @Column(name = "language_for_localization", nullable = false)
@@ -35,12 +35,10 @@ public class Exercise extends BaseEntity implements Serializable {
     public Exercise() {
     }
 
-    public Exercise(String name, String description, Language language) {
-        this.name = name;
+    public Exercise(String name, String description, Language languageForLocalization) {
+        this.name = name.toLowerCase().trim();
         this.description = description;
-        this.languageForLocalization = language;
-        this.mainMuscles = new ArrayList<>();
-        this.secondaryMuscles = new ArrayList<>();
+        this.languageForLocalization = languageForLocalization;
     }
 
     public String getName() {
@@ -59,19 +57,25 @@ public class Exercise extends BaseEntity implements Serializable {
         this.description = description;
     }
 
-    public void setMainMuscles(List<Muscle> mainMuscles) {
+    public void setMainMuscles(Set<Muscle> mainMuscles) {
         this.mainMuscles = mainMuscles;
     }
 
-    public List<Muscle> getMainMuscles() {
+    public Set<Muscle> getMainMuscles() {
+        if (mainMuscles == null) {
+            mainMuscles = new HashSet<>();
+        }
         return mainMuscles;
     }
 
-    public void setSecondaryMuscles(List<Muscle> secondaryMuscles) {
+    public void setSecondaryMuscles(Set<Muscle> secondaryMuscles) {
         this.secondaryMuscles = secondaryMuscles;
     }
 
-    public List<Muscle> getSecondaryMuscles() {
+    public Set<Muscle> getSecondaryMuscles() {
+        if (secondaryMuscles == null) {
+            secondaryMuscles = new HashSet<>();
+        }
         return secondaryMuscles;
     }
 

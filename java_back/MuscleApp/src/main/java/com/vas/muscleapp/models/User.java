@@ -2,9 +2,7 @@ package com.vas.muscleapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -36,7 +34,7 @@ public class User extends BaseEntity implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "measuredUser", cascade = CascadeType.ALL)
-    private List<BodyMeasurements> bodyMeasurementses = new ArrayList<>();
+    private Set<BodyMeasurements> bodyMeasurementses = new HashSet<>();
     @JsonIgnore
     @OneToMany(mappedBy = "personalTrainnerUser", cascade = CascadeType.ALL)
     private Set<BodyMeasurements> bodyMeasurementsesCreateds = new HashSet<>();
@@ -78,11 +76,11 @@ public class User extends BaseEntity implements Serializable {
         this.password = password;
     }
 
-    public void setBodyMeasurementses(List<BodyMeasurements> bodyMeasurementses) {
+    public void setBodyMeasurementses(Set<BodyMeasurements> bodyMeasurementses) {
         this.bodyMeasurementses = bodyMeasurementses;
     }
 
-    public List<BodyMeasurements> getBodyMeasurementses() {
+    public Set<BodyMeasurements> getBodyMeasurementses() {
         return bodyMeasurementses;
     }
 
