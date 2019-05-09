@@ -1,14 +1,16 @@
 package com.vas.muscleapp.dtos;
 
+import com.vas.muscleapp.enums.Language;
+
 /**
  *
- * @author Vinicius
+ * @author Vinícius
  */
-public class UserDTO {
+public class MuscleGroupDTO {
 
     private Long id;
     private String name;
-    private String email;
+    private Language languageForLocalization;
 
     public Long getId() {
         return id;
@@ -26,12 +28,12 @@ public class UserDTO {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public Language getLanguageForLocalization() {
+        return languageForLocalization;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLanguageForLocalization(Language languageForLocalization) {
+        this.languageForLocalization = languageForLocalization;
     }
 
 }

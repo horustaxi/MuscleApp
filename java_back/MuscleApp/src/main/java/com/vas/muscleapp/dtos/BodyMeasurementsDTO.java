@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vas.muscleapp.dtos;
-
-import java.util.Date;
 
 /**
  *
- * @author vinicius
+ * @author Vinícius
  */
 public class BodyMeasurementsDTO {
-    
+
     private Long id;
-    private Date createdAt;
     private int age;
     private float height;
     private float weight;
@@ -30,7 +22,8 @@ public class BodyMeasurementsDTO {
     private float rightCalf;
     private float leftCalf;
     private float glutes;
-    private UserDTO personalTrainnerUser;
+    private String measuredUserName;
+    private String personalTrainnerUserName;
 
     public Long getId() {
         return id;
@@ -38,14 +31,6 @@ public class BodyMeasurementsDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 
     public int getAge() {
@@ -168,12 +153,19 @@ public class BodyMeasurementsDTO {
         this.glutes = glutes;
     }
 
-    public UserDTO getPersonalTrainnerUser() {
-        return personalTrainnerUser;
+    public String getMeasuredUserName() {
+        return measuredUserName;
     }
 
-    public void setPersonalTrainnerUser(UserDTO personalTrainnerUser) {
-        this.personalTrainnerUser = personalTrainnerUser;
+    public void setMeasuredUserName(String measuredUserName) {
+        this.measuredUserName = measuredUserName;
     }
-    
+
+    public String getPersonalTrainnerUserName() {
+        return personalTrainnerUserName;
+    }
+
+    public void setPersonalTrainnerUserName(String personalTrainnerUserName) {
+        this.personalTrainnerUserName = personalTrainnerUserName;
+    }
 }
