@@ -5,6 +5,7 @@
  */
 package com.vas.muscleapp.abstracts;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vas.muscleapp.Application;
 import com.vas.muscleapp.JpaConfigTest;
 import org.junit.Before;
@@ -44,6 +45,8 @@ public abstract class BaseControllerTest {
 
     @Autowired
     protected WebApplicationContext webApplicationContext;
+    @Autowired
+    protected ObjectMapper objectMapper;
 
     @Autowired
     public void setConverters(HttpMessageConverter<?>[] converters) {

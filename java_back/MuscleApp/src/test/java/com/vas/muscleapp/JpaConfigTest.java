@@ -23,7 +23,7 @@ public class JpaConfigTest {
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
         dataSource.setUsername("sa");
-        dataSource.setPassword("sa");
+        dataSource.setPassword("");
  
         return dataSource;
     }
