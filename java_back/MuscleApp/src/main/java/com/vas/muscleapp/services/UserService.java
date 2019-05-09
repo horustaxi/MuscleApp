@@ -5,11 +5,9 @@
  */
 package com.vas.muscleapp.services;
 
-import com.vas.muscleapp.dtos.UserDTO;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.exceptions.user.UserNotFoundException;
 import com.vas.muscleapp.repositories.UserRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +25,8 @@ public class UserService {
         this.userReporitory = userReporitory;
     }
 
-    public UserDTO findUserByEmail(String email) {
-        ModelMapper modelMapper = new ModelMapper();
-        User user = userReporitory.findUserByEmail(email).orElse(null);
-        return user != null ? modelMapper.map(user, UserDTO.class) : null;
+    public User findUserByEmail(String email) {
+        return userReporitory.findUserByEmail(email).get();
     }
 
     public User save(User user) {
@@ -44,6 +40,10 @@ public class UserService {
 
     public void deleteAll() {
         userReporitory.deleteAll();
+    }
+    
+    public boolean existsUserWithEmail(String email) {
+        return userReporitory.findUserByEmail(email).isPresent();
     }
     
 }

@@ -18,31 +18,27 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ExerciseService {
-
+    
     private final ExerciseRepository exerciseRepository;
-
+    
     @Autowired
     public ExerciseService(ExerciseRepository exerciseRepository) {
         this.exerciseRepository = exerciseRepository;
     }
-
-    public Exercise save(Exercise exercise) {  
+    
+    public Exercise save(Exercise exercise) {        
         if (exerciseRepository.findExerciseByName(exercise.getName()).orElse(null) != null) {
             throw new ExerciseAlreadyExistsException(exercise.getName());
         }
         return exerciseRepository.save(exercise);
     }
-
-    public List<Exercise> findAll() {
-        return exerciseRepository.findAll();
+    
+    public List<Exercise> findAllActives() {
+        return exerciseRepository.findExerciseByActive(Boolean.TRUE);
     }
-
+    
     public Exercise findById(Long id) {
-        return exerciseRepository.findById(id).orElse(null);
-    }
-
-    public void deleteAllInBatch() {
-        exerciseRepository.deleteAllInBatch();
+        return exerciseRepository.findById(id).get();
     }
     
 }

@@ -5,7 +5,6 @@
  */
 package com.vas.muscleapp.services;
 
-import com.vas.muscleapp.dtos.BodyMeasurementsDTO;
 import com.vas.muscleapp.models.BodyMeasurements;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.repositories.BodyMeasurementsRepository;
@@ -38,16 +37,16 @@ public class BodyMeasurementsService {
         bodyMeasurementsRepository.save(bodyMeasurements);
     }
 
-    public List<BodyMeasurementsDTO> getBodyMeasurementsByUserId(Long userId) {
-        ModelMapper modelMapper = new ModelMapper();
-        User user = userService.findById(userId);
-        List<BodyMeasurementsDTO> bodyMeasurementsDTOs = new ArrayList<>();
-        
-        user.getBodyMeasurementses().forEach(
-                (bm) -> bodyMeasurementsDTOs.add(modelMapper.map(bm, BodyMeasurementsDTO.class))
-        );
-        
-        return bodyMeasurementsDTOs;
-    }
+//    public List<BodyMeasurementsDTO> getBodyMeasurementsByUserId(Long userId) {
+//        ModelMapper modelMapper = new ModelMapper();
+//        User user = userService.findById(userId);
+//        List<BodyMeasurementsDTO> bodyMeasurementsDTOs = new ArrayList<>();
+//        
+//        user.getBodyMeasurementses().forEach(
+//                (bm) -> bodyMeasurementsDTOs.add(modelMapper.map(bm, BodyMeasurementsDTO.class))
+//        );
+//        
+//        return bodyMeasurementsDTOs;
+//    }
 
 }
