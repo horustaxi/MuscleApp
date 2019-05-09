@@ -5,7 +5,6 @@
  */
 package com.vas.muscleapp.controllers;
 
-import com.vas.muscleapp.dtos.BodyMeasurementsDTO;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.models.BodyMeasurements;
 import com.vas.muscleapp.services.BodyMeasurementsService;
@@ -50,10 +49,10 @@ public class BodyMeasurementsController {
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping(value = "/user/{userId}/bodymeasurements")
-    public ResponseEntity<List<BodyMeasurementsDTO>> getBodyMeasurements(@PathVariable Long userId) {
-        List<BodyMeasurementsDTO> bodyMeasurementsDTOs = bodyMeasurementsService.getBodyMeasurementsByUserId(userId);
-        return new ResponseEntity<>(bodyMeasurementsDTOs, HttpStatus.OK);
-    }
+//    @GetMapping(value = "/user/{userId}/bodymeasurements")
+//    public ResponseEntity<List<BodyMeasurementsDTO>> getBodyMeasurements(@PathVariable Long userId) {
+//        List<BodyMeasurementsDTO> bodyMeasurementsDTOs = bodyMeasurementsService.getBodyMeasurementsByUserId(userId);
+//        return new ResponseEntity<>(bodyMeasurementsDTOs, HttpStatus.OK);
+//    }
 
 }
