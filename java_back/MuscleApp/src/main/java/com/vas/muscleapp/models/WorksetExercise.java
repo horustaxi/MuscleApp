@@ -26,7 +26,7 @@ public class WorksetExercise extends BaseEntity implements Serializable {
     private String details;
 
     @OneToOne
-    Exercise exercise;
+    private Exercise exercise;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Workset workset;
