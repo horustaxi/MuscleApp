@@ -5,11 +5,17 @@
  */
 package com.vas.muscleapp.controllers;
 
+import com.vas.muscleapp.dtos.BodyMeasurementsDTO;
+import com.vas.muscleapp.dtos.ExerciseDTO;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.models.BodyMeasurements;
 import com.vas.muscleapp.services.BodyMeasurementsService;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +30,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  *
  * @author Vinícius
  */
-
 // TODO missing tests
 @RestController
 public class BodyMeasurementsController {
 
     private final BodyMeasurementsService bodyMeasurementsService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public BodyMeasurementsController(BodyMeasurementsService bodyMeasurementsService) {
+    public BodyMeasurementsController(BodyMeasurementsService bodyMeasurementsService, ModelMapper modelMapper) {
         this.bodyMeasurementsService = bodyMeasurementsService;
+        this.modelMapper = modelMapper;
     }
 
     @PostMapping(value = "/user/{userId}/bodymeasurements")
@@ -49,10 +56,13 @@ public class BodyMeasurementsController {
         return ResponseEntity.created(location).build();
     }
 
-//    @GetMapping(value = "/user/{userId}/bodymeasurements")
-//    public ResponseEntity<List<BodyMeasurementsDTO>> getBodyMeasurements(@PathVariable Long userId) {
-//        List<BodyMeasurementsDTO> bodyMeasurementsDTOs = bodyMeasurementsService.getBodyMeasurementsByUserId(userId);
-//        return new ResponseEntity<>(bodyMeasurementsDTOs, HttpStatus.OK);
-//    }
+    @GetMapping(value = "/user/{userId}/bodymeasurements")
+    public ResponseEntity<Set<BodyMeasurementsDTO>> getBodyMeasurements(@PathVariable Long userId) {
+        Set<BodyMeasurements> bodyMeasurements = bodyMeasurementsService.getBodyMeasurementsByUserId(userId);
+        Type listType = new TypeToken<Set<BodyMeasurementsDTO>>() {
+        }.getType();
+        Set<BodyMeasurementsDTO> bodyMeasurementsDTOs = modelMapper.map(bodyMeasurements, listType);
+        return new ResponseEntity<>(bodyMeasurementsDTOs, HttpStatus.OK);
+    }
 
 }
