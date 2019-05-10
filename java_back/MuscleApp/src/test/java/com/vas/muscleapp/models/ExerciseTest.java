@@ -5,8 +5,8 @@
  */
 package com.vas.muscleapp.models;
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
@@ -14,31 +14,33 @@ import org.junit.Before;
  */
 public class ExerciseTest {
 
-    Exercise exercise;
+	Exercise exercise;
 
-    @Before
-    public void setUp() {
-        exercise = new Exercise();
-    }
+	@Before
+	public void setUp() {
+		exercise = new Exercise();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetNameWithException() {
-        exercise.setName("");
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetNameWithException() {
+		exercise.setName("");
+	}
 
-    @Test
-    public void testSetName() throws Exception {
-        exercise.setName("Bench Press");
-    }
+	@Test
+	public void testSetName() throws Exception {
+		exercise.setName("Bench Press");
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetDescriptionWithException() {
-        exercise.setDescription("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu ");
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetDescriptionWithException() {
+		exercise.setDescription(
+				"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu ");
+	}
 
-    @Test
-    public void testSetDescription() {
-        exercise.setDescription("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu");
-    }
+	@Test
+	public void testSetDescription() {
+		exercise.setDescription(
+				"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu");
+	}
 
 }

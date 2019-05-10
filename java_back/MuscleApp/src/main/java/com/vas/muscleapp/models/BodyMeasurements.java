@@ -1,340 +1,344 @@
 package com.vas.muscleapp.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
  * @author Vinícius
  */
+@SuppressWarnings("serial")
 @Entity(name = "body_measurements")
-public class BodyMeasurements extends BaseEntity implements Comparable<BodyMeasurements>, Serializable {
-    
-    private int age;
-    private float height;
-    private float weight;
-    private float shoulders;
-    private float chest;
-    private float waist;
-    private float rightArm;
-    private float leftArm;
-    private float rightForearm;
-    private float leftForearm;
-    private float rightThigh;
-    private float leftThigh;
-    private float rightCalf;
-    private float leftCalf;
-    private float glutes;
+public class BodyMeasurements extends BaseEntity
+		implements Comparable<BodyMeasurements>, Serializable {
 
-    @JsonIgnore
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private User measuredUser;
+	private int age;
+	private float height;
+	private float weight;
+	private float shoulders;
+	private float chest;
+	private float waist;
+	private float rightArm;
+	private float leftArm;
+	private float rightForearm;
+	private float leftForearm;
+	private float rightThigh;
+	private float leftThigh;
+	private float rightCalf;
+	private float leftCalf;
+	private float glutes;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private User personalTrainnerUser;
+	@JsonIgnore
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	private User measuredUser;
 
-    public BodyMeasurements(Builder builder) {
-        this.age = builder.age;
-        this.height = builder.height;
-        this.weight = builder.weight;
-        this.shoulders = builder.shoulders;
-        this.chest = builder.chest;
-        this.waist = builder.waist;
-        this.rightArm = builder.rightArm;
-        this.leftArm = builder.leftArm;
-        this.rightForearm = builder.rightForearm;
-        this.leftForearm = builder.leftForearm;
-        this.rightThigh = builder.rightThigh;
-        this.leftThigh = builder.leftThigh;
-        this.rightCalf = builder.rightCalf;
-        this.leftCalf = builder.leftCalf;
-        this.glutes = builder.glutes;
-        this.measuredUser = builder.measuredUser;
-        this.personalTrainnerUser = builder.personalTrainnerUser;
-    }
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	private User personalTrainnerUser;
 
-    public BodyMeasurements() {
-    }
+	public BodyMeasurements(Builder builder) {
+		this.age = builder.age;
+		this.height = builder.height;
+		this.weight = builder.weight;
+		this.shoulders = builder.shoulders;
+		this.chest = builder.chest;
+		this.waist = builder.waist;
+		this.rightArm = builder.rightArm;
+		this.leftArm = builder.leftArm;
+		this.rightForearm = builder.rightForearm;
+		this.leftForearm = builder.leftForearm;
+		this.rightThigh = builder.rightThigh;
+		this.leftThigh = builder.leftThigh;
+		this.rightCalf = builder.rightCalf;
+		this.leftCalf = builder.leftCalf;
+		this.glutes = builder.glutes;
+		this.measuredUser = builder.measuredUser;
+		this.personalTrainnerUser = builder.personalTrainnerUser;
+	}
 
-    public float getHeight() {
-        return height;
-    }
+	public BodyMeasurements() {
+	}
 
-    public void setHeight(float height) {
-        this.height = height;
-    }
+	public float getHeight() {
+		return height;
+	}
 
-    public float getWeight() {
-        return weight;
-    }
+	public void setHeight(float height) {
+		this.height = height;
+	}
 
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
+	public float getWeight() {
+		return weight;
+	}
 
-    public float getShoulders() {
-        return shoulders;
-    }
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
 
-    public void setShoulders(float shoulders) {
-        this.shoulders = shoulders;
-    }
+	public float getShoulders() {
+		return shoulders;
+	}
 
-    public float getChest() {
-        return chest;
-    }
+	public void setShoulders(float shoulders) {
+		this.shoulders = shoulders;
+	}
 
-    public void setChest(float chest) {
-        this.chest = chest;
-    }
+	public float getChest() {
+		return chest;
+	}
 
-    public float getWaist() {
-        return waist;
-    }
+	public void setChest(float chest) {
+		this.chest = chest;
+	}
 
-    public void setWaist(float waist) {
-        this.waist = waist;
-    }
+	public float getWaist() {
+		return waist;
+	}
 
-    public float getRightArm() {
-        return rightArm;
-    }
+	public void setWaist(float waist) {
+		this.waist = waist;
+	}
 
-    public void setRightArm(float rightArm) {
-        this.rightArm = rightArm;
-    }
+	public float getRightArm() {
+		return rightArm;
+	}
 
-    public float getLeftArm() {
-        return leftArm;
-    }
+	public void setRightArm(float rightArm) {
+		this.rightArm = rightArm;
+	}
 
-    public void setLeftArm(float leftArm) {
-        this.leftArm = leftArm;
-    }
+	public float getLeftArm() {
+		return leftArm;
+	}
 
-    public float getRightForearm() {
-        return rightForearm;
-    }
+	public void setLeftArm(float leftArm) {
+		this.leftArm = leftArm;
+	}
 
-    public void setRightForearm(float rightForearm) {
-        this.rightForearm = rightForearm;
-    }
+	public float getRightForearm() {
+		return rightForearm;
+	}
 
-    public float getLeftForearm() {
-        return leftForearm;
-    }
+	public void setRightForearm(float rightForearm) {
+		this.rightForearm = rightForearm;
+	}
 
-    public void setLeftForearm(float leftForearm) {
-        this.leftForearm = leftForearm;
-    }
+	public float getLeftForearm() {
+		return leftForearm;
+	}
 
-    public float getRightThigh() {
-        return rightThigh;
-    }
+	public void setLeftForearm(float leftForearm) {
+		this.leftForearm = leftForearm;
+	}
 
-    public void setRightThigh(float rightThigh) {
-        this.rightThigh = rightThigh;
-    }
+	public float getRightThigh() {
+		return rightThigh;
+	}
 
-    public float getLeftThigh() {
-        return leftThigh;
-    }
+	public void setRightThigh(float rightThigh) {
+		this.rightThigh = rightThigh;
+	}
 
-    public void setLeftThigh(float leftThigh) {
-        this.leftThigh = leftThigh;
-    }
+	public float getLeftThigh() {
+		return leftThigh;
+	}
 
-    public float getRightCalf() {
-        return rightCalf;
-    }
+	public void setLeftThigh(float leftThigh) {
+		this.leftThigh = leftThigh;
+	}
 
-    public void setRightCalf(float rightCalf) {
-        this.rightCalf = rightCalf;
-    }
+	public float getRightCalf() {
+		return rightCalf;
+	}
 
-    public float getLeftCalf() {
-        return leftCalf;
-    }
+	public void setRightCalf(float rightCalf) {
+		this.rightCalf = rightCalf;
+	}
 
-    public void setLeftCalf(float leftCalf) {
-        this.leftCalf = leftCalf;
-    }
+	public float getLeftCalf() {
+		return leftCalf;
+	}
 
-    public void setPersonalTrainnerUser(User personalTrainnerUser) {
-        this.personalTrainnerUser = personalTrainnerUser;
-    }
+	public void setLeftCalf(float leftCalf) {
+		this.leftCalf = leftCalf;
+	}
 
-    public void setMeasuredUser(User measuredUser) {
-        this.measuredUser = measuredUser;
-    }
+	public void setPersonalTrainnerUser(User personalTrainnerUser) {
+		this.personalTrainnerUser = personalTrainnerUser;
+	}
 
-    public User getPersonalTrainnerUser() {
-        return personalTrainnerUser;
-    }
+	public void setMeasuredUser(User measuredUser) {
+		this.measuredUser = measuredUser;
+	}
 
-    public User getMeasuredUser() {
-        return measuredUser;
-    }
+	public User getPersonalTrainnerUser() {
+		return personalTrainnerUser;
+	}
 
-    public void setGlutes(float glutes) {
-        this.glutes = glutes;
-    }
+	public User getMeasuredUser() {
+		return measuredUser;
+	}
 
-    public float getGlutes() {
-        return glutes;
-    }
+	public void setGlutes(float glutes) {
+		this.glutes = glutes;
+	}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+	public float getGlutes() {
+		return glutes;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	public void setAge(int age) {
+		this.age = age;
+	}
 
-    @Override
-    public int compareTo(BodyMeasurements o) {
-        if (o == null && this == null) {
-            return 1;
-        }
-        if (o == null) {
-            return 1;
-        }
-        if (this == null) {
-            return -1;
-        }
-        return getCreatedAt().compareTo(o.getCreatedAt());
-    }
+	public int getAge() {
+		return age;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(getId());
-        return hash;
-    }
+	@Override
+	public int compareTo(BodyMeasurements o) {
+		if (o == null && this == null) {
+			return 1;
+		}
+		if (o == null) {
+			return 1;
+		}
+		if (this == null) {
+			return -1;
+		}
+		return getCreatedAt().compareTo(o.getCreatedAt());
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof BodyMeasurements)) {
-            return false;
-        }
-        final BodyMeasurements other = (BodyMeasurements) obj;
-        return Objects.equals(getId(), other.getId());
-    }
+	@Override
+	public int hashCode() {
+		int hash = 3;
+		hash = 97 * hash + Objects.hashCode(getId());
+		return hash;
+	}
 
-    public static class Builder {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof BodyMeasurements)) {
+			return false;
+		}
+		final BodyMeasurements other = (BodyMeasurements) obj;
+		return Objects.equals(getId(), other.getId());
+	}
 
-        private int age;
-        private float height;
-        private float weight;
-        private float shoulders;
-        private float chest;
-        private float waist;
-        private float rightArm;
-        private float leftArm;
-        private float rightForearm;
-        private float leftForearm;
-        private float rightThigh;
-        private float leftThigh;
-        private float rightCalf;
-        private float leftCalf;
-        private float glutes;
-        private final User measuredUser;
-        private final User personalTrainnerUser;
+	public static class Builder {
 
-        public Builder(User measuredUser, User personalTrainnerUser) {
-            this.measuredUser = measuredUser;
-            this.personalTrainnerUser = personalTrainnerUser;
-        }
+		private int age;
+		private float height;
+		private float weight;
+		private float shoulders;
+		private float chest;
+		private float waist;
+		private float rightArm;
+		private float leftArm;
+		private float rightForearm;
+		private float leftForearm;
+		private float rightThigh;
+		private float leftThigh;
+		private float rightCalf;
+		private float leftCalf;
+		private float glutes;
+		private final User measuredUser;
+		private final User personalTrainnerUser;
 
-        public Builder setAge(int age) {
-            this.age = age;
-            return this;
-        }
+		public Builder(User measuredUser, User personalTrainnerUser) {
+			this.measuredUser = measuredUser;
+			this.personalTrainnerUser = personalTrainnerUser;
+		}
 
-        public Builder setHeight(float height) {
-            this.height = height;
-            return this;
-        }
+		public Builder setAge(int age) {
+			this.age = age;
+			return this;
+		}
 
-        public Builder setWeight(float weight) {
-            this.weight = weight;
-            return this;
-        }
+		public Builder setHeight(float height) {
+			this.height = height;
+			return this;
+		}
 
-        public Builder setShoulders(float shoulders) {
-            this.shoulders = shoulders;
-            return this;
-        }
+		public Builder setWeight(float weight) {
+			this.weight = weight;
+			return this;
+		}
 
-        public Builder setChest(float chest) {
-            this.chest = chest;
-            return this;
-        }
+		public Builder setShoulders(float shoulders) {
+			this.shoulders = shoulders;
+			return this;
+		}
 
-        public Builder setWaist(float waist) {
-            this.waist = waist;
-            return this;
-        }
+		public Builder setChest(float chest) {
+			this.chest = chest;
+			return this;
+		}
 
-        public Builder setRightArm(float rightArm) {
-            this.rightArm = rightArm;
-            return this;
-        }
+		public Builder setWaist(float waist) {
+			this.waist = waist;
+			return this;
+		}
 
-        public Builder setLeftArm(float leftArm) {
-            this.leftArm = leftArm;
-            return this;
-        }
+		public Builder setRightArm(float rightArm) {
+			this.rightArm = rightArm;
+			return this;
+		}
 
-        public Builder setRightForearm(float rightForearm) {
-            this.rightForearm = rightForearm;
-            return this;
-        }
+		public Builder setLeftArm(float leftArm) {
+			this.leftArm = leftArm;
+			return this;
+		}
 
-        public Builder setLeftForearm(float leftForearm) {
-            this.leftForearm = leftForearm;
-            return this;
-        }
+		public Builder setRightForearm(float rightForearm) {
+			this.rightForearm = rightForearm;
+			return this;
+		}
 
-        public Builder setRightThigh(float rightThigh) {
-            this.rightThigh = rightThigh;
-            return this;
-        }
+		public Builder setLeftForearm(float leftForearm) {
+			this.leftForearm = leftForearm;
+			return this;
+		}
 
-        public Builder setLeftThigh(float leftThigh) {
-            this.leftThigh = leftThigh;
-            return this;
-        }
+		public Builder setRightThigh(float rightThigh) {
+			this.rightThigh = rightThigh;
+			return this;
+		}
 
-        public Builder setRightCalf(float rightCalf) {
-            this.rightCalf = rightCalf;
-            return this;
-        }
+		public Builder setLeftThigh(float leftThigh) {
+			this.leftThigh = leftThigh;
+			return this;
+		}
 
-        public Builder setLeftCalf(float leftCalf) {
-            this.leftCalf = leftCalf;
-            return this;
-        }
+		public Builder setRightCalf(float rightCalf) {
+			this.rightCalf = rightCalf;
+			return this;
+		}
 
-        public Builder setGlutes(float glutes) {
-            this.glutes = glutes;
-            return this;
-        }
+		public Builder setLeftCalf(float leftCalf) {
+			this.leftCalf = leftCalf;
+			return this;
+		}
 
-        public BodyMeasurements build() {
-            return new BodyMeasurements(this);
-        }
+		public Builder setGlutes(float glutes) {
+			this.glutes = glutes;
+			return this;
+		}
 
-    }
+		public BodyMeasurements build() {
+			return new BodyMeasurements(this);
+		}
+
+	}
 }

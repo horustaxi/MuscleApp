@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class UserNotFoundException extends RuntimeException {
 
-    public UserNotFoundException(String attribute, String attributeValue) {
-        super("could not find user with "+attribute+"= '" + attributeValue + "'.");
-    }
+	public UserNotFoundException(String attribute, String attributeValue) {
+		super("could not find user with " + attribute + "= '" + attributeValue + "'.");
+	}
 
 }

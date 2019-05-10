@@ -5,9 +5,10 @@
  */
 package com.vas.muscleapp.repositories;
 
-import com.vas.muscleapp.models.BodyMeasurements;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import com.vas.muscleapp.models.BodyMeasurements;
 
 /**
  *
@@ -15,5 +16,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  */
 @RepositoryRestResource(collectionResourceRel = "bodymeasurements", exported = false)
 public interface BodyMeasurementsRepository extends JpaRepository<BodyMeasurements, Long> {
-        
+
 }

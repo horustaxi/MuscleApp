@@ -5,11 +5,12 @@
  */
 package com.vas.muscleapp.services;
 
-import com.vas.muscleapp.models.User;
-import com.vas.muscleapp.exceptions.user.UserNotFoundException;
-import com.vas.muscleapp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.vas.muscleapp.exceptions.user.UserNotFoundException;
+import com.vas.muscleapp.models.User;
+import com.vas.muscleapp.repositories.UserRepository;
 
 /**
  *
@@ -17,33 +18,33 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
-    
-    private final UserRepository userReporitory;
 
-    @Autowired
-    public UserService(UserRepository userReporitory) {
-        this.userReporitory = userReporitory;
-    }
+	private final UserRepository userReporitory;
 
-    public User findUserByEmail(String email) {
-        return userReporitory.findUserByEmail(email).get();
-    }
+	@Autowired
+	public UserService(UserRepository userReporitory) {
+		this.userReporitory = userReporitory;
+	}
 
-    public User save(User user) {
-        return userReporitory.save(user);
-    }
+	public User findUserByEmail(String email) {
+		return userReporitory.findUserByEmail(email).get();
+	}
 
-    public User findById(Long userId) {
-        return userReporitory.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("id", userId.toString()));
-    }
+	public User save(User user) {
+		return userReporitory.save(user);
+	}
 
-    public void deleteAll() {
-        userReporitory.deleteAll();
-    }
-    
-    public boolean existsUserWithEmail(String email) {
-        return userReporitory.findUserByEmail(email).isPresent();
-    }
-    
+	public User findById(Long userId) {
+		return userReporitory.findById(userId)
+				.orElseThrow(() -> new UserNotFoundException("id", userId.toString()));
+	}
+
+	public void deleteAll() {
+		userReporitory.deleteAll();
+	}
+
+	public boolean existsUserWithEmail(String email) {
+		return userReporitory.findUserByEmail(email).isPresent();
+	}
+
 }

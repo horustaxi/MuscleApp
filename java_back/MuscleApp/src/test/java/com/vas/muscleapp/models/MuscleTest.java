@@ -5,8 +5,8 @@
  */
 package com.vas.muscleapp.models;
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
@@ -14,21 +14,21 @@ import org.junit.Before;
  */
 public class MuscleTest {
 
-    Muscle muscle;
+	Muscle muscle;
 
-    @Before
-    public void setUp() {
-        muscle = new Muscle();
-    }
+	@Before
+	public void setUp() {
+		muscle = new Muscle();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetMainMuscleWithException() {
-        muscle.setName("");
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetMainMuscleWithException() {
+		muscle.setName("");
+	}
 
-    @Test
-    public void testSetMainMuscle() {
-        muscle.setName("Triceps");
-    }
+	@Test
+	public void testSetMainMuscle() {
+		muscle.setName("Triceps");
+	}
 
 }

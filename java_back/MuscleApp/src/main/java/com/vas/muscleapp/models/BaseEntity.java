@@ -5,7 +5,10 @@
  */
 package com.vas.muscleapp.models;
 
+import static javax.persistence.TemporalType.TIMESTAMP;
+
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +17,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
-import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
  *
@@ -23,52 +25,52 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 @MappedSuperclass
 public abstract class BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    @Temporal(TIMESTAMP)
-    private Date createdAt;
+	@Column(name = "created_at", nullable = false, updatable = false)
+	@Temporal(TIMESTAMP)
+	private Date createdAt;
 
-    @Column(name = "last_updated", insertable = false)
-    @Temporal(TIMESTAMP)
-    private Date lastUpdated;
+	@Column(name = "last_updated", insertable = false)
+	@Temporal(TIMESTAMP)
+	private Date lastUpdated;
 
-    @Column(nullable = false)
-    private boolean active = true;
+	@Column(nullable = false)
+	private boolean active = true;
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    @PrePersist
-    public void setCreatedAt() {
-        this.createdAt = new Date();
-    }
+	@PrePersist
+	public void setCreatedAt() {
+		this.createdAt = new Date();
+	}
 
-    public Date getLastUpdated() {
-        return lastUpdated;
-    }
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
 
-    @PreUpdate
-    public void setLastUpdated() {
-        this.lastUpdated = new Date();
-    }
+	@PreUpdate
+	public void setLastUpdated() {
+		this.lastUpdated = new Date();
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public boolean isActive() {
-        return active;
-    }
+	public boolean isActive() {
+		return active;
+	}
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

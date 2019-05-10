@@ -10,5 +10,5 @@ package com.vas.muscleapp.enums;
  * @author vinicius
  */
 public enum Language {
-    ENGLISH, PORTUGUESE, SPANISH
+	ENGLISH, PORTUGUESE, SPANISH
 }

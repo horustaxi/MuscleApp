@@ -8,41 +8,41 @@ import com.vas.muscleapp.enums.Language;
  */
 public class MuscleDTO {
 
-    private Long id;
-    private String name;
-    private Language languageForLocalization;
-    private String muscleGroupName;
+	private Long id;
+	private String name;
+	private Language languageForLocalization;
+	private String muscleGroupName;
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Language getLanguageForLocalization() {
-        return languageForLocalization;
-    }
+	public Language getLanguageForLocalization() {
+		return languageForLocalization;
+	}
 
-    public void setLanguageForLocalization(Language languageForLocalization) {
-        this.languageForLocalization = languageForLocalization;
-    }
+	public void setLanguageForLocalization(Language languageForLocalization) {
+		this.languageForLocalization = languageForLocalization;
+	}
 
-    public String getMuscleGroupName() {
-        return muscleGroupName;
-    }
+	public String getMuscleGroupName() {
+		return muscleGroupName;
+	}
 
-    public void setMuscleGroupName(String muscleGroupName) {
-        this.muscleGroupName = muscleGroupName;
-    }
+	public void setMuscleGroupName(String muscleGroupName) {
+		this.muscleGroupName = muscleGroupName;
+	}
 
 }

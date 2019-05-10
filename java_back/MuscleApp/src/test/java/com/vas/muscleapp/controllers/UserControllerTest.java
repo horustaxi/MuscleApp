@@ -5,11 +5,13 @@
  */
 package com.vas.muscleapp.controllers;
 
-import com.vas.muscleapp.abstracts.BaseControllerTest;
-import com.vas.muscleapp.models.User;
-import org.junit.Test;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.Test;
+
+import com.vas.muscleapp.abstracts.BaseControllerTest;
+import com.vas.muscleapp.models.User;
 
 /**
  *
@@ -17,12 +19,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class UserControllerTest extends BaseControllerTest {
 
-    @Test
-    public void User_RegisterShouldReturnHttpCreated() throws Exception {
-        User user = new User("Jack", "jack@email.com", "000000");
-        mockMvc.perform(
-                post("/register").contentType(contentType).content(json(user)))
-                .andExpect(status().isCreated());
-    }
+	@Test
+	public void User_RegisterShouldReturnHttpCreated() throws Exception {
+		User user = new User("Jack", "jack@email.com", "000000");
+		mockMvc.perform(post("/register").contentType(contentType)
+				.content(objectMapper.writeValueAsString(user))).andExpect(status().isCreated());
+	}
 
 }

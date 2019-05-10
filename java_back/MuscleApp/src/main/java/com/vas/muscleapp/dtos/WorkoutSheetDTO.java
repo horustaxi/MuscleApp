@@ -6,32 +6,32 @@ package com.vas.muscleapp.dtos;
  */
 public class WorkoutSheetDTO {
 
-    private Long id;
-    private String description;
-    private String workoutPlanDescription;
+	private Long id;
+	private String description;
+	private String workoutPlanDescription;
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getWorkoutPlanDescription() {
-        return workoutPlanDescription;
-    }
+	public String getWorkoutPlanDescription() {
+		return workoutPlanDescription;
+	}
 
-    public void setWorkoutPlanDescription(String workoutPlanDescription) {
-        this.workoutPlanDescription = workoutPlanDescription;
-    }
+	public void setWorkoutPlanDescription(String workoutPlanDescription) {
+		this.workoutPlanDescription = workoutPlanDescription;
+	}
 
 }

@@ -1,3 +1,10 @@
 /java_back/MuscleApp/target/
 /java_back/MuscleApp/nbproject/
 nbactions.xml
+.attach~
+.classpath
+.factorypath
+.project
+/java_back/MuscleApp/.settings/*
+/java_back/MuscleApp/bin/*
+

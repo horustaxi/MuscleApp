@@ -5,14 +5,9 @@
  */
 package com.vas.muscleapp.controllers;
 
-import com.vas.muscleapp.dtos.UserDTO;
-import com.vas.muscleapp.models.User;
-import com.vas.muscleapp.services.UserService;
-import com.vas.muscleapp.exceptions.user.UserAlreadyExistsException;
-import com.vas.muscleapp.exceptions.user.UserNotFoundException;
 import static com.vas.muscleapp.security.SecurityConstants.SECRET;
 import static com.vas.muscleapp.security.SecurityConstants.TOKEN_PREFIX;
-import io.jsonwebtoken.Jwts;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +20,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vas.muscleapp.dtos.UserDTO;
+import com.vas.muscleapp.exceptions.user.UserAlreadyExistsException;
+import com.vas.muscleapp.models.User;
+import com.vas.muscleapp.services.UserService;
+
+import io.jsonwebtoken.Jwts;
+
 /**
  *
  * @author Vinícius
@@ -32,46 +34,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    private final UserService userService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final ModelMapper modelMapper;
+	private final UserService userService;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final ModelMapper modelMapper;
 
-    @Autowired
-    public UserController(UserService userService,
-            BCryptPasswordEncoder bCryptPasswordEncoder,
-            ModelMapper modelMapper) {
-        this.userService = userService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.modelMapper = modelMapper;
-    }
+	@Autowired
+	public UserController(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder,
+			ModelMapper modelMapper) {
+		this.userService = userService;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+		this.modelMapper = modelMapper;
+	}
 
-    @PostMapping(value = "/register")
-    public ResponseEntity<?> register(@RequestBody User user) throws Exception {
-        if (userService.existsUserWithEmail(user.getEmail())) {
-            throw new UserAlreadyExistsException(user.getEmail());
-        }
-        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
-        this.userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+	@PostMapping(value = "/register")
+	public ResponseEntity<?> register(@RequestBody User user) throws Exception {
+		if (userService.existsUserWithEmail(user.getEmail())) {
+			throw new UserAlreadyExistsException(user.getEmail());
+		}
+		user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+		this.userService.save(user);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
 
-    // TODO missing test
-    @GetMapping(value = "/user")
-    public ResponseEntity<UserDTO> userByToken(@RequestHeader String authorization) throws Exception {
-        String email = Jwts.parser()
-                .setSigningKey(SECRET.getBytes())
-                .parseClaimsJws(authorization.replace(TOKEN_PREFIX, ""))
-                .getBody()
-                .getSubject();
-        User user = userService.findUserByEmail(email);
-        UserDTO userDto = modelMapper.map(user, UserDTO.class);
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
-    }
+	// TODO missing test
+	@GetMapping(value = "/user")
+	public ResponseEntity<UserDTO> userByToken(@RequestHeader String authorization)
+			throws Exception {
+		String email = Jwts.parser().setSigningKey(SECRET.getBytes())
+				.parseClaimsJws(authorization.replace(TOKEN_PREFIX, "")).getBody().getSubject();
+		User user = userService.findUserByEmail(email);
+		UserDTO userDto = modelMapper.map(user, UserDTO.class);
+		return new ResponseEntity<>(userDto, HttpStatus.OK);
+	}
 
-    @GetMapping(value = "/user/{email:.+}")
-    public ResponseEntity<UserDTO> userLogado(@PathVariable String email) {
-        User user = userService.findUserByEmail(email);
-        UserDTO userDto = modelMapper.map(user, UserDTO.class);
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
-    }
+	@GetMapping(value = "/user/{email:.+}")
+	public ResponseEntity<UserDTO> userLogado(@PathVariable String email) {
+		User user = userService.findUserByEmail(email);
+		UserDTO userDto = modelMapper.map(user, UserDTO.class);
+		return new ResponseEntity<>(userDto, HttpStatus.OK);
+	}
 }

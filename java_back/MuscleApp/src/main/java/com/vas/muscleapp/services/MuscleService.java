@@ -5,11 +5,13 @@
  */
 package com.vas.muscleapp.services;
 
-import com.vas.muscleapp.repositories.MuscleRepository;
-import com.vas.muscleapp.models.Muscle;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.vas.muscleapp.models.Muscle;
+import com.vas.muscleapp.repositories.MuscleRepository;
 
 /**
  *
@@ -17,24 +19,24 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MuscleService {
-    
-    private final MuscleRepository muscleRepository;
-    
-    @Autowired
-    public MuscleService(MuscleRepository muscleRepository) {
-        this.muscleRepository = muscleRepository;
-    }
-    
-    public Muscle save(Muscle muscle) {      
-        return muscleRepository.save(muscle);
-    }
-    
-    public List<Muscle> findAllActives() {
-        return muscleRepository.findMuscleByActive(Boolean.TRUE);
-    }
-    
-    public Muscle findById(Long id) {
-        return muscleRepository.findById(id).get();
-    }
-    
+
+	private final MuscleRepository muscleRepository;
+
+	@Autowired
+	public MuscleService(MuscleRepository muscleRepository) {
+		this.muscleRepository = muscleRepository;
+	}
+
+	public Muscle save(Muscle muscle) {
+		return muscleRepository.save(muscle);
+	}
+
+	public List<Muscle> findAllActives() {
+		return muscleRepository.findMuscleByActive(Boolean.TRUE);
+	}
+
+	public Muscle findById(Long id) {
+		return muscleRepository.findById(id).get();
+	}
+
 }

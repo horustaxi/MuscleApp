@@ -1,7 +1,7 @@
 package com.vas.muscleapp.models;
 
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
@@ -9,21 +9,21 @@ import org.junit.Before;
  */
 public class MuscleGroupTest {
 
-    MuscleGroup muscleGroup;
+	MuscleGroup muscleGroup;
 
-    @Before
-    public void setUp() {
-        muscleGroup = new MuscleGroup();
-    }
+	@Before
+	public void setUp() {
+		muscleGroup = new MuscleGroup();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetMainMuscleWithException() {
-        muscleGroup.setName("");
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetMainMuscleWithException() {
+		muscleGroup.setName("");
+	}
 
-    @Test
-    public void testSetMainMuscle() {
-        muscleGroup.setName("Triceps");
-    }
+	@Test
+	public void testSetMainMuscle() {
+		muscleGroup.setName("Triceps");
+	}
 
 }

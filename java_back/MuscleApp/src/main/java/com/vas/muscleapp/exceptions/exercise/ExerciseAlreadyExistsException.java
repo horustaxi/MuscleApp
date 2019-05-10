@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.CONFLICT)
 public class ExerciseAlreadyExistsException extends RuntimeException {
 
-    public ExerciseAlreadyExistsException(String name) {
-        super("Exercise with name '" + name + "' already exists.");
-    }
+	public ExerciseAlreadyExistsException(String name) {
+		super("Exercise with name '" + name + "' already exists.");
+	}
 
 }
