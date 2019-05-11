@@ -39,6 +39,7 @@ import com.vas.muscleapp.repositories.WorksetRepository;
  *
  * @author Vinícius
  */
+// TODO refatorar para CommandLineRunner conforme SPG
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 

@@ -32,7 +32,7 @@ import com.vas.muscleapp.Application;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { Application.class })
 @TestPropertySource(locations = "classpath:/application-test.properties")
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+// @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class BaseControllerTest {
 
 	protected final MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),

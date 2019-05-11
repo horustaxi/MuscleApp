@@ -13,12 +13,14 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.dtos.MuscleGroupDTO;
 import com.vas.muscleapp.models.MuscleGroup;
 import com.vas.muscleapp.repositories.MuscleGroupRepository;
 
+@Transactional
 public class MuscleGroupControllerTest extends BaseControllerTest {
 
 	@Autowired
@@ -26,11 +28,11 @@ public class MuscleGroupControllerTest extends BaseControllerTest {
 
 	@Test
 	public void MuscleGroup_GetAll_ShouldReturnHttpOkAndAllActives() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(get("/muscle-group")).andExpect(status().isOk())
+		MvcResult mvcResult = mockMvc.perform(get("/muscle-groups")).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize((int) muscleGroupRepository.count()))).andReturn();
 
-		List<MuscleGroup> muscleGroups = objectMapper
+		List<MuscleGroupDTO> muscleGroups = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(muscleGroups.isEmpty());
 	}
@@ -39,13 +41,13 @@ public class MuscleGroupControllerTest extends BaseControllerTest {
 	public void MuscleGroup_GetById_ShouldReturnHttpOk() throws Exception {
 		MuscleGroup muscleGroupRequested = muscleGroupRepository.findAll().get(0);
 		MvcResult mvcResult = mockMvc
-				.perform(get("/muscle-group/" + muscleGroupRequested.getId()))
+				.perform(get("/muscle-groups/" + muscleGroupRequested.getId()))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
 		MuscleGroupDTO muscleGroup = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), MuscleGroupDTO.class);
-		assertEquals(muscleGroupRequested.getMuscles(), muscleGroup.getName());
+		assertEquals(muscleGroupRequested.getName(), muscleGroup.getName());
 		assertEquals(muscleGroupRequested.getId(), muscleGroup.getId());
 	}
 

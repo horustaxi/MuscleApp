@@ -16,11 +16,6 @@ public class MuscleGroupTest {
 		muscleGroup = new MuscleGroup();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetMainMuscleWithException() {
-		muscleGroup.setName("");
-	}
-
 	@Test
 	public void testSetMainMuscle() {
 		muscleGroup.setName("Triceps");
