@@ -18,6 +18,7 @@ import com.vas.muscleapp.enums.Language;
  *
  * @author Vinícius
  */
+@SuppressWarnings("serial")
 @Entity(name = "exercise")
 public class Exercise extends BaseEntity implements Serializable {
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author vinicius
  */
+@SuppressWarnings("serial")
 @ResponseStatus(HttpStatus.CONFLICT)
 public class ExerciseAlreadyExistsException extends RuntimeException {
 

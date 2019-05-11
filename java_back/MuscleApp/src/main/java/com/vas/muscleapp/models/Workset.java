@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
  *
  * @author Vinícius
  */
+@SuppressWarnings("serial")
 @Entity(name = "workset")
 public class Workset extends BaseEntity implements Serializable {
 
