@@ -18,7 +18,7 @@ import com.vas.muscleapp.repositories.MuscleRepository;
  * @author Vinícius
  */
 @Service
-public class MuscleService {
+public class MuscleService implements BaseService<Muscle, Long> {
 
 	private final MuscleRepository muscleRepository;
 
