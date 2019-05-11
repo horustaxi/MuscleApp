@@ -10,9 +10,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 import java.nio.charset.Charset;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
