@@ -32,7 +32,7 @@ public class UserControllerTest extends BaseControllerTest {
 
 	@Test
 	public void User_GetByEmail_ShoultReturnUserPlain() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(get("/user/jack@email.com"))
+		MvcResult mvcResult = mockMvc.perform(get("/users?email=jack@email.com"))
 				.andExpect(status().isOk()).andReturn();
 		UserDTO user = objectMapper.readValue(mvcResult.getResponse().getContentAsString(),
 				UserDTO.class);

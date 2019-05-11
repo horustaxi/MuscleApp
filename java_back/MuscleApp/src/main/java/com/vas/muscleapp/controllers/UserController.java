@@ -5,27 +5,21 @@
  */
 package com.vas.muscleapp.controllers;
 
-import static com.vas.muscleapp.security.SecurityConstants.SECRET;
-import static com.vas.muscleapp.security.SecurityConstants.TOKEN_PREFIX;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vas.muscleapp.dtos.UserDTO;
 import com.vas.muscleapp.exceptions.user.UserAlreadyExistsException;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.services.UserService;
-
-import io.jsonwebtoken.Jwts;
 
 /**
  *
@@ -57,18 +51,18 @@ public class UserController {
 	}
 
 	// TODO missing test
-	@GetMapping(value = "/user")
-	public ResponseEntity<UserDTO> userByToken(@RequestHeader String authorization)
-			throws Exception {
-		String email = Jwts.parser().setSigningKey(SECRET.getBytes())
-				.parseClaimsJws(authorization.replace(TOKEN_PREFIX, "")).getBody().getSubject();
-		User user = userService.findByEmail(email);
-		UserDTO userDto = modelMapper.map(user, UserDTO.class);
-		return new ResponseEntity<>(userDto, HttpStatus.OK);
-	}
+	/*
+	 * @GetMapping(value = "/users") public ResponseEntity<UserDTO>
+	 * userByToken(@RequestHeader String authorization) throws Exception { String
+	 * email = Jwts.parser().setSigningKey(SECRET.getBytes())
+	 * .parseClaimsJws(authorization.replace(TOKEN_PREFIX,
+	 * "")).getBody().getSubject(); User user = userService.findByEmail(email);
+	 * UserDTO userDto = modelMapper.map(user, UserDTO.class); return new
+	 * ResponseEntity<>(userDto, HttpStatus.OK); }
+	 */
 
-	@GetMapping(value = "/user/{email:.+}")
-	public ResponseEntity<UserDTO> getByEMail(@PathVariable String email) {
+	@GetMapping(value = "/users")
+	public ResponseEntity<UserDTO> getByEMail(@RequestParam(required = true) String email) {
 		User user = userService.findByEmail(email);
 		UserDTO userDto = modelMapper.map(user, UserDTO.class);
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
