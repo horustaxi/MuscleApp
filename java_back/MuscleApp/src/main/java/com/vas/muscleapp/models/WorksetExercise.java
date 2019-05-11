@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
  *
  * @author Vinícius
  */
+@SuppressWarnings("serial")
 @Entity(name = "workset_exercise")
 public class WorksetExercise extends BaseEntity implements Serializable {
 

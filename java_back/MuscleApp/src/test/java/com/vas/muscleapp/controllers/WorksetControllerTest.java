@@ -28,13 +28,13 @@ public class WorksetControllerTest extends BaseControllerTest {
 	private WorkoutSheetRepository workoutSheetRepository;
 
 	@Test
-	public void Workset_GetAll_ShouldReturnHttpOkAndAllActives() throws Exception {
+	public void Workset_GetAllByWorkoutSHeet_ShouldReturnHttpOkAndAllActives() throws Exception {
 		Long workoutSheetId = workoutSheetRepository.findAll().get(0).getId();
 		MvcResult mvcResult = mockMvc.perform(get("/workout-sheet/" + workoutSheetId + "/workset"))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize((int) worksetRepository.count()))).andReturn();
 
-		List<Workset> worksets = objectMapper
+		List<WorksetDTO> worksets = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(worksets.isEmpty());
 	}
