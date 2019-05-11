@@ -9,8 +9,8 @@ public class WorkoutPlanDTO {
 	private Long id;
 	private String description;
 	private String createdByName;
-	private String createdById;
-	private String createdToId;
+	private Long createdById;
+	private Long createdToId;
 	private String createdToName;
 
 	public Long getId() {
@@ -37,19 +37,19 @@ public class WorkoutPlanDTO {
 		this.createdByName = createdByName;
 	}
 
-	public String getCreatedById() {
+	public Long getCreatedById() {
 		return createdById;
 	}
 
-	public void setCreatedById(String createdById) {
+	public void setCreatedById(Long createdById) {
 		this.createdById = createdById;
 	}
 
-	public String getCreatedToId() {
+	public Long getCreatedToId() {
 		return createdToId;
 	}
 
-	public void setCreatedToId(String createdToId) {
+	public void setCreatedToId(Long createdToId) {
 		this.createdToId = createdToId;
 	}
 
