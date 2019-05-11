@@ -38,15 +38,15 @@ public class WorkoutSheetController {
 		this.modelMapper = modelMapper;
 	}
 
-	@GetMapping(value = "/workout-sheet/{id}")
+	@GetMapping(value = "/workout-sheets/{id}")
 	public ResponseEntity<WorkoutSheetDTO> getById(@PathVariable Long id) {
 		WorkoutSheet workoutSheet = workoutSheetService.findById(id);
 		WorkoutSheetDTO dto = modelMapper.map(workoutSheet, WorkoutSheetDTO.class);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/workout-plan/{workoutPlanId}/workout-sheet")
-	public ResponseEntity<List<WorkoutSheetDTO>> getAllByCreatedByUserOrCreatedToUser(
+	@GetMapping(value = "/workout-plans/{workoutPlanId}/workout-sheets")
+	public ResponseEntity<List<WorkoutSheetDTO>> getAllByWorkoutPlan(
 			@PathVariable Long workoutPlanId) {
 		List<WorkoutSheet> workoutSheet = workoutSheetService.getAllByWorkoutPlan(workoutPlanId);
 		Type listType = new TypeToken<List<WorkoutSheetDTO>>() {

@@ -39,16 +39,15 @@ public class WorksetExerciseController {
 		this.modelMapper = modelMapper;
 	}
 
-	@GetMapping(value = "/workset-exercise/{id}")
+	@GetMapping(value = "/workset-exercises/{id}")
 	public ResponseEntity<WorksetExerciseDTO> getById(@PathVariable Long id) {
 		WorksetExercise worksetExercise = worksetExerciseService.findById(id);
 		WorksetExerciseDTO dto = modelMapper.map(worksetExercise, WorksetExerciseDTO.class);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/workset/{worksetId}/workset-exercise")
-	public ResponseEntity<List<WorksetExerciseDTO>> getAllByCreatedByUserOrCreatedToUser(
-			@PathVariable Long worksetId) {
+	@GetMapping(value = "/worksets/{worksetId}/workset-exercises")
+	public ResponseEntity<List<WorksetExerciseDTO>> getAllByWorkset(@PathVariable Long worksetId) {
 		List<WorksetExercise> worksetExercise = worksetExerciseService.getAllByWorkset(worksetId);
 		Type listType = new TypeToken<List<WorksetDTO>>() {
 		}.getType();

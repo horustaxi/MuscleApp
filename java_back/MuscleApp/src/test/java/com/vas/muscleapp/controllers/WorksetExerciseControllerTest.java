@@ -35,7 +35,7 @@ public class WorksetExerciseControllerTest extends BaseControllerTest {
 	public void WorksetExercise_GetAllByWorkset_ShouldReturnHttpOk() throws Exception {
 		Workset workset = worksetRepository.findAll().get(0);
 		MvcResult mvcResult = mockMvc
-				.perform(get("/workset/" + workset.getId() + "/workset-exercise"))
+				.perform(get("/worksets/" + workset.getId() + "/workset-exercises"))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize(workset.getWorksetExercises().size())))
 				.andReturn();
@@ -49,7 +49,7 @@ public class WorksetExerciseControllerTest extends BaseControllerTest {
 	public void WorksetExercise_GetById_ShouldReturnHttpOk() throws Exception {
 		WorksetExercise worksetExerciseRequested = worksetExerciseRepository.findAll().get(0);
 		MvcResult mvcResult = mockMvc
-				.perform(get("/workset-exercise/" + worksetExerciseRequested.getId()))
+				.perform(get("/workset-exercises/" + worksetExerciseRequested.getId()))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 

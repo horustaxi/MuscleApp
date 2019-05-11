@@ -13,13 +13,16 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.dtos.WorksetDTO;
+import com.vas.muscleapp.models.WorkoutSheet;
 import com.vas.muscleapp.models.Workset;
 import com.vas.muscleapp.repositories.WorkoutSheetRepository;
 import com.vas.muscleapp.repositories.WorksetRepository;
 
+@Transactional
 public class WorksetControllerTest extends BaseControllerTest {
 
 	@Autowired
@@ -29,10 +32,11 @@ public class WorksetControllerTest extends BaseControllerTest {
 
 	@Test
 	public void Workset_GetAllByWorkoutSHeet_ShouldReturnHttpOkAndAllActives() throws Exception {
-		Long workoutSheetId = workoutSheetRepository.findAll().get(0).getId();
-		MvcResult mvcResult = mockMvc.perform(get("/workout-sheet/" + workoutSheetId + "/workset"))
+		WorkoutSheet workoutSheet = workoutSheetRepository.findAll().get(0);
+		MvcResult mvcResult = mockMvc
+				.perform(get("/workout-sheets/" + workoutSheet.getId() + "/worksets"))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
-				.andExpect(jsonPath("$", hasSize((int) worksetRepository.count()))).andReturn();
+				.andExpect(jsonPath("$", hasSize(workoutSheet.getWorksets().size()))).andReturn();
 
 		List<WorksetDTO> worksets = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
@@ -42,7 +46,7 @@ public class WorksetControllerTest extends BaseControllerTest {
 	@Test
 	public void Workset_GetById_ShouldReturnHttpOk() throws Exception {
 		Workset worksetRequested = worksetRepository.findAll().get(0);
-		MvcResult mvcResult = mockMvc.perform(get("/workset/" + worksetRequested.getId()))
+		MvcResult mvcResult = mockMvc.perform(get("/worksets/" + worksetRequested.getId()))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 

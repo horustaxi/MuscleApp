@@ -13,13 +13,16 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.dtos.WorkoutSheetDTO;
+import com.vas.muscleapp.models.WorkoutPlan;
 import com.vas.muscleapp.models.WorkoutSheet;
 import com.vas.muscleapp.repositories.WorkoutPlanRepository;
 import com.vas.muscleapp.repositories.WorkoutSheetRepository;
 
+@Transactional
 public class WorkoutSheetControllerTest extends BaseControllerTest {
 
 	@Autowired
@@ -30,14 +33,14 @@ public class WorkoutSheetControllerTest extends BaseControllerTest {
 	@Test
 	public void WorkoutSheet_GetAllByWorkoutPlan_ShouldReturnHttpOkAndAllActives()
 			throws Exception {
-		Long workoutPlanId = workoutPlanRepository.findAll().get(0).getId();
+		WorkoutPlan workoutPlan = workoutPlanRepository.findAll().get(0);
 		MvcResult mvcResult = mockMvc
-				.perform(get("/workout-plan/" + workoutPlanId + "/workout-sheet"))
+				.perform(get("/workout-plans/" + workoutPlan.getId() + "/workout-sheets"))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
-				.andExpect(jsonPath("$", hasSize((int) workoutSheetRepository.count())))
+				.andExpect(jsonPath("$", hasSize(workoutPlan.getWorkoutSheets().size())))
 				.andReturn();
 
-		List<WorkoutSheet> workoutSheets = objectMapper
+		List<WorkoutSheetDTO> workoutSheets = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(workoutSheets.isEmpty());
 	}
@@ -46,7 +49,7 @@ public class WorkoutSheetControllerTest extends BaseControllerTest {
 	public void WorkoutSheet_GetById_ShouldReturnHttpOk() throws Exception {
 		WorkoutSheet workoutSheetRequested = workoutSheetRepository.findAll().get(0);
 		MvcResult mvcResult = mockMvc
-				.perform(get("/workout-sheet/" + workoutSheetRequested.getId()))
+				.perform(get("/workout-sheets/" + workoutSheetRequested.getId()))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
