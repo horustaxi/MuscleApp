@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
  *
  * @author Vinícius
  */
+@SuppressWarnings("serial")
 @Entity(name = "workout_sheet")
 public class WorkoutSheet extends BaseEntity implements Serializable {
 

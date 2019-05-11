@@ -17,17 +17,23 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.dtos.WorkoutSheetDTO;
 import com.vas.muscleapp.models.WorkoutSheet;
+import com.vas.muscleapp.repositories.WorkoutPlanRepository;
 import com.vas.muscleapp.repositories.WorkoutSheetRepository;
 
 public class WorkoutSheetControllerTest extends BaseControllerTest {
 
 	@Autowired
 	private WorkoutSheetRepository workoutSheetRepository;
+	@Autowired
+	private WorkoutPlanRepository workoutPlanRepository;
 
 	@Test
-	public void WorkoutSheet_GetAll_ShouldReturnHttpOkAndAllActives() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(get("/workout-sheet")).andExpect(status().isOk())
-				.andExpect(content().contentType(contentType))
+	public void WorkoutSheet_GetAllByWorkoutPlan_ShouldReturnHttpOkAndAllActives()
+			throws Exception {
+		Long workoutPlanId = workoutPlanRepository.findAll().get(0).getId();
+		MvcResult mvcResult = mockMvc
+				.perform(get("/workout-plan/" + workoutPlanId + "/workout-sheet"))
+				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize((int) workoutSheetRepository.count())))
 				.andReturn();
 
