@@ -17,7 +17,7 @@ import com.vas.muscleapp.repositories.UserRepository;
  * @author Vinícius
  */
 @Service
-public class UserService {
+public class UserService implements BaseService<User, Long> {
 
 	private final UserRepository userReporitory;
 
@@ -26,7 +26,7 @@ public class UserService {
 		this.userReporitory = userReporitory;
 	}
 
-	public User findUserByEmail(String email) {
+	public User findByEmail(String email) {
 		return userReporitory.findUserByEmail(email).get();
 	}
 
@@ -43,7 +43,7 @@ public class UserService {
 		userReporitory.deleteAll();
 	}
 
-	public boolean existsUserWithEmail(String email) {
+	public boolean existsWithEmail(String email) {
 		return userReporitory.findUserByEmail(email).isPresent();
 	}
 

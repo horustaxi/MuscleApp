@@ -48,7 +48,7 @@ public class UserController {
 
 	@PostMapping(value = "/register")
 	public ResponseEntity<?> register(@RequestBody User user) throws Exception {
-		if (userService.existsUserWithEmail(user.getEmail())) {
+		if (userService.existsWithEmail(user.getEmail())) {
 			throw new UserAlreadyExistsException(user.getEmail());
 		}
 		user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
@@ -62,14 +62,14 @@ public class UserController {
 			throws Exception {
 		String email = Jwts.parser().setSigningKey(SECRET.getBytes())
 				.parseClaimsJws(authorization.replace(TOKEN_PREFIX, "")).getBody().getSubject();
-		User user = userService.findUserByEmail(email);
+		User user = userService.findByEmail(email);
 		UserDTO userDto = modelMapper.map(user, UserDTO.class);
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/user/{email:.+}")
-	public ResponseEntity<UserDTO> userLogado(@PathVariable String email) {
-		User user = userService.findUserByEmail(email);
+	public ResponseEntity<UserDTO> getByEMail(@PathVariable String email) {
+		User user = userService.findByEmail(email);
 		UserDTO userDto = modelMapper.map(user, UserDTO.class);
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
 	}
