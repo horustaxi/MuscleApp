@@ -59,9 +59,8 @@ public class ExerciseController {
 		return new ResponseEntity<>(exercisesDTO, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "exercises/{id}")
+	@GetMapping(value = "/exercises/{id}")
 	public @ResponseBody ResponseEntity<ExerciseDTO> getById(@PathVariable Long id) {
-		// TODO throw an exception if it can't find exercise
 		Exercise exercise = exerciseService.findById(id);
 		ExerciseDTO exerciseDTO = modelMapper.map(exercise, ExerciseDTO.class);
 		return new ResponseEntity<>(exerciseDTO, HttpStatus.OK);
