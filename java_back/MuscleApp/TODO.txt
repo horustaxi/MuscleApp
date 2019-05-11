@@ -1,2 +1,2 @@
 - Verificar nullables (tipos)
-- Verificar se os resources estão no plural nas urls
+- Posts recebendo DTOS

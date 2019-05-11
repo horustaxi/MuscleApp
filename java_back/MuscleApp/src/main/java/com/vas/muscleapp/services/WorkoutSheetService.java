@@ -27,6 +27,7 @@ public class WorkoutSheetService implements BaseService<WorkoutSheet, Long> {
 		this.workoutSheetRepository = workoutSheetRepository;
 	}
 
+	@Override
 	public WorkoutSheet save(WorkoutSheet workoutSheet) {
 		return workoutSheetRepository.save(workoutSheet);
 	}
@@ -35,6 +36,7 @@ public class WorkoutSheetService implements BaseService<WorkoutSheet, Long> {
 		return workoutSheetRepository.findByWorkoutPlanId(workoutPlanId);
 	}
 
+	@Override
 	public WorkoutSheet findById(Long id) {
 		return workoutSheetRepository.findById(id).get();
 	}

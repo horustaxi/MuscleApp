@@ -30,10 +30,12 @@ public class UserService implements BaseService<User, Long> {
 		return userReporitory.findUserByEmail(email).get();
 	}
 
+	@Override
 	public User save(User user) {
 		return userReporitory.save(user);
 	}
 
+	@Override
 	public User findById(Long userId) {
 		return userReporitory.findById(userId)
 				.orElseThrow(() -> new UserNotFoundException("id", userId.toString()));

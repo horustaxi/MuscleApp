@@ -44,7 +44,7 @@ public class BodyMeasurementsController {
 	}
 
 	@PostMapping(value = "/users/{userId}/body-measurements")
-	public ResponseEntity<?> save(@PathVariable Long userId,
+	public ResponseEntity<URI> save(@PathVariable Long userId,
 			@RequestBody BodyMeasurements bodyMeasurements) {
 		User measuredUser = new User();
 		measuredUser.setId(userId);

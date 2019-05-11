@@ -394,7 +394,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 		}
 	}
 
-	private void initUsers() throws Exception {
+	private void initUsers() {
 		if (userRepository.count() == 0) {
 			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 			User userVinicius = new User("Vinicius A. dos Santos", "vinicius.vas.ti@gmail.com",

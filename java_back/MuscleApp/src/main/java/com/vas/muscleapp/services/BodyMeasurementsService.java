@@ -27,6 +27,7 @@ public class BodyMeasurementsService implements BaseService<BodyMeasurements, Lo
 		this.bodyMeasurementsRepository = bodyMeasurementsRepository;
 	}
 
+	@Override
 	public BodyMeasurements save(BodyMeasurements bodyMeasurements) {
 		return bodyMeasurementsRepository.save(bodyMeasurements);
 	}
@@ -35,6 +36,7 @@ public class BodyMeasurementsService implements BaseService<BodyMeasurements, Lo
 		return bodyMeasurementsRepository.findByMeasuredUserId(userId);
 	}
 
+	@Override
 	public BodyMeasurements findById(Long id) {
 		return bodyMeasurementsRepository.findById(id).get();
 	}

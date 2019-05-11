@@ -23,6 +23,7 @@ public class ExerciseService implements BaseService<Exercise, Long> {
 		this.exerciseRepository = exerciseRepository;
 	}
 
+	@Override
 	public Exercise save(Exercise exercise) {
 		if (exerciseRepository.findExerciseByName(exercise.getName()).orElse(null) != null) {
 			throw new ExerciseAlreadyExistsException(exercise.getName());
@@ -34,6 +35,7 @@ public class ExerciseService implements BaseService<Exercise, Long> {
 		return exerciseRepository.findExerciseByActive(Boolean.TRUE);
 	}
 
+	@Override
 	public Exercise findById(Long id) {
 		return exerciseRepository.findById(id).get();
 	}

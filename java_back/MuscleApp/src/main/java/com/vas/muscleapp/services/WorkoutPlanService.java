@@ -27,6 +27,7 @@ public class WorkoutPlanService implements BaseService<WorkoutPlan, Long> {
 		this.workoutPlanRepository = workoutPlanRepository;
 	}
 
+	@Override
 	public WorkoutPlan save(WorkoutPlan workoutPlan) {
 		return workoutPlanRepository.save(workoutPlan);
 	}
@@ -39,6 +40,7 @@ public class WorkoutPlanService implements BaseService<WorkoutPlan, Long> {
 		return workoutPlanRepository.getAllByCreatedById(userId);
 	}
 
+	@Override
 	public WorkoutPlan findById(Long id) {
 		return workoutPlanRepository.findById(id).get();
 	}
