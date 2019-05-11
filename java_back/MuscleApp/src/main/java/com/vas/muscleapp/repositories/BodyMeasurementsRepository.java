@@ -18,7 +18,7 @@ import com.vas.muscleapp.models.BodyMeasurements;
  */
 @Repository
 public interface BodyMeasurementsRepository extends JpaRepository<BodyMeasurements, Long> {
-	
+
 	Set<BodyMeasurements> findByMeasuredUserId(Long userId);
 
 }

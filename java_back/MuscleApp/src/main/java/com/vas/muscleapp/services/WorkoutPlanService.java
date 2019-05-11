@@ -34,7 +34,7 @@ public class WorkoutPlanService implements BaseService<WorkoutPlan, Long> {
 	public List<WorkoutPlan> getAllCreatedToUserId(Long userId) {
 		return workoutPlanRepository.getAllByCreatedToId(userId);
 	}
-	
+
 	public List<WorkoutPlan> getAllCreatedByUserId(Long userId) {
 		return workoutPlanRepository.getAllByCreatedById(userId);
 	}
