@@ -17,17 +17,21 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.dtos.WorksetDTO;
 import com.vas.muscleapp.models.Workset;
+import com.vas.muscleapp.repositories.WorkoutSheetRepository;
 import com.vas.muscleapp.repositories.WorksetRepository;
 
 public class WorksetControllerTest extends BaseControllerTest {
 
 	@Autowired
 	private WorksetRepository worksetRepository;
+	@Autowired
+	private WorkoutSheetRepository workoutSheetRepository;
 
 	@Test
 	public void Workset_GetAll_ShouldReturnHttpOkAndAllActives() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(get("/workset")).andExpect(status().isOk())
-				.andExpect(content().contentType(contentType))
+		Long workoutSheetId = workoutSheetRepository.findAll().get(0).getId();
+		MvcResult mvcResult = mockMvc.perform(get("/workout-sheet/" + workoutSheetId + "/workset"))
+				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize((int) worksetRepository.count()))).andReturn();
 
 		List<Workset> worksets = objectMapper
@@ -38,8 +42,7 @@ public class WorksetControllerTest extends BaseControllerTest {
 	@Test
 	public void Workset_GetById_ShouldReturnHttpOk() throws Exception {
 		Workset worksetRequested = worksetRepository.findAll().get(0);
-		MvcResult mvcResult = mockMvc
-				.perform(get("/workset/" + worksetRequested.getId()))
+		MvcResult mvcResult = mockMvc.perform(get("/workset/" + worksetRequested.getId()))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
