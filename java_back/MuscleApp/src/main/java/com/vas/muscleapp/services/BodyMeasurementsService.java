@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vas.muscleapp.models.BodyMeasurements;
-import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.repositories.BodyMeasurementsRepository;
 
 /**
@@ -19,27 +18,25 @@ import com.vas.muscleapp.repositories.BodyMeasurementsRepository;
  * @author Vinícius
  */
 @Service
-public class BodyMeasurementsService {
+public class BodyMeasurementsService implements BaseService<BodyMeasurements, Long> {
 
 	@Autowired
 	private final BodyMeasurementsRepository bodyMeasurementsRepository;
 
-	@Autowired
-	private final UserService userService;
-
-	public BodyMeasurementsService(BodyMeasurementsRepository bodyMeasurementsRepository,
-			UserService userService) {
+	public BodyMeasurementsService(BodyMeasurementsRepository bodyMeasurementsRepository) {
 		this.bodyMeasurementsRepository = bodyMeasurementsRepository;
-		this.userService = userService;
 	}
 
-	public void save(BodyMeasurements bodyMeasurements) {
-		bodyMeasurementsRepository.save(bodyMeasurements);
+	public BodyMeasurements save(BodyMeasurements bodyMeasurements) {
+		return bodyMeasurementsRepository.save(bodyMeasurements);
 	}
 
-	public Set<BodyMeasurements> getBodyMeasurementsByUserId(Long userId) {
-		User user = userService.findById(userId);
-		return user.getBodyMeasurementses();
+	public Set<BodyMeasurements> getAllByUserId(Long userId) {
+		return bodyMeasurementsRepository.findByMeasuredUserId(userId);
+	}
+
+	public BodyMeasurements findById(Long id) {
+		return bodyMeasurementsRepository.findById(id).get();
 	}
 
 }

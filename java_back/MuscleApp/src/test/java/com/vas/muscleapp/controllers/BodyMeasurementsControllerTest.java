@@ -17,19 +17,23 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.dtos.BodyMeasurementsDTO;
 import com.vas.muscleapp.models.BodyMeasurements;
+import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.repositories.BodyMeasurementsRepository;
+import com.vas.muscleapp.repositories.UserRepository;
 
 public class BodyMeasurementsControllerTest extends BaseControllerTest {
 
 	@Autowired
 	private BodyMeasurementsRepository bodyMeasurementsRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	@Test
-	public void BodyMeasurements_GetAll_ShouldReturnHttpOkAndAllActives() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(get("/body-measurements")).andExpect(status().isOk())
-				.andExpect(content().contentType(contentType))
-				.andExpect(jsonPath("$", hasSize((int) bodyMeasurementsRepository.count())))
-				.andReturn();
+	public void BodyMeasurements_GetAllByUser_ShouldReturnHttpOkAndAll() throws Exception {
+		User user = userRepository.findUserByEmail("tiago.oliveira@gmail.com").get();
+		MvcResult mvcResult = mockMvc.perform(get("/user/" + user.getId() + "/body-measurements"))
+				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
+				.andExpect(jsonPath("$", hasSize(1))).andReturn();
 
 		List<BodyMeasurements> bodyMeasurementss = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);

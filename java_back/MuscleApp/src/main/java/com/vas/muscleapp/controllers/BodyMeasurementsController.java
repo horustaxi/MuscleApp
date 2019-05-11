@@ -43,7 +43,7 @@ public class BodyMeasurementsController {
 		this.modelMapper = modelMapper;
 	}
 
-	@PostMapping(value = "/user/{userId}/bodymeasurements")
+	@PostMapping(value = "/user/{userId}/body-measurements")
 	public ResponseEntity<?> save(@PathVariable Long userId,
 			@RequestBody BodyMeasurements bodyMeasurements) {
 		User measuredUser = new User();
@@ -56,10 +56,16 @@ public class BodyMeasurementsController {
 		return ResponseEntity.created(location).build();
 	}
 
-	@GetMapping(value = "/user/{userId}/bodymeasurements")
-	public ResponseEntity<Set<BodyMeasurementsDTO>> getBodyMeasurements(@PathVariable Long userId) {
-		Set<BodyMeasurements> bodyMeasurements = bodyMeasurementsService
-				.getBodyMeasurementsByUserId(userId);
+	@GetMapping(value = "/body-measurements/{id}")
+	public ResponseEntity<BodyMeasurementsDTO> getById(@PathVariable Long id) {
+		BodyMeasurements bodyMeasurements = bodyMeasurementsService.findById(id);
+		BodyMeasurementsDTO dto = modelMapper.map(bodyMeasurements, BodyMeasurementsDTO.class);
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/user/{userId}/body-measurements")
+	public ResponseEntity<Set<BodyMeasurementsDTO>> getAllByUser(@PathVariable Long userId) {
+		Set<BodyMeasurements> bodyMeasurements = bodyMeasurementsService.getAllByUserId(userId);
 		Type listType = new TypeToken<Set<BodyMeasurementsDTO>>() {
 		}.getType();
 		Set<BodyMeasurementsDTO> bodyMeasurementsDTOs = modelMapper.map(bodyMeasurements, listType);

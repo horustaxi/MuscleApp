@@ -202,14 +202,8 @@ public class BodyMeasurements extends BaseEntity
 
 	@Override
 	public int compareTo(BodyMeasurements o) {
-		if (o == null && this == null) {
-			return 1;
-		}
 		if (o == null) {
 			return 1;
-		}
-		if (this == null) {
-			return -1;
 		}
 		return getCreatedAt().compareTo(o.getCreatedAt());
 	}
