@@ -7,6 +7,7 @@ package com.vas.muscleapp.controllers;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -38,6 +39,13 @@ public class MuscleController {
 		this.modelMapper = modelMapper;
 	}
 
+	@GetMapping(value = "/muscles/{id}")
+	public @ResponseBody ResponseEntity<MuscleDTO> getById(@PathVariable Long id) {
+		Muscle muscle = muscleService.findById(id);
+		MuscleDTO muscleDTO = modelMapper.map(muscle, MuscleDTO.class);
+		return new ResponseEntity<>(muscleDTO, HttpStatus.OK);
+	}
+
 	@GetMapping(value = "/muscles")
 	public @ResponseBody ResponseEntity<List<MuscleDTO>> getAllActives() {
 		List<Muscle> muscles = muscleService.findAllActives();
@@ -47,11 +55,14 @@ public class MuscleController {
 		return new ResponseEntity<>(musclesDTO, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/muscles/{id}")
-	public @ResponseBody ResponseEntity<MuscleDTO> getById(@PathVariable Long id) {
-		Muscle muscle = muscleService.findById(id);
-		MuscleDTO muscleDTO = modelMapper.map(muscle, MuscleDTO.class);
-		return new ResponseEntity<>(muscleDTO, HttpStatus.OK);
+	@GetMapping(value = "/muscle-groups/{muscleGroupId}/muscles")
+	public @ResponseBody ResponseEntity<Set<MuscleDTO>> getAllByMuscleGroup(
+			@PathVariable Long muscleGroupId) {
+		Set<Muscle> muscles = muscleService.findAllByMuscleGroup(muscleGroupId);
+		Type listType = new TypeToken<Set<MuscleDTO>>() {
+		}.getType();
+		Set<MuscleDTO> musclesDTO = modelMapper.map(muscles, listType);
+		return new ResponseEntity<>(musclesDTO, HttpStatus.OK);
 	}
 
 }

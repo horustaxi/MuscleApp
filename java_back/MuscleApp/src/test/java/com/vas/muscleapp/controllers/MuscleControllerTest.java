@@ -13,22 +13,41 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.dtos.MuscleDTO;
 import com.vas.muscleapp.models.Muscle;
+import com.vas.muscleapp.models.MuscleGroup;
+import com.vas.muscleapp.repositories.MuscleGroupRepository;
 import com.vas.muscleapp.repositories.MuscleRepository;
 
+@Transactional
 public class MuscleControllerTest extends BaseControllerTest {
 
 	@Autowired
 	private MuscleRepository muscleRepository;
+	@Autowired
+	private MuscleGroupRepository muscleGroupRepository;
 
 	@Test
 	public void Muscle_GetAll_ShouldReturnHttpOkAndAllActives() throws Exception {
 		MvcResult mvcResult = mockMvc.perform(get("/muscles")).andExpect(status().isOk())
 				.andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize((int) muscleRepository.count()))).andReturn();
+
+		List<Muscle> muscles = objectMapper.readValue(mvcResult.getResponse().getContentAsString(),
+				List.class);
+		assertFalse(muscles.isEmpty());
+	}
+
+	@Test
+	public void Muscle_GetAllByMuscleGroup_ShouldReturnHttpOk() throws Exception {
+		MuscleGroup muscleGroup = muscleGroupRepository.findAll().get(0);
+		MvcResult mvcResult = mockMvc
+				.perform(get("/muscle-groups/" + muscleGroup.getId() + "/muscles"))
+				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
+				.andExpect(jsonPath("$", hasSize(muscleGroup.getMuscles().size()))).andReturn();
 
 		List<Muscle> muscles = objectMapper.readValue(mvcResult.getResponse().getContentAsString(),
 				List.class);

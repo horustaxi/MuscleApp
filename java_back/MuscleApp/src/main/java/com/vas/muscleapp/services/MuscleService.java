@@ -6,6 +6,7 @@
 package com.vas.muscleapp.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,23 +21,29 @@ import com.vas.muscleapp.repositories.MuscleRepository;
 @Service
 public class MuscleService implements BaseService<Muscle, Long> {
 
-	private final MuscleRepository muscleRepository;
+	private final MuscleRepository repository;
 
 	@Autowired
 	public MuscleService(MuscleRepository muscleRepository) {
-		this.muscleRepository = muscleRepository;
+		this.repository = muscleRepository;
 	}
 
+	@Override
 	public Muscle save(Muscle muscle) {
-		return muscleRepository.save(muscle);
+		return repository.save(muscle);
 	}
 
 	public List<Muscle> findAllActives() {
-		return muscleRepository.findMuscleByActive(Boolean.TRUE);
+		return repository.findMuscleByActive(Boolean.TRUE);
 	}
 
+	@Override
 	public Muscle findById(Long id) {
-		return muscleRepository.findById(id).get();
+		return repository.findById(id).get();
+	}
+
+	public Set<Muscle> findAllByMuscleGroup(Long muscleGroupId) {
+		return repository.findByMuscleGroupId(muscleGroupId);
 	}
 
 }
