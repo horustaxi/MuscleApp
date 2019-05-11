@@ -26,11 +26,15 @@ import com.vas.muscleapp.models.BodyMeasurements;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.services.BodyMeasurementsService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 /**
  *
  * @author Vinícius
  */
 @RestController
+@Api(tags = { "Body Measurements" })
 public class BodyMeasurementsController {
 
 	private final BodyMeasurementsService bodyMeasurementsService;
@@ -43,6 +47,7 @@ public class BodyMeasurementsController {
 		this.modelMapper = modelMapper;
 	}
 
+	@ApiOperation(value = "Create a body measurement for a user created by another (or de the same) user")
 	@PostMapping(value = "/users/{userId}/body-measurements")
 	public ResponseEntity<URI> save(@PathVariable Long userId,
 			@RequestBody BodyMeasurements bodyMeasurements) {
@@ -56,6 +61,7 @@ public class BodyMeasurementsController {
 		return ResponseEntity.created(location).build();
 	}
 
+	@ApiOperation(value = "Returns a body measurement with specified ID", response = BodyMeasurementsDTO.class)
 	@GetMapping(value = "/body-measurements/{id}")
 	public ResponseEntity<BodyMeasurementsDTO> getById(@PathVariable Long id) {
 		BodyMeasurements bodyMeasurements = bodyMeasurementsService.findById(id);
