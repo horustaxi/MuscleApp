@@ -41,14 +41,14 @@ public class WorkoutPlanController {
 		this.modelMapper = modelMapper;
 	}
 
-	@GetMapping(value = "/workout-plan/{id}")
+	@GetMapping(value = "/workout-plans/{id}")
 	public ResponseEntity<WorkoutPlanDTO> getById(@PathVariable Long id) {
 		WorkoutPlan workoutPlan = workoutPlanService.findById(id);
 		WorkoutPlanDTO dto = modelMapper.map(workoutPlan, WorkoutPlanDTO.class);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/workout-plan")
+	@GetMapping(value = "/workout-plans")
 	public ResponseEntity<List<WorkoutPlanDTO>> getAllByCreatedByUserOrCreatedToUser(
 			@RequestParam(name = "created-to") Optional<Long> createdTo,
 			@RequestParam(name = "created-by") Optional<Long> createdBy) {

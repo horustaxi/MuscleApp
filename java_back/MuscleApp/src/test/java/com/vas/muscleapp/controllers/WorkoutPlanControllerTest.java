@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.dtos.WorkoutPlanDTO;
+import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.models.WorkoutPlan;
 import com.vas.muscleapp.repositories.WorkoutPlanRepository;
 
@@ -28,24 +29,29 @@ public class WorkoutPlanControllerTest extends BaseControllerTest {
 
 	@Test
 	public void WorkoutPlan_GetAllToCreatedToUser_ShouldReturnHttpOk() throws Exception {
-		Long createdToUserId = workoutPlanRepository.findAll().get(0).getCreatedTo().getId();
-		MvcResult mvcResult = mockMvc.perform(get("/workout-plan?created-to=" + createdToUserId))
+		User createdToUser = workoutPlanRepository.findAll().get(0).getCreatedTo();
+		MvcResult mvcResult = mockMvc
+				.perform(get("/workout-plans?created-to=" + createdToUser.getId()))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
-				.andExpect(jsonPath("$", hasSize(1))).andReturn();
+				.andExpect(jsonPath("$", hasSize(createdToUser.getBodyMeasurements().size())))
+				.andReturn();
 
-		List<WorkoutPlan> workoutPlans = objectMapper
+		List<WorkoutPlanDTO> workoutPlans = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(workoutPlans.isEmpty());
 	}
 
 	@Test
 	public void WorkoutPlan_GetAllByCreatedToUser_ShouldReturnHttpOk() throws Exception {
-		Long createdByUserId = workoutPlanRepository.findAll().get(0).getCreatedBy().getId();
-		MvcResult mvcResult = mockMvc.perform(get("/workout-plan?created-by=" + createdByUserId))
+		User createdByUser = workoutPlanRepository.findAll().get(0).getCreatedBy();
+		MvcResult mvcResult = mockMvc
+				.perform(get("/workout-plans?created-by=" + createdByUser.getId()))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
-				.andExpect(jsonPath("$", hasSize(1))).andReturn();
+				.andExpect(jsonPath("$",
+						hasSize(createdByUser.getBodyMeasurementsesCreateds().size())))
+				.andReturn();
 
-		List<WorkoutPlan> workoutPlans = objectMapper
+		List<WorkoutPlanDTO> workoutPlans = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(workoutPlans.isEmpty());
 	}
@@ -53,7 +59,7 @@ public class WorkoutPlanControllerTest extends BaseControllerTest {
 	@Test
 	public void WorkoutPlan_GetById_ShouldReturnHttpOk() throws Exception {
 		WorkoutPlan workoutPlanRequested = workoutPlanRepository.findAll().get(0);
-		MvcResult mvcResult = mockMvc.perform(get("/workout-plan/" + workoutPlanRequested.getId()))
+		MvcResult mvcResult = mockMvc.perform(get("/workout-plans/" + workoutPlanRequested.getId()))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
