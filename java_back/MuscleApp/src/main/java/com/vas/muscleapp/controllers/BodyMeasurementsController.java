@@ -43,7 +43,7 @@ public class BodyMeasurementsController {
 		this.modelMapper = modelMapper;
 	}
 
-	@PostMapping(value = "/user/{userId}/body-measurements")
+	@PostMapping(value = "/users/{userId}/body-measurements")
 	public ResponseEntity<?> save(@PathVariable Long userId,
 			@RequestBody BodyMeasurements bodyMeasurements) {
 		User measuredUser = new User();
@@ -63,7 +63,7 @@ public class BodyMeasurementsController {
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/user/{userId}/body-measurements")
+	@GetMapping(value = "/users/{userId}/body-measurements")
 	public ResponseEntity<Set<BodyMeasurementsDTO>> getAllByUser(@PathVariable Long userId) {
 		Set<BodyMeasurements> bodyMeasurements = bodyMeasurementsService.getAllByUserId(userId);
 		Type listType = new TypeToken<Set<BodyMeasurementsDTO>>() {

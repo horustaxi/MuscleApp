@@ -409,7 +409,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 					.setRightArm(34.5f).setLeftCalf(32.3f).setRightCalf(32.7f).setLeftForearm(25.2f)
 					.setRightForearm(25).setLeftThigh(47).setRightThigh(47.8f).setShoulders(94.6f)
 					.setWaist(80).setWeight(70).build();
-			userTiago.getBodyMeasurementses().add(bodyMeasurements);
+			userTiago.getBodyMeasurements().add(bodyMeasurements);
 			userRepository.save(userVinicius);
 			userRepository.save(userEdson);
 			userRepository.save(userTiago);

@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
 import com.vas.muscleapp.dtos.BodyMeasurementsDTO;
@@ -21,6 +22,7 @@ import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.repositories.BodyMeasurementsRepository;
 import com.vas.muscleapp.repositories.UserRepository;
 
+@Transactional
 public class BodyMeasurementsControllerTest extends BaseControllerTest {
 
 	@Autowired
@@ -31,9 +33,9 @@ public class BodyMeasurementsControllerTest extends BaseControllerTest {
 	@Test
 	public void BodyMeasurements_GetAllByUser_ShouldReturnHttpOkAndAll() throws Exception {
 		User user = userRepository.findUserByEmail("tiago.oliveira@gmail.com").get();
-		MvcResult mvcResult = mockMvc.perform(get("/user/" + user.getId() + "/body-measurements"))
+		MvcResult mvcResult = mockMvc.perform(get("/users/" + user.getId() + "/body-measurements"))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
-				.andExpect(jsonPath("$", hasSize(1))).andReturn();
+				.andExpect(jsonPath("$", hasSize(user.getBodyMeasurements().size()))).andReturn();
 
 		List<BodyMeasurements> bodyMeasurementss = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);

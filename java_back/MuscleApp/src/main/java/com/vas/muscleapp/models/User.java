@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  * @author Vinicius
  */
+@SuppressWarnings("serial")
 @Entity(name = "user")
 public class User extends BaseEntity implements Serializable {
 
@@ -36,10 +37,10 @@ public class User extends BaseEntity implements Serializable {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "measuredUser", cascade = CascadeType.ALL)
-	private Set<BodyMeasurements> bodyMeasurementses = new HashSet<>();
+	private Set<BodyMeasurements> bodyMeasurements = new HashSet<>();
 	@JsonIgnore
 	@OneToMany(mappedBy = "personalTrainnerUser", cascade = CascadeType.ALL)
-	private Set<BodyMeasurements> bodyMeasurementsesCreateds = new HashSet<>();
+	private Set<BodyMeasurements> bodyMeasurementsCreateds = new HashSet<>();
 	@OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
 	private final Set<WorkoutPlan> workoutPlansCreated = new HashSet<>();
 	@OneToMany(mappedBy = "createdTo", cascade = CascadeType.ALL)
@@ -78,12 +79,12 @@ public class User extends BaseEntity implements Serializable {
 		this.password = password;
 	}
 
-	public void setBodyMeasurementses(Set<BodyMeasurements> bodyMeasurementses) {
-		this.bodyMeasurementses = bodyMeasurementses;
+	public void setBodyMeasurements(Set<BodyMeasurements> bodyMeasurementses) {
+		this.bodyMeasurements = bodyMeasurementses;
 	}
 
-	public Set<BodyMeasurements> getBodyMeasurementses() {
-		return bodyMeasurementses;
+	public Set<BodyMeasurements> getBodyMeasurements() {
+		return bodyMeasurements;
 	}
 
 	public void setWorkoutPlans(Set<WorkoutPlan> workoutPlans) {
@@ -98,12 +99,12 @@ public class User extends BaseEntity implements Serializable {
 		return workoutPlans;
 	}
 
-	public void setBodyMeasurementsesCreateds(Set<BodyMeasurements> bodyMeasurementsesCreateds) {
-		this.bodyMeasurementsesCreateds = bodyMeasurementsesCreateds;
+	public void setBodyMeasurementsCreateds(Set<BodyMeasurements> bodyMeasurementsCreateds) {
+		this.bodyMeasurementsCreateds = bodyMeasurementsCreateds;
 	}
 
 	public Set<BodyMeasurements> getBodyMeasurementsesCreateds() {
-		return bodyMeasurementsesCreateds;
+		return bodyMeasurementsCreateds;
 	}
 
 	@Override
