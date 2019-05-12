@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
-import com.vas.muscleapp.dtos.ExerciseDTO;
+import com.vas.muscleapp.dtos.queries.ExerciseQueryDTO;
 import com.vas.muscleapp.enums.Language;
 import com.vas.muscleapp.models.Exercise;
 import com.vas.muscleapp.repositories.ExerciseRepository;
@@ -63,7 +63,7 @@ public class ExerciseControllerTest extends BaseControllerTest {
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 		String responseBodyAsString = mvcResult.getResponse().getContentAsString();
-		ExerciseDTO exerciseDTO = objectMapper.readValue(responseBodyAsString, ExerciseDTO.class);
+		ExerciseQueryDTO exerciseDTO = objectMapper.readValue(responseBodyAsString, ExerciseQueryDTO.class);
 		Assert.assertEquals(exerciseRequested.getName(), exerciseDTO.getName());
 		Assert.assertEquals(exerciseRequested.getDescription(), exerciseDTO.getDescription());
 	}

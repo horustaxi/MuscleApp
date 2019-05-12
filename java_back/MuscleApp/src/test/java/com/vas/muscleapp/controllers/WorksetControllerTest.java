@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
-import com.vas.muscleapp.dtos.WorksetDTO;
+import com.vas.muscleapp.dtos.queries.WorksetQueryDTO;
 import com.vas.muscleapp.models.WorkoutSheet;
 import com.vas.muscleapp.models.Workset;
 import com.vas.muscleapp.repositories.WorkoutSheetRepository;
@@ -38,7 +38,7 @@ public class WorksetControllerTest extends BaseControllerTest {
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$", hasSize(workoutSheet.getWorksets().size()))).andReturn();
 
-		List<WorksetDTO> worksets = objectMapper
+		List<WorksetQueryDTO> worksets = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(worksets.isEmpty());
 	}
@@ -50,8 +50,8 @@ public class WorksetControllerTest extends BaseControllerTest {
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
-		WorksetDTO workset = objectMapper.readValue(mvcResult.getResponse().getContentAsString(),
-				WorksetDTO.class);
+		WorksetQueryDTO workset = objectMapper.readValue(mvcResult.getResponse().getContentAsString(),
+				WorksetQueryDTO.class);
 		assertEquals(worksetRequested.getId(), workset.getId());
 		assertEquals(worksetRequested.getLetter(), workset.getLetter());
 		assertEquals(worksetRequested.getWorkoutSheet().getDescription(),

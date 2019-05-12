@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
-import com.vas.muscleapp.dtos.UserDTO;
+import com.vas.muscleapp.dtos.queries.UserQueryDTO;
 import com.vas.muscleapp.models.User;
 
 /**
@@ -34,8 +34,8 @@ public class UserControllerTest extends BaseControllerTest {
 	public void User_GetByEmail_ShoultReturnUserPlain() throws Exception {
 		MvcResult mvcResult = mockMvc.perform(get("/users?email=jack@email.com"))
 				.andExpect(status().isOk()).andReturn();
-		UserDTO user = objectMapper.readValue(mvcResult.getResponse().getContentAsString(),
-				UserDTO.class);
+		UserQueryDTO user = objectMapper.readValue(mvcResult.getResponse().getContentAsString(),
+				UserQueryDTO.class);
 		assertEquals("Jack", user.getName());
 		assertEquals("jack@email.com", user.getEmail());
 	}

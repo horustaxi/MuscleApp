@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -16,7 +17,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
-import com.vas.muscleapp.dtos.BodyMeasurementsDTO;
+import com.vas.muscleapp.dtos.queries.BodyMeasurementsQueryDTO;
 import com.vas.muscleapp.models.BodyMeasurements;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.repositories.BodyMeasurementsRepository;
@@ -50,13 +51,27 @@ public class BodyMeasurementsControllerTest extends BaseControllerTest {
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
-		BodyMeasurementsDTO bodyMeasurements = objectMapper
-				.readValue(mvcResult.getResponse().getContentAsString(), BodyMeasurementsDTO.class);
+		BodyMeasurementsQueryDTO bodyMeasurements = objectMapper
+				.readValue(mvcResult.getResponse().getContentAsString(), BodyMeasurementsQueryDTO.class);
 		assertEquals(bodyMeasurementsRequested.getAge(), bodyMeasurements.getAge());
 		assertEquals(bodyMeasurementsRequested.getChest(), bodyMeasurements.getChest(), 0);
 		assertEquals(bodyMeasurementsRequested.getGlutes(), bodyMeasurements.getGlutes(), 0);
 		assertEquals(bodyMeasurementsRequested.getHeight(), bodyMeasurements.getHeight(), 0);
 		assertEquals(bodyMeasurementsRequested.getRightArm(), bodyMeasurements.getRightArm(), 0);
+	}
+
+	@Test
+	public void BodyMeasurements_Create_ShouldReturnCreated() throws Exception {
+		User personalTrainnerUser = userRepository.findAll().get(0);
+		User measuredUser = userRepository.findAll().get(1);
+		BodyMeasurements bodyMeasurements = new BodyMeasurements.Builder(measuredUser,
+				personalTrainnerUser).setAge(24)
+						.setChest(95.3f)
+						.build();
+		mockMvc.perform(post("/users/" + measuredUser.getId() + "/body-measurements")
+				.contentType(contentType)
+				.content(objectMapper.writeValueAsString(bodyMeasurements)))
+				.andExpect(status().isCreated());
 	}
 
 }

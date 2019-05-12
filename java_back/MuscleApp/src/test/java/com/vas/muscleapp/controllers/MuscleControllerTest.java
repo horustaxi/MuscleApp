@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
-import com.vas.muscleapp.dtos.MuscleDTO;
+import com.vas.muscleapp.dtos.queries.MuscleQueryDTO;
 import com.vas.muscleapp.models.Muscle;
 import com.vas.muscleapp.models.MuscleGroup;
 import com.vas.muscleapp.repositories.MuscleGroupRepository;
@@ -61,8 +61,8 @@ public class MuscleControllerTest extends BaseControllerTest {
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
-		MuscleDTO muscle = objectMapper.readValue(mvcResult.getResponse().getContentAsString(),
-				MuscleDTO.class);
+		MuscleQueryDTO muscle = objectMapper.readValue(mvcResult.getResponse().getContentAsString(),
+				MuscleQueryDTO.class);
 		assertEquals(muscleRequested.getName(), muscle.getName());
 	}
 

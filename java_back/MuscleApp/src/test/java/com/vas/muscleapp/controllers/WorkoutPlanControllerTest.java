@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
-import com.vas.muscleapp.dtos.WorkoutPlanDTO;
+import com.vas.muscleapp.dtos.queries.WorkoutPlanQueryDTO;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.models.WorkoutPlan;
 import com.vas.muscleapp.repositories.WorkoutPlanRepository;
@@ -36,7 +36,7 @@ public class WorkoutPlanControllerTest extends BaseControllerTest {
 				.andExpect(jsonPath("$", hasSize(createdToUser.getBodyMeasurements().size())))
 				.andReturn();
 
-		List<WorkoutPlanDTO> workoutPlans = objectMapper
+		List<WorkoutPlanQueryDTO> workoutPlans = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(workoutPlans.isEmpty());
 	}
@@ -51,7 +51,7 @@ public class WorkoutPlanControllerTest extends BaseControllerTest {
 						hasSize(createdByUser.getBodyMeasurementsesCreateds().size())))
 				.andReturn();
 
-		List<WorkoutPlanDTO> workoutPlans = objectMapper
+		List<WorkoutPlanQueryDTO> workoutPlans = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(workoutPlans.isEmpty());
 	}
@@ -63,8 +63,8 @@ public class WorkoutPlanControllerTest extends BaseControllerTest {
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
-		WorkoutPlanDTO workoutPlan = objectMapper
-				.readValue(mvcResult.getResponse().getContentAsString(), WorkoutPlanDTO.class);
+		WorkoutPlanQueryDTO workoutPlan = objectMapper
+				.readValue(mvcResult.getResponse().getContentAsString(), WorkoutPlanQueryDTO.class);
 		assertEquals(workoutPlanRequested.getDescription(), workoutPlan.getDescription());
 		assertEquals(workoutPlanRequested.getId(), workoutPlan.getId());
 		assertEquals(workoutPlanRequested.getCreatedBy().getName(), workoutPlan.getCreatedByName());

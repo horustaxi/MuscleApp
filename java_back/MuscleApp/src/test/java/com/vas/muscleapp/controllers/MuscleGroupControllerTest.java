@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
-import com.vas.muscleapp.dtos.MuscleGroupDTO;
+import com.vas.muscleapp.dtos.queries.MuscleGroupQueryDTO;
 import com.vas.muscleapp.models.MuscleGroup;
 import com.vas.muscleapp.repositories.MuscleGroupRepository;
 
@@ -34,7 +34,7 @@ public class MuscleGroupControllerTest extends BaseControllerTest {
 						.filter(mg -> mg.isActive()).count())))
 				.andReturn();
 
-		List<MuscleGroupDTO> muscleGroups = objectMapper
+		List<MuscleGroupQueryDTO> muscleGroups = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(muscleGroups.isEmpty());
 	}
@@ -46,8 +46,8 @@ public class MuscleGroupControllerTest extends BaseControllerTest {
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
-		MuscleGroupDTO muscleGroup = objectMapper
-				.readValue(mvcResult.getResponse().getContentAsString(), MuscleGroupDTO.class);
+		MuscleGroupQueryDTO muscleGroup = objectMapper
+				.readValue(mvcResult.getResponse().getContentAsString(), MuscleGroupQueryDTO.class);
 		assertEquals(muscleGroupRequested.getName(), muscleGroup.getName());
 		assertEquals(muscleGroupRequested.getId(), muscleGroup.getId());
 	}

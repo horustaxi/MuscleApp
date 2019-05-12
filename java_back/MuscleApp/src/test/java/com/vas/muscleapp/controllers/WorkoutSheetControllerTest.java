@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vas.muscleapp.abstracts.BaseControllerTest;
-import com.vas.muscleapp.dtos.WorkoutSheetDTO;
+import com.vas.muscleapp.dtos.queries.WorkoutSheetQueryDTO;
 import com.vas.muscleapp.models.WorkoutPlan;
 import com.vas.muscleapp.models.WorkoutSheet;
 import com.vas.muscleapp.repositories.WorkoutPlanRepository;
@@ -40,7 +40,7 @@ public class WorkoutSheetControllerTest extends BaseControllerTest {
 				.andExpect(jsonPath("$", hasSize(workoutPlan.getWorkoutSheets().size())))
 				.andReturn();
 
-		List<WorkoutSheetDTO> workoutSheets = objectMapper
+		List<WorkoutSheetQueryDTO> workoutSheets = objectMapper
 				.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertFalse(workoutSheets.isEmpty());
 	}
@@ -53,8 +53,8 @@ public class WorkoutSheetControllerTest extends BaseControllerTest {
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andReturn();
 
-		WorkoutSheetDTO workoutSheet = objectMapper
-				.readValue(mvcResult.getResponse().getContentAsString(), WorkoutSheetDTO.class);
+		WorkoutSheetQueryDTO workoutSheet = objectMapper
+				.readValue(mvcResult.getResponse().getContentAsString(), WorkoutSheetQueryDTO.class);
 		assertEquals(workoutSheetRequested.getId(), workoutSheet.getId());
 		assertEquals(workoutSheetRequested.getDescription(), workoutSheet.getDescription());
 		assertEquals(workoutSheetRequested.getWorkoutPlan().getDescription(),
