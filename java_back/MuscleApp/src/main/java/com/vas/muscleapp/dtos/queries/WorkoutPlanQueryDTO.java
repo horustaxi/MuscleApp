@@ -1,10 +1,10 @@
-package com.vas.muscleapp.dtos;
+package com.vas.muscleapp.dtos.queries;
 
 /**
  *
  * @author Vinícius
  */
-public class WorkoutPlanDTO {
+public class WorkoutPlanQueryDTO {
 
 	private Long id;
 	private String description;

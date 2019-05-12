@@ -4,9 +4,8 @@ package com.vas.muscleapp.dtos.queries;
  *
  * @author Vinícius
  */
-public class BodyMeasurementsQueryDTO {
+public class BodyMeasurementsCreateDTO {
 
-	private Long id;
 	private int age;
 	private float height;
 	private float weight;
@@ -22,16 +21,9 @@ public class BodyMeasurementsQueryDTO {
 	private float rightCalf;
 	private float leftCalf;
 	private float glutes;
-	private String measuredUserName;
-	private String personalTrainnerUserName;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private Long measuredUserId;
+	private Long personalTrainnerUserId;
 
 	public int getAge() {
 		return age;
@@ -153,19 +145,20 @@ public class BodyMeasurementsQueryDTO {
 		this.glutes = glutes;
 	}
 
-	public String getMeasuredUserName() {
-		return measuredUserName;
+	public Long getMeasuredUserId() {
+		return measuredUserId;
 	}
 
-	public void setMeasuredUserName(String measuredUserName) {
-		this.measuredUserName = measuredUserName;
+	public void setMeasuredUserId(Long measuredUserId) {
+		this.measuredUserId = measuredUserId;
 	}
 
-	public String getPersonalTrainnerUserName() {
-		return personalTrainnerUserName;
+	public Long getPersonalTrainnerUserId() {
+		return personalTrainnerUserId;
 	}
 
-	public void setPersonalTrainnerUserName(String personalTrainnerUserName) {
-		this.personalTrainnerUserName = personalTrainnerUserName;
+	public void setPersonalTrainnerUserId(Long personalTrainnerUserId) {
+		this.personalTrainnerUserId = personalTrainnerUserId;
 	}
+
 }

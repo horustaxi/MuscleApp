@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vas.muscleapp.dtos.MuscleDTO;
+import com.vas.muscleapp.dtos.queries.MuscleQueryDTO;
 import com.vas.muscleapp.models.Muscle;
 import com.vas.muscleapp.services.MuscleService;
 
@@ -40,28 +40,28 @@ public class MuscleController {
 	}
 
 	@GetMapping(value = "/muscles/{id}")
-	public @ResponseBody ResponseEntity<MuscleDTO> getById(@PathVariable Long id) {
+	public @ResponseBody ResponseEntity<MuscleQueryDTO> getById(@PathVariable Long id) {
 		Muscle muscle = muscleService.findById(id);
-		MuscleDTO muscleDTO = modelMapper.map(muscle, MuscleDTO.class);
+		MuscleQueryDTO muscleDTO = modelMapper.map(muscle, MuscleQueryDTO.class);
 		return new ResponseEntity<>(muscleDTO, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/muscles")
-	public @ResponseBody ResponseEntity<List<MuscleDTO>> getAllActives() {
+	public @ResponseBody ResponseEntity<List<MuscleQueryDTO>> getAllActives() {
 		List<Muscle> muscles = muscleService.findAllActives();
-		Type listType = new TypeToken<List<MuscleDTO>>() {
+		Type listType = new TypeToken<List<MuscleQueryDTO>>() {
 		}.getType();
-		List<MuscleDTO> musclesDTO = modelMapper.map(muscles, listType);
+		List<MuscleQueryDTO> musclesDTO = modelMapper.map(muscles, listType);
 		return new ResponseEntity<>(musclesDTO, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/muscle-groups/{muscleGroupId}/muscles")
-	public @ResponseBody ResponseEntity<Set<MuscleDTO>> getAllByMuscleGroup(
+	public @ResponseBody ResponseEntity<Set<MuscleQueryDTO>> getAllByMuscleGroup(
 			@PathVariable Long muscleGroupId) {
 		Set<Muscle> muscles = muscleService.findAllByMuscleGroup(muscleGroupId);
-		Type listType = new TypeToken<Set<MuscleDTO>>() {
+		Type listType = new TypeToken<Set<MuscleQueryDTO>>() {
 		}.getType();
-		Set<MuscleDTO> musclesDTO = modelMapper.map(muscles, listType);
+		Set<MuscleQueryDTO> musclesDTO = modelMapper.map(muscles, listType);
 		return new ResponseEntity<>(musclesDTO, HttpStatus.OK);
 	}
 

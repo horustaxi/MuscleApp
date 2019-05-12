@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.vas.muscleapp.dtos.WorkoutPlanDTO;
+import com.vas.muscleapp.dtos.queries.WorkoutPlanQueryDTO;
 import com.vas.muscleapp.models.WorkoutPlan;
 import com.vas.muscleapp.services.WorkoutPlanService;
 
@@ -42,14 +42,14 @@ public class WorkoutPlanController {
 	}
 
 	@GetMapping(value = "/workout-plans/{id}")
-	public ResponseEntity<WorkoutPlanDTO> getById(@PathVariable Long id) {
+	public ResponseEntity<WorkoutPlanQueryDTO> getById(@PathVariable Long id) {
 		WorkoutPlan workoutPlan = workoutPlanService.findById(id);
-		WorkoutPlanDTO dto = modelMapper.map(workoutPlan, WorkoutPlanDTO.class);
+		WorkoutPlanQueryDTO dto = modelMapper.map(workoutPlan, WorkoutPlanQueryDTO.class);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/workout-plans")
-	public ResponseEntity<List<WorkoutPlanDTO>> getAllByCreatedByUserOrCreatedToUser(
+	public ResponseEntity<List<WorkoutPlanQueryDTO>> getAllByCreatedByUserOrCreatedToUser(
 			@RequestParam(name = "created-to") Optional<Long> createdTo,
 			@RequestParam(name = "created-by") Optional<Long> createdBy) {
 		if (!createdTo.isPresent() && !createdBy.isPresent()) {
@@ -65,9 +65,9 @@ public class WorkoutPlanController {
 			workoutPlan = workoutPlanService.getAllCreatedToUserId(createdTo.get());
 		if (createdBy.isPresent())
 			workoutPlan = workoutPlanService.getAllCreatedByUserId(createdBy.get());
-		Type listType = new TypeToken<List<WorkoutPlanDTO>>() {
+		Type listType = new TypeToken<List<WorkoutPlanQueryDTO>>() {
 		}.getType();
-		List<WorkoutPlanDTO> workoutPlanDTOs = modelMapper.map(workoutPlan, listType);
+		List<WorkoutPlanQueryDTO> workoutPlanDTOs = modelMapper.map(workoutPlan, listType);
 		return new ResponseEntity<>(workoutPlanDTOs, HttpStatus.OK);
 	}
 

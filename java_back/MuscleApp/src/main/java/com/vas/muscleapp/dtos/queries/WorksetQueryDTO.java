@@ -1,10 +1,10 @@
-package com.vas.muscleapp.dtos;
+package com.vas.muscleapp.dtos.queries;
 
 /**
  *
  * @author Vinícius
  */
-public class WorksetDTO {
+public class WorksetQueryDTO {
 
 	private Long id;
 	private char letter;

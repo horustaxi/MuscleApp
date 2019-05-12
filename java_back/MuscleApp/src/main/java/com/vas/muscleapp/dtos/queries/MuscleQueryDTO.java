@@ -1,4 +1,4 @@
-package com.vas.muscleapp.dtos;
+package com.vas.muscleapp.dtos.queries;
 
 import com.vas.muscleapp.enums.Language;
 
@@ -6,12 +6,12 @@ import com.vas.muscleapp.enums.Language;
  *
  * @author Vinícius
  */
-public class MuscleDTO {
+public class MuscleQueryDTO {
 
 	private Long id;
 	private String name;
-	private Language languageForLocalization;
 	private String muscleGroupName;
+	private Language languageForLocalization;
 
 	public Long getId() {
 		return id;

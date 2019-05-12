@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vas.muscleapp.dtos.UserDTO;
+import com.vas.muscleapp.dtos.commands.UserRegisterCommandDTO;
+import com.vas.muscleapp.dtos.queries.UserQueryDTO;
 import com.vas.muscleapp.exceptions.user.UserAlreadyExistsException;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.services.UserService;
@@ -41,12 +42,12 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/register")
-	public ResponseEntity<?> register(@RequestBody User user) throws Exception {
+	public ResponseEntity<?> register(@RequestBody UserRegisterCommandDTO user) throws Exception {
 		if (userService.existsWithEmail(user.getEmail())) {
 			throw new UserAlreadyExistsException(user.getEmail());
 		}
 		user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
-		this.userService.save(user);
+		this.userService.save(modelMapper.map(user, User.class));
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
@@ -62,9 +63,9 @@ public class UserController {
 	 */
 
 	@GetMapping(value = "/users")
-	public ResponseEntity<UserDTO> getByEMail(@RequestParam(required = true) String email) {
+	public ResponseEntity<UserQueryDTO> getByEMail(@RequestParam(required = true) String email) {
 		User user = userService.findByEmail(email);
-		UserDTO userDto = modelMapper.map(user, UserDTO.class);
+		UserQueryDTO userDto = modelMapper.map(user, UserQueryDTO.class);
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
 	}
 }

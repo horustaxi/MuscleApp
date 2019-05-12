@@ -1,10 +1,10 @@
-package com.vas.muscleapp.dtos;
+package com.vas.muscleapp.dtos.queries;
 
 /**
  *
  * @author Vinícius
  */
-public class WorksetExerciseDTO {
+public class WorksetExerciseQueryDTO {
 
 	private Long id;
 	private String seriesNumber;

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vas.muscleapp.dtos.WorkoutSheetDTO;
+import com.vas.muscleapp.dtos.queries.WorkoutSheetQueryDTO;
 import com.vas.muscleapp.models.WorkoutSheet;
 import com.vas.muscleapp.services.WorkoutSheetService;
 
@@ -39,19 +39,19 @@ public class WorkoutSheetController {
 	}
 
 	@GetMapping(value = "/workout-sheets/{id}")
-	public ResponseEntity<WorkoutSheetDTO> getById(@PathVariable Long id) {
+	public ResponseEntity<WorkoutSheetQueryDTO> getById(@PathVariable Long id) {
 		WorkoutSheet workoutSheet = workoutSheetService.findById(id);
-		WorkoutSheetDTO dto = modelMapper.map(workoutSheet, WorkoutSheetDTO.class);
+		WorkoutSheetQueryDTO dto = modelMapper.map(workoutSheet, WorkoutSheetQueryDTO.class);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/workout-plans/{workoutPlanId}/workout-sheets")
-	public ResponseEntity<List<WorkoutSheetDTO>> getAllByWorkoutPlan(
+	public ResponseEntity<List<WorkoutSheetQueryDTO>> getAllByWorkoutPlan(
 			@PathVariable Long workoutPlanId) {
 		List<WorkoutSheet> workoutSheet = workoutSheetService.getAllByWorkoutPlan(workoutPlanId);
-		Type listType = new TypeToken<List<WorkoutSheetDTO>>() {
+		Type listType = new TypeToken<List<WorkoutSheetQueryDTO>>() {
 		}.getType();
-		List<WorkoutSheetDTO> workoutSheetDTOs = modelMapper.map(workoutSheet, listType);
+		List<WorkoutSheetQueryDTO> workoutSheetDTOs = modelMapper.map(workoutSheet, listType);
 		return new ResponseEntity<>(workoutSheetDTOs, HttpStatus.OK);
 	}
 

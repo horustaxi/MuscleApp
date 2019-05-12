@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.vas.muscleapp.dtos.BodyMeasurementsDTO;
+import com.vas.muscleapp.dtos.queries.BodyMeasurementsQueryDTO;
 import com.vas.muscleapp.models.BodyMeasurements;
 import com.vas.muscleapp.models.User;
 import com.vas.muscleapp.services.BodyMeasurementsService;
@@ -61,20 +61,20 @@ public class BodyMeasurementsController {
 		return ResponseEntity.created(location).build();
 	}
 
-	@ApiOperation(value = "Returns a body measurement with specified ID", response = BodyMeasurementsDTO.class)
+	@ApiOperation(value = "Returns a body measurement with specified ID", response = BodyMeasurementsQueryDTO.class)
 	@GetMapping(value = "/body-measurements/{id}")
-	public ResponseEntity<BodyMeasurementsDTO> getById(@PathVariable Long id) {
+	public ResponseEntity<BodyMeasurementsQueryDTO> getById(@PathVariable Long id) {
 		BodyMeasurements bodyMeasurements = bodyMeasurementsService.findById(id);
-		BodyMeasurementsDTO dto = modelMapper.map(bodyMeasurements, BodyMeasurementsDTO.class);
+		BodyMeasurementsQueryDTO dto = modelMapper.map(bodyMeasurements, BodyMeasurementsQueryDTO.class);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/users/{userId}/body-measurements")
-	public ResponseEntity<Set<BodyMeasurementsDTO>> getAllByUser(@PathVariable Long userId) {
+	public ResponseEntity<Set<BodyMeasurementsQueryDTO>> getAllByUser(@PathVariable Long userId) {
 		Set<BodyMeasurements> bodyMeasurements = bodyMeasurementsService.getAllByUserId(userId);
-		Type listType = new TypeToken<Set<BodyMeasurementsDTO>>() {
+		Type listType = new TypeToken<Set<BodyMeasurementsQueryDTO>>() {
 		}.getType();
-		Set<BodyMeasurementsDTO> bodyMeasurementsDTOs = modelMapper.map(bodyMeasurements, listType);
+		Set<BodyMeasurementsQueryDTO> bodyMeasurementsDTOs = modelMapper.map(bodyMeasurements, listType);
 		return new ResponseEntity<>(bodyMeasurementsDTOs, HttpStatus.OK);
 	}
 

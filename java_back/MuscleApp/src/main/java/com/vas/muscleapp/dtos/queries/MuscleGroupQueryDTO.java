@@ -1,4 +1,4 @@
-package com.vas.muscleapp.dtos;
+package com.vas.muscleapp.dtos.queries;
 
 import com.vas.muscleapp.enums.Language;
 
@@ -6,7 +6,7 @@ import com.vas.muscleapp.enums.Language;
  *
  * @author Vinícius
  */
-public class MuscleGroupDTO {
+public class MuscleGroupQueryDTO {
 
 	private Long id;
 	private String name;

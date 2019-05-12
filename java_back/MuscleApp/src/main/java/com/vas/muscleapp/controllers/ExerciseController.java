@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.vas.muscleapp.dtos.ExerciseDTO;
+import com.vas.muscleapp.dtos.queries.ExerciseQueryDTO;
 import com.vas.muscleapp.models.Exercise;
 import com.vas.muscleapp.services.ExerciseService;
 
@@ -51,18 +51,18 @@ public class ExerciseController {
 	}
 
 	@GetMapping(value = "/exercises")
-	public @ResponseBody ResponseEntity<List<ExerciseDTO>> getAllActives() {
+	public @ResponseBody ResponseEntity<List<ExerciseQueryDTO>> getAllActives() {
 		List<Exercise> exercises = exerciseService.findAllActives();
-		Type listType = new TypeToken<List<ExerciseDTO>>() {
+		Type listType = new TypeToken<List<ExerciseQueryDTO>>() {
 		}.getType();
-		List<ExerciseDTO> exercisesDTO = modelMapper.map(exercises, listType);
+		List<ExerciseQueryDTO> exercisesDTO = modelMapper.map(exercises, listType);
 		return new ResponseEntity<>(exercisesDTO, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/exercises/{id}")
-	public @ResponseBody ResponseEntity<ExerciseDTO> getById(@PathVariable Long id) {
+	public @ResponseBody ResponseEntity<ExerciseQueryDTO> getById(@PathVariable Long id) {
 		Exercise exercise = exerciseService.findById(id);
-		ExerciseDTO exerciseDTO = modelMapper.map(exercise, ExerciseDTO.class);
+		ExerciseQueryDTO exerciseDTO = modelMapper.map(exercise, ExerciseQueryDTO.class);
 		return new ResponseEntity<>(exerciseDTO, HttpStatus.OK);
 	}
 

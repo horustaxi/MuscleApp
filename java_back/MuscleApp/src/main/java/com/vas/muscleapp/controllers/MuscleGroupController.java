@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.vas.muscleapp.dtos.MuscleGroupDTO;
+import com.vas.muscleapp.dtos.queries.MuscleGroupQueryDTO;
 import com.vas.muscleapp.models.MuscleGroup;
 import com.vas.muscleapp.services.MuscleGroupService;
 
@@ -46,18 +46,18 @@ public class MuscleGroupController {
 	}
 
 	@GetMapping(value = "/muscle-groups")
-	public @ResponseBody ResponseEntity<Set<MuscleGroupDTO>> getAllActives() {
+	public @ResponseBody ResponseEntity<Set<MuscleGroupQueryDTO>> getAllActives() {
 		Set<MuscleGroup> muscleGroups = muscleGroupService.findAllActives();
-		Type listType = new TypeToken<Set<MuscleGroupDTO>>() {
+		Type listType = new TypeToken<Set<MuscleGroupQueryDTO>>() {
 		}.getType();
-		Set<MuscleGroupDTO> muscleGroupsDTO = modelMapper.map(muscleGroups, listType);
+		Set<MuscleGroupQueryDTO> muscleGroupsDTO = modelMapper.map(muscleGroups, listType);
 		return new ResponseEntity<>(muscleGroupsDTO, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "muscle-groups/{id}")
-	public @ResponseBody ResponseEntity<MuscleGroupDTO> getById(@PathVariable Long id) {
+	public @ResponseBody ResponseEntity<MuscleGroupQueryDTO> getById(@PathVariable Long id) {
 		MuscleGroup muscleGroup = muscleGroupService.findById(id);
-		MuscleGroupDTO muscleGroupDTO = modelMapper.map(muscleGroup, MuscleGroupDTO.class);
+		MuscleGroupQueryDTO muscleGroupDTO = modelMapper.map(muscleGroup, MuscleGroupQueryDTO.class);
 		return new ResponseEntity<>(muscleGroupDTO, HttpStatus.OK);
 	}
 
