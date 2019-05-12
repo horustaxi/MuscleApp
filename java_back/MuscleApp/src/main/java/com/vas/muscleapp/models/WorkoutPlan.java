@@ -48,10 +48,7 @@ public class WorkoutPlan extends BaseEntity implements Serializable {
 	}
 
 	public void setDescription(String description) {
-		if (description.isEmpty()) {
-			throw new IllegalArgumentException("Name can't be empty");
-		}
-		this.description = description.toLowerCase().trim();
+		this.description = description;
 	}
 
 	public void setCreatedBy(User createdBy) {
