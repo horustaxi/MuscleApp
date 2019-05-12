@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
@@ -20,11 +21,12 @@ import javax.persistence.OneToMany;
 @Entity(name = "workout_sheet")
 public class WorkoutSheet extends BaseEntity implements Serializable {
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 100)
+	@NotEmpty
 	private String description;
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private WorkoutPlan workoutPlan;
-	@OneToMany(mappedBy = "workoutSheet", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "workoutSheet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Workset> worksets = new HashSet<>();
 
 	public WorkoutSheet() {

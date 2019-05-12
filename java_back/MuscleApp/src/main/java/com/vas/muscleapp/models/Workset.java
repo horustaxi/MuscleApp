@@ -21,9 +21,9 @@ public class Workset extends BaseEntity implements Serializable {
 
 	private char letter;
 
-	@OneToMany(mappedBy = "workset", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "workset", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<WorksetExercise> worksetExercises = new HashSet<>();
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private WorkoutSheet workoutSheet;
 
 	public Workset() {

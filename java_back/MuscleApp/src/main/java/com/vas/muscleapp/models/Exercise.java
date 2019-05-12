@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 
@@ -22,18 +23,19 @@ import com.vas.muscleapp.enums.Language;
 @Entity(name = "exercise")
 public class Exercise extends BaseEntity implements Serializable {
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, length = 50, unique = true)
 	@NotEmpty
 	private String name;
-	@ManyToMany
-	private Set<Muscle> mainMuscles;
-	@ManyToMany
-	private Set<Muscle> secondaryMuscles;
 	@Column(length = 500)
 	private String description;
-	@Column(name = "language_for_localization", nullable = false)
+	@Column(name = "language_for_localization", length = 50, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Language languageForLocalization;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	private Set<Muscle> mainMuscles;
+	@ManyToMany(fetch = FetchType.LAZY)
+	private Set<Muscle> secondaryMuscles;
 
 	public Exercise() {
 	}

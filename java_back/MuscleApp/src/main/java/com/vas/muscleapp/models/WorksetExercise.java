@@ -17,20 +17,20 @@ import javax.persistence.OneToOne;
 @Entity(name = "workset_exercise")
 public class WorksetExercise extends BaseEntity implements Serializable {
 
-	@Column(name = "series_number", nullable = false)
+	@Column(name = "series_number", nullable = false, length = 50)
 	private String seriesNumber;
-	@Column(name = "repetitions_number", nullable = false)
+	@Column(name = "repetitions_number", nullable = false, length = 50)
 	private String repetitionsNumber;
 	// in seconds
 	@Column(name = "resting_time")
 	private Short restingTime;
-	@Column(name = "details")
+	@Column(name = "details", length = 200)
 	private String details;
 
 	@OneToOne
 	private Exercise exercise;
 
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Workset workset;
 
 	public WorksetExercise() {

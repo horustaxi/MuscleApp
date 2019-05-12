@@ -35,10 +35,10 @@ public class BodyMeasurements extends BaseEntity
 	private float glutes;
 
 	@JsonIgnore
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private User measuredUser;
 
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private User personalTrainnerUser;
 
 	public BodyMeasurements(Builder builder) {

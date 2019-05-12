@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
@@ -21,14 +22,14 @@ import com.vas.muscleapp.enums.Language;
 @Entity(name = "muscle_group")
 public class MuscleGroup extends BaseEntity implements Serializable {
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, length = 50, unique = true)
 	@NotEmpty
 	private String name;
-	@Column(name = "language_for_localization", nullable = false)
+	@Column(name = "language_for_localization", length = 50, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Language languageForLocalization;
 
-	@OneToMany(mappedBy = "muscleGroup")
+	@OneToMany(mappedBy = "muscleGroup", fetch = FetchType.LAZY)
 	private Set<Muscle> muscles;
 
 	public MuscleGroup() {

@@ -21,14 +21,14 @@ import com.vas.muscleapp.enums.Language;
 @Entity(name = "muscle")
 public class Muscle extends BaseEntity implements Serializable {
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, length = 50, unique = true)
 	@NotEmpty
 	private String name;
-	@Column(name = "language_for_localization", nullable = false)
+	@Column(name = "language_for_localization", length = 50, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Language languageForLocalization;
 
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private MuscleGroup muscleGroup;
 
 	public Muscle() {

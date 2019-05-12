@@ -21,7 +21,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity(name = "workout_plan")
 public class WorkoutPlan extends BaseEntity implements Serializable {
 
-	@Column(nullable = false, unique = false)
+	@Column(nullable = false, length = 100)
 	@NotEmpty
 	private String description;
 
@@ -31,7 +31,7 @@ public class WorkoutPlan extends BaseEntity implements Serializable {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private User createdTo;
 
-	@OneToMany(mappedBy = "workoutPlan", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "workoutPlan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private final Set<WorkoutSheet> workoutSheets = new HashSet<>();
 
 	public WorkoutPlan() {

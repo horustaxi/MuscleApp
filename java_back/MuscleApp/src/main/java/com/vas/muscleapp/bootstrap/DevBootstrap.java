@@ -77,7 +77,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 		}
 	}
 
-	private void initData() throws Exception {
+	public void initData() throws Exception {
 		initUsers();
 		initMuscleGroups();
 		initMuscles();

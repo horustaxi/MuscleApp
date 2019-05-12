@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -23,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity(name = "user")
 public class User extends BaseEntity implements Serializable {
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 100)
 	@NotEmpty
 	private String name;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, length = 100, unique = true)
 	@NotEmpty
 	@Email
 	private String email;
@@ -36,14 +37,14 @@ public class User extends BaseEntity implements Serializable {
 	private String password;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "measuredUser", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "measuredUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<BodyMeasurements> bodyMeasurements = new HashSet<>();
 	@JsonIgnore
-	@OneToMany(mappedBy = "personalTrainnerUser", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "personalTrainnerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<BodyMeasurements> bodyMeasurementsCreateds = new HashSet<>();
 	@OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
 	private final Set<WorkoutPlan> workoutPlansCreated = new HashSet<>();
-	@OneToMany(mappedBy = "createdTo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "createdTo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<WorkoutPlan> workoutPlans = new HashSet<>();
 
 	public User() {
@@ -75,7 +76,7 @@ public class User extends BaseEntity implements Serializable {
 		return password;
 	}
 
-	public void setPassword(String password) throws Exception {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
