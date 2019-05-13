@@ -11,11 +11,18 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author Vinícius
  */
 @SuppressWarnings("serial")
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "workset")
 public class Workset extends BaseEntity implements Serializable {
 
@@ -26,36 +33,9 @@ public class Workset extends BaseEntity implements Serializable {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private WorkoutSheet workoutSheet;
 
-	public Workset() {
-	}
-
 	public Workset(char letter, WorkoutSheet workoutSheet) {
 		this.letter = letter;
 		this.workoutSheet = workoutSheet;
-	}
-
-	public char getLetter() {
-		return letter;
-	}
-
-	public void setLetter(char letter) {
-		this.letter = letter;
-	}
-
-	public Set<WorksetExercise> getWorksetExercises() {
-		return worksetExercises;
-	}
-
-	public void setWorksetExercises(Set<WorksetExercise> worksetExercises) {
-		this.worksetExercises = worksetExercises;
-	}
-
-	public void setWorkoutSheet(WorkoutSheet workoutSheet) {
-		this.workoutSheet = workoutSheet;
-	}
-
-	public WorkoutSheet getWorkoutSheet() {
-		return workoutSheet;
 	}
 
 	@Override

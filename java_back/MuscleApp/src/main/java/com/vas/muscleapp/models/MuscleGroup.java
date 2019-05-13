@@ -14,11 +14,18 @@ import javax.validation.constraints.NotEmpty;
 
 import com.vas.muscleapp.enums.Language;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author Vinícius
  */
 @SuppressWarnings("serial")
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "muscle_group")
 public class MuscleGroup extends BaseEntity implements Serializable {
 
@@ -32,35 +39,8 @@ public class MuscleGroup extends BaseEntity implements Serializable {
 	@OneToMany(mappedBy = "muscleGroup", fetch = FetchType.LAZY)
 	private Set<Muscle> muscles;
 
-	public MuscleGroup() {
-	}
-
 	public MuscleGroup(String name, Language languageForLocalization) {
 		this.name = name.toLowerCase().trim();
-		this.languageForLocalization = languageForLocalization;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name.toLowerCase().trim();
-	}
-
-	public void setMuscles(Set<Muscle> muscles) {
-		this.muscles = muscles;
-	}
-
-	public Set<Muscle> getMuscles() {
-		return muscles;
-	}
-
-	public Language getLanguageForLocalization() {
-		return languageForLocalization;
-	}
-
-	public void setLanguageForLocalization(Language languageForLocalization) {
 		this.languageForLocalization = languageForLocalization;
 	}
 

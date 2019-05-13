@@ -54,7 +54,8 @@ public class WorksetExerciseControllerTest extends BaseControllerTest {
 				.andReturn();
 
 		WorksetExerciseQueryDTO worksetExercise = objectMapper
-				.readValue(mvcResult.getResponse().getContentAsString(), WorksetExerciseQueryDTO.class);
+				.readValue(mvcResult.getResponse().getContentAsString(),
+						WorksetExerciseQueryDTO.class);
 		assertEquals(worksetExerciseRequested.getId(), worksetExercise.getId());
 		assertEquals(worksetExerciseRequested.getDetails(), worksetExercise.getDetails());
 		assertEquals(worksetExerciseRequested.getExercise().getName(),
@@ -62,7 +63,8 @@ public class WorksetExerciseControllerTest extends BaseControllerTest {
 		assertEquals(worksetExerciseRequested.getRepetitionsNumber(),
 				worksetExercise.getRepetitionsNumber());
 		assertEquals(worksetExerciseRequested.getSeriesNumber(), worksetExercise.getSeriesNumber());
-		assertTrue(worksetExerciseRequested.getRestingTime() == worksetExercise.getRestingTime());
+		assertTrue(
+				worksetExerciseRequested.getRestingTime().equals(worksetExercise.getRestingTime()));
 		assertEquals(worksetExerciseRequested.getWorkset().getLetter(),
 				worksetExercise.getWorksetLetter());
 	}

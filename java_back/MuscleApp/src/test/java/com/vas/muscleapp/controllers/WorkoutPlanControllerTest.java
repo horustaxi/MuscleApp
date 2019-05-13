@@ -48,7 +48,7 @@ public class WorkoutPlanControllerTest extends BaseControllerTest {
 				.perform(get("/workout-plans?created-by=" + createdByUser.getId()))
 				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
 				.andExpect(jsonPath("$",
-						hasSize(createdByUser.getBodyMeasurementsesCreateds().size())))
+						hasSize(createdByUser.getBodyMeasurementsCreateds().size())))
 				.andReturn();
 
 		List<WorkoutPlanQueryDTO> workoutPlans = objectMapper

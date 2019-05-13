@@ -5,10 +5,15 @@ import javax.validation.constraints.Size;
 
 import com.vas.muscleapp.enums.Language;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author Vinícius
  */
+@Getter
+@Setter
 public class ExerciseCreateCommandDTO {
 
 	@NotEmpty
@@ -16,29 +21,5 @@ public class ExerciseCreateCommandDTO {
 	@Size(max = 500)
 	private String description;
 	private Language languageForLocalization;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name.toLowerCase().trim();
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setLanguageForLocalization(Language languageForLocalization) {
-		this.languageForLocalization = languageForLocalization;
-	}
-
-	public Language getLanguageForLocalization() {
-		return languageForLocalization;
-	}
 
 }

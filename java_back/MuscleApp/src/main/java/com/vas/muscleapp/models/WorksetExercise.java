@@ -9,11 +9,20 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author Vinícius
  */
 @SuppressWarnings("serial")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity(name = "workset_exercise")
 public class WorksetExercise extends BaseEntity implements Serializable {
 
@@ -32,59 +41,6 @@ public class WorksetExercise extends BaseEntity implements Serializable {
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Workset workset;
-
-	public WorksetExercise() {
-	}
-
-	public WorksetExercise(String seriesNumber, String repetitionsNumber, Short restingTime,
-			String details, Exercise exercise, Workset workset) {
-		this.seriesNumber = seriesNumber;
-		this.repetitionsNumber = repetitionsNumber;
-		this.restingTime = restingTime;
-		this.details = details;
-		this.exercise = exercise;
-		this.workset = workset;
-	}
-
-	public String getSeriesNumber() {
-		return seriesNumber;
-	}
-
-	public void setSeriesNumber(String seriesNumber) {
-		this.seriesNumber = seriesNumber;
-	}
-
-	public String getRepetitionsNumber() {
-		return repetitionsNumber;
-	}
-
-	public void setRepetitionsNumber(String repetitionsNumber) {
-		this.repetitionsNumber = repetitionsNumber;
-	}
-
-	public int getRestingTime() {
-		return restingTime;
-	}
-
-	public void setRestingTime(Short restingTime) {
-		this.restingTime = restingTime;
-	}
-
-	public void setExercise(Exercise exercise) {
-		this.exercise = exercise;
-	}
-
-	public Exercise getExercise() {
-		return exercise;
-	}
-
-	public Workset getWorkset() {
-		return workset;
-	}
-
-	public void setWorkset(Workset workset) {
-		this.workset = workset;
-	}
 
 	@Override
 	public int hashCode() {
@@ -106,14 +62,6 @@ public class WorksetExercise extends BaseEntity implements Serializable {
 		}
 		final WorksetExercise other = (WorksetExercise) obj;
 		return Objects.equals(getId(), other.getId());
-	}
-
-	public String getDetails() {
-		return details;
-	}
-
-	public void setDetails(String details) {
-		this.details = details;
 	}
 
 }

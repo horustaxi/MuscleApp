@@ -15,11 +15,18 @@ import javax.validation.constraints.NotEmpty;
 
 import com.vas.muscleapp.enums.Language;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author Vinícius
  */
 @SuppressWarnings("serial")
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "exercise")
 public class Exercise extends BaseEntity implements Serializable {
 
@@ -37,33 +44,10 @@ public class Exercise extends BaseEntity implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY)
 	private Set<Muscle> secondaryMuscles;
 
-	public Exercise() {
-	}
-
 	public Exercise(String name, String description, Language languageForLocalization) {
 		this.name = name.toLowerCase().trim();
 		this.description = description;
 		this.languageForLocalization = languageForLocalization;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name.toLowerCase().trim();
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setMainMuscles(Set<Muscle> mainMuscles) {
-		this.mainMuscles = mainMuscles;
 	}
 
 	public Set<Muscle> getMainMuscles() {
@@ -73,23 +57,11 @@ public class Exercise extends BaseEntity implements Serializable {
 		return mainMuscles;
 	}
 
-	public void setSecondaryMuscles(Set<Muscle> secondaryMuscles) {
-		this.secondaryMuscles = secondaryMuscles;
-	}
-
 	public Set<Muscle> getSecondaryMuscles() {
 		if (secondaryMuscles == null) {
 			secondaryMuscles = new HashSet<>();
 		}
 		return secondaryMuscles;
-	}
-
-	public void setLanguageForLocalization(Language languageForLocalization) {
-		this.languageForLocalization = languageForLocalization;
-	}
-
-	public Language getLanguageForLocalization() {
-		return languageForLocalization;
 	}
 
 	@Override

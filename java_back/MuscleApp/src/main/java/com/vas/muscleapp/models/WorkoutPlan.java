@@ -13,11 +13,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author Vinícius
  */
 @SuppressWarnings("serial")
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "workout_plan")
 public class WorkoutPlan extends BaseEntity implements Serializable {
 
@@ -34,41 +41,10 @@ public class WorkoutPlan extends BaseEntity implements Serializable {
 	@OneToMany(mappedBy = "workoutPlan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private final Set<WorkoutSheet> workoutSheets = new HashSet<>();
 
-	public WorkoutPlan() {
-	}
-
 	public WorkoutPlan(String description, User createdBy, User createdTo) {
 		this.description = description;
 		this.createdBy = createdBy;
 		this.createdTo = createdTo;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setCreatedBy(User createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public User getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedTo(User createdTo) {
-		this.createdTo = createdTo;
-	}
-
-	public User getCreatedTo() {
-		return createdTo;
-	}
-
-	public Set<WorkoutSheet> getWorkoutSheets() {
-		return workoutSheets;
 	}
 
 	@Override

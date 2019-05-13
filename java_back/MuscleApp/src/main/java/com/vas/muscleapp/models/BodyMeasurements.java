@@ -9,11 +9,18 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author Vinícius
  */
 @SuppressWarnings("serial")
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "body_measurements")
 public class BodyMeasurements extends BaseEntity
 		implements Comparable<BodyMeasurements>, Serializable {
@@ -59,145 +66,6 @@ public class BodyMeasurements extends BaseEntity
 		this.glutes = builder.glutes;
 		this.measuredUser = builder.measuredUser;
 		this.personalTrainnerUser = builder.personalTrainnerUser;
-	}
-
-	public BodyMeasurements() {
-	}
-
-	public float getHeight() {
-		return height;
-	}
-
-	public void setHeight(float height) {
-		this.height = height;
-	}
-
-	public float getWeight() {
-		return weight;
-	}
-
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
-
-	public float getShoulders() {
-		return shoulders;
-	}
-
-	public void setShoulders(float shoulders) {
-		this.shoulders = shoulders;
-	}
-
-	public float getChest() {
-		return chest;
-	}
-
-	public void setChest(float chest) {
-		this.chest = chest;
-	}
-
-	public float getWaist() {
-		return waist;
-	}
-
-	public void setWaist(float waist) {
-		this.waist = waist;
-	}
-
-	public float getRightArm() {
-		return rightArm;
-	}
-
-	public void setRightArm(float rightArm) {
-		this.rightArm = rightArm;
-	}
-
-	public float getLeftArm() {
-		return leftArm;
-	}
-
-	public void setLeftArm(float leftArm) {
-		this.leftArm = leftArm;
-	}
-
-	public float getRightForearm() {
-		return rightForearm;
-	}
-
-	public void setRightForearm(float rightForearm) {
-		this.rightForearm = rightForearm;
-	}
-
-	public float getLeftForearm() {
-		return leftForearm;
-	}
-
-	public void setLeftForearm(float leftForearm) {
-		this.leftForearm = leftForearm;
-	}
-
-	public float getRightThigh() {
-		return rightThigh;
-	}
-
-	public void setRightThigh(float rightThigh) {
-		this.rightThigh = rightThigh;
-	}
-
-	public float getLeftThigh() {
-		return leftThigh;
-	}
-
-	public void setLeftThigh(float leftThigh) {
-		this.leftThigh = leftThigh;
-	}
-
-	public float getRightCalf() {
-		return rightCalf;
-	}
-
-	public void setRightCalf(float rightCalf) {
-		this.rightCalf = rightCalf;
-	}
-
-	public float getLeftCalf() {
-		return leftCalf;
-	}
-
-	public void setLeftCalf(float leftCalf) {
-		this.leftCalf = leftCalf;
-	}
-
-	public void setPersonalTrainnerUser(User personalTrainnerUser) {
-		this.personalTrainnerUser = personalTrainnerUser;
-	}
-
-	public void setMeasuredUser(User measuredUser) {
-		this.measuredUser = measuredUser;
-	}
-
-	public User getPersonalTrainnerUser() {
-		return personalTrainnerUser;
-	}
-
-	public User getMeasuredUser() {
-		return measuredUser;
-	}
-
-	public void setGlutes(float glutes) {
-		this.glutes = glutes;
-	}
-
-	public float getGlutes() {
-		return glutes;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public int getAge() {
-		return age;
 	}
 
 	@Override
