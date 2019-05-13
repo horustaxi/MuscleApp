@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.vas.muscleapp.dtos.commands.ExerciseCreateCommandDTO;
 import com.vas.muscleapp.dtos.queries.ExerciseQueryDTO;
 import com.vas.muscleapp.models.Exercise;
 import com.vas.muscleapp.services.ExerciseService;
@@ -43,10 +44,10 @@ public class ExerciseController {
 	}
 
 	@PostMapping(value = "/exercises")
-	public ResponseEntity<?> save(@RequestBody Exercise exercise) {
-		exercise = exerciseService.save(exercise);
+	public ResponseEntity<?> save(@RequestBody ExerciseCreateCommandDTO exercise) {
+		Exercise exerciseNew = exerciseService.save(modelMapper.map(exercise, Exercise.class));
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(exercise.getId()).toUri();
+				.buildAndExpand(exerciseNew.getId()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 
