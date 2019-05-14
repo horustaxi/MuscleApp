@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -39,9 +38,8 @@ import com.vas.muscleapp.repositories.WorksetRepository;
  *
  * @author Vinícius
  */
-// TODO refatorar para CommandLineRunner conforme SPG
 @Component
-public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+public class DevBootstrap implements CommandLineRunner {
 
 	private final UserRepository userRepository;
 	private final ExerciseRepository exerciseRepository;
@@ -68,7 +66,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 	}
 
 	@Override
-	public void onApplicationEvent(ContextRefreshedEvent e) {
+	public void run(String... args) throws Exception {
 		try {
 			initData();
 		} catch (Exception ex) {

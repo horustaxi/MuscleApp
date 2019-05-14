@@ -43,7 +43,6 @@ public class User extends BaseEntity implements Serializable {
 	@Size(min = 6, max = 100)
 	private String password;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "measuredUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<BodyMeasurements> bodyMeasurements = new HashSet<>();
 	@JsonIgnore
@@ -53,6 +52,11 @@ public class User extends BaseEntity implements Serializable {
 	private final Set<WorkoutPlan> workoutPlansCreated = new HashSet<>();
 	@OneToMany(mappedBy = "createdTo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<WorkoutPlan> workoutPlans = new HashSet<>();
+
+	@OneToMany(targetEntity = User.class, fetch = FetchType.LAZY)
+	private Set<User> trainees;
+	@OneToMany(targetEntity = User.class, fetch = FetchType.LAZY)
+	private Set<User> personalTrainers;
 
 	public User(String name, String email, String password) {
 		this.name = name;

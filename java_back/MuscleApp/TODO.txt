@@ -1,1 +1,1 @@
-- Entidade personal trainner herdando user e tendo um set de trainees
+- Adicionar foto para Usuários
