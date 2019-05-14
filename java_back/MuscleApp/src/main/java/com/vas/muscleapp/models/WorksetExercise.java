@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -33,6 +34,7 @@ public class WorksetExercise extends BaseEntity implements Serializable {
 	// in seconds
 	@Column(name = "resting_time")
 	private Short restingTime;
+	@Lob
 	@Column(name = "details", length = 200)
 	private String details;
 

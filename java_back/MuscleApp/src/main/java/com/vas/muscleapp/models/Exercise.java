@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 
@@ -34,6 +35,7 @@ public class Exercise extends BaseEntity implements Serializable {
 	@NotEmpty
 	private String name;
 	@Column(length = 500)
+	@Lob
 	private String description;
 	@Column(name = "language_for_localization", length = 50, nullable = false)
 	@Enumerated(EnumType.STRING)
