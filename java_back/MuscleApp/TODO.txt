@@ -1,2 +1,1 @@
-- Verificar nullables (tipos)
-- Posts recebendo DTOS
+- Entidade personal trainner herdando user e tendo um set de trainees
