@@ -1,1 +1,3 @@
 - Adicionar foto para Usuários
+- Adicionar limite de tamanho para coleções nas models
+- Adicionar list de links do youtube para workoutexercises
